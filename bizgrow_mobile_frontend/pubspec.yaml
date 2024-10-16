@@ -17,3 +17,12 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - lib/assets/navbar_icon/default/Beranda.png
+    - lib/assets/navbar_icon/default/Penjualan.png
+    - lib/assets/navbar_icon/default/Stok.png
+    - lib/assets/navbar_icon/default/Profil.png
+    - lib/assets/navbar_icon/selected/Beranda.png
+    - lib/assets/navbar_icon/selected/Penjualan.png
+    - lib/assets/navbar_icon/selected/Stok.png
+    - lib/assets/navbar_icon/selected/Profil.png
