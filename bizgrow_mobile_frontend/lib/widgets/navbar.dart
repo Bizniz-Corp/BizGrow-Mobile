@@ -1,31 +1,54 @@
 import 'package:flutter/material.dart';
 
-class MainNavigator extends StatefulWidget{
-    @override
-    _MainNavigatorState createState() => _MainNavigatorState();
+class MainNavigator extends StatefulWidget {
+  @override
+  _MainNavigatorState createState() => _MainNavigatorState();
 }
 
-class _MainNavigatorState extends State<MainNavigator>{
+class _MainNavigatorState extends State<MainNavigator> {
+  int _selectedIndex = 0;
 
-    int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index; // Mengubah indeks yang dipilih
+    });
+  }
 
-    // List<Widget> _screens = [
-    //     BerandaScreen(),
-    //     PenjualanScreen(),
-    //     StokScreen(),
-    //     ProfilScreen(),
-    // ];
-
-    @override
-    Widget build(BuildContext context){
-        return Scaffold(
-            bottomNavigationBar: BottomNavigationBar(
-                items: const [
-                    BottomNavigationBarItem(
-                        icon: Icon(Icons.home), 
-                        label: 'Beranda'
-                    )
-            ]),
-        );
-    }
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      currentIndex: _selectedIndex,
+      onTap: _onItemTapped,
+      items: [
+        BottomNavigationBarItem(
+          icon: ImageIcon(
+            AssetImage('lib/assets/navbar_icon/default/Beranda.png'),
+            size: 24,
+          ),
+          label: 'Beranda',
+        ),
+        BottomNavigationBarItem(
+          icon: ImageIcon(
+            AssetImage('lib/assets/navbar_icon/default/Penjualan.png'),
+            size: 24,
+          ),
+          label: 'Penjualan',
+        ),
+        BottomNavigationBarItem(
+          icon: ImageIcon(
+            AssetImage('lib/assets/navbar_icon/default/Stok.png'),
+            size: 24,
+          ),
+          label: 'Stok',
+        ),
+        BottomNavigationBarItem(
+          icon: ImageIcon(
+            AssetImage('lib/assets/navbar_icon/default/Profil.png'),
+            size: 24,
+          ),
+          label: 'Profil',
+        ),
+      ],
+    );
+  }
 }
