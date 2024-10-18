@@ -17,6 +17,8 @@ class _MainNavigatorState extends State<MainNavigator> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      // backgroundColor: Colors.(#151436),
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,
       items: [
