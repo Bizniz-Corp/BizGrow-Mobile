@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bizgrow_mobile_frontend/styles/colors.dart';
+import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 
 class MainNavigator extends StatefulWidget {
   @override
