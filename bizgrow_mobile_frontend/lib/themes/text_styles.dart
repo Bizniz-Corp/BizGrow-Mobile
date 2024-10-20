@@ -7,6 +7,12 @@ extension TextStyleExtension on TextStyle {
   }
 }
 
+// contoh penggunaan
+// Text(
+//   'ini tulisan',
+//   style: Regular.h1.withColor(MainColors.blue),
+// );
+
 class Regular{
   static const TextStyle h1 = TextStyle(
     fontFamily: 'Montserrat',
