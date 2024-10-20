@@ -5,7 +5,7 @@ import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 
-class beranda_sceen extends StatelessWidget{
+class BerandaScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(

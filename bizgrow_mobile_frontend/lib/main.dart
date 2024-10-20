@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: BizGrowTheme.darkMode,
-      home: beranda_sceen()
+      home: BerandaScreen()
     );
   }
 }
