@@ -17,6 +17,17 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: lib/assets/fonts/Montserrat-Regular.ttf
+          weight: 400
+        - asset: lib/assets/fonts/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: lib/assets/fonts/Montserrat-Bold.ttf
+          weight: 700
+        - asset: lib/assets/fonts/Montserrat-Black.ttf
+          weight: 900
   assets:
     - lib/assets/navbar_icon/default/Beranda.png
     - lib/assets/navbar_icon/default/Penjualan.png
