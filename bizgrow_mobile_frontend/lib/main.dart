@@ -13,7 +13,11 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Text('Taest'),
+          child: Text(
+            'Taest',
+            style: TextStyle(
+            ),
+          ),
         ),
         bottomNavigationBar: MainNavigator(), // Memasukkan MainNavigator sebagai bottomNavigationBar
       ),
