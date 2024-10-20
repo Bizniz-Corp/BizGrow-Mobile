@@ -10,7 +10,7 @@ extension TextStyleExtension on TextStyle {
 // contoh penggunaan
 // Text(
 //   'ini tulisan',
-//   style: Regular.h1.withColor(MainColors.blue),
+//   style: Regular.h1.withColor(Main.blue),
 // );
 
 class Regular{

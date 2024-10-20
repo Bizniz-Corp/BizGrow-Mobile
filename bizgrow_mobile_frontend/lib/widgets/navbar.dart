@@ -22,14 +22,14 @@ class _MainNavigatorState extends State<MainNavigator> {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: MainColors.blueSecondary,
+            color: Main.blueSecondary,
             width: 8
           )
         )
       ),
       child: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: MainColors.darkBlue,
+        backgroundColor: Main.darkBlue,
         selectedItemColor: Monochrome.whiteDarkMode,
         unselectedItemColor: Monochrome.lightGrey,
         currentIndex: _selectedIndex,
