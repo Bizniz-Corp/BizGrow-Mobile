@@ -12,12 +12,15 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Text(
-            'Taest',
-            style: TextStyle(
-            ),
-          ),
+        body: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Taest',
+                style: TextStyle(
+                ),
+              ),
+            ],
         ),
         bottomNavigationBar: MainNavigator(), // Memasukkan MainNavigator sebagai bottomNavigationBar
       ),

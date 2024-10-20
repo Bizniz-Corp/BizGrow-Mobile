@@ -10,4 +10,9 @@ class BizGrowTheme{
       titleTextStyle: Bold.large.withColor(Monochrome.whiteDarkMode)
     ),
   );
+
+  static double getMargin(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    return screenSize.width * 0.05;
+  }
 }
