@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
-
+// Extension untuk TextStyle
+extension TextStyleExtension on TextStyle {
+  TextStyle withColor(Color color) {
+    return copyWith(color: color);
+  }
+}
 
 class Regular{
   static const TextStyle h1 = TextStyle(
