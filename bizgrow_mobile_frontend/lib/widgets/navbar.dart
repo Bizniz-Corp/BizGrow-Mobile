@@ -17,55 +17,66 @@ class _MainNavigatorState extends State<MainNavigator> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: MainColors.darkBlue,
-      selectedItemColor: Monochrome.whiteDarkMode,
-      unselectedItemColor: Monochrome.lightGrey,
-      currentIndex: _selectedIndex,
-      onTap: _onItemTapped,
-      items: [
-        BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage(
-              _selectedIndex == 0? 
-              'lib/assets/navbar_icon/selected/Beranda.png' : 'lib/assets/navbar_icon/default/Beranda.png',
+    return Container(
+      height: 80,
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: MainColors.blueSecondary,
+            width: 8
+          )
+        )
+      ),
+      child: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: MainColors.darkBlue,
+        selectedItemColor: Monochrome.whiteDarkMode,
+        unselectedItemColor: Monochrome.lightGrey,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: [
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                _selectedIndex == 0? 
+                'lib/assets/navbar_icon/selected/Beranda.png' : 'lib/assets/navbar_icon/default/Beranda.png',
+              ),
+              size: 24,
             ),
-            size: 24,
+            label: 'Beranda',
           ),
-          label: 'Beranda',
-        ),
-        BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage(
-              _selectedIndex == 1? 
-              'lib/assets/navbar_icon/selected/Penjualan.png' : 'lib/assets/navbar_icon/default/Penjualan.png',
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                _selectedIndex == 1? 
+                'lib/assets/navbar_icon/selected/Penjualan.png' : 'lib/assets/navbar_icon/default/Penjualan.png',
+              ),
+              size: 24,
             ),
-            size: 24,
+            label: 'Penjualan',
           ),
-          label: 'Penjualan',
-        ),
-        BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage(
-              _selectedIndex == 2? 
-              'lib/assets/navbar_icon/selected/Stok.png' : 'lib/assets/navbar_icon/default/Stok.png',
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                _selectedIndex == 2? 
+                'lib/assets/navbar_icon/selected/Stok.png' : 'lib/assets/navbar_icon/default/Stok.png',
+              ),
+              size: 24,
             ),
-            size: 24,
+            label: 'Stok',
           ),
-          label: 'Stok',
-        ),
-        BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage(
-              _selectedIndex == 3? 
-              'lib/assets/navbar_icon/selected/Profil.png' : 'lib/assets/navbar_icon/default/Profil.png',
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                _selectedIndex == 3? 
+                'lib/assets/navbar_icon/selected/Profil.png' : 'lib/assets/navbar_icon/default/Profil.png',
+              ),
+              size: 24,
             ),
-            size: 24,
+            label: 'Profil',
           ),
-          label: 'Profil',
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
