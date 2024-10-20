@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
+import 'package:bizgrow_mobile_frontend/themes/theme.dart';
+import 'package:bizgrow_mobile_frontend/screens/beranda/beranda_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -11,19 +12,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Taest',
-                style: TextStyle(
-                ),
-              ),
-            ],
-        ),
-        bottomNavigationBar: MainNavigator(), // Memasukkan MainNavigator sebagai bottomNavigationBar
-      ),
+      theme: BizGrowTheme.darkMode,
+      home: beranda_sceen()
     );
   }
 }
