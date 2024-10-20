@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // Extension untuk TextStyle
 extension TextStyleExtension on TextStyle {
@@ -14,133 +15,153 @@ extension TextStyleExtension on TextStyle {
 // );
 
 class Regular{
-  static const TextStyle h1 = TextStyle(
-    fontFamily: 'Montserrat',
+  static TextStyle h1 = GoogleFonts.montserrat(
     fontSize: 36,
-    fontWeight: FontWeight.normal
+    fontWeight: FontWeight.normal,
+    letterSpacing: -1.5
   );
-  static const TextStyle h2 = TextStyle(
-    fontFamily: 'Montserrat',
+
+  static TextStyle h2 = GoogleFonts.montserrat(
     fontSize: 28,
-    fontWeight: FontWeight.normal
+    fontWeight: FontWeight.normal,
+    letterSpacing: -1
   );
-  static const TextStyle h3 = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle h3 = GoogleFonts.montserrat(
     fontSize: 22,
-    fontWeight: FontWeight.normal
+    fontWeight: FontWeight.normal,
+    letterSpacing: -0.5
   );
-  static const TextStyle large = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle large = GoogleFonts.montserrat(
     fontSize: 18,
-    fontWeight: FontWeight.normal
+    fontWeight: FontWeight.normal,
+    letterSpacing: 0
   );
-  static const TextStyle body = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle body = GoogleFonts.montserrat(
     fontSize: 14,
-    fontWeight: FontWeight.normal
+    fontWeight: FontWeight.normal,
+    letterSpacing: 0.5
   );
-  static const TextStyle small = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle small = GoogleFonts.montserrat(
     fontSize: 12,
-    fontWeight: FontWeight.normal
+    fontWeight: FontWeight.normal,
+    letterSpacing: 1
   );
 }
 
 class SemiBold{
-  static const TextStyle h1 = TextStyle(
-    fontFamily: 'Montserrat',
+  static TextStyle h1 = GoogleFonts.montserrat(
     fontSize: 36,
-    fontWeight: FontWeight.w600
+    fontWeight: FontWeight.w600,
+    letterSpacing: -1.5
   );
-  static const TextStyle h2 = TextStyle(
-    fontFamily: 'Montserrat',
+
+  static TextStyle h2 = GoogleFonts.montserrat(
     fontSize: 28,
-    fontWeight: FontWeight.w600
+    fontWeight: FontWeight.w600,
+    letterSpacing: -1
   );
-  static const TextStyle h3 = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle h3 = GoogleFonts.montserrat(
     fontSize: 22,
-    fontWeight: FontWeight.w600
+    fontWeight: FontWeight.w600,
+    letterSpacing: -0.5
   );
-  static const TextStyle large = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle large = GoogleFonts.montserrat(
     fontSize: 18,
-    fontWeight: FontWeight.w600
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0
   );
-  static const TextStyle body = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle body = GoogleFonts.montserrat(
     fontSize: 14,
-    fontWeight: FontWeight.w600
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.5
   );
-  static const TextStyle small = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle small = GoogleFonts.montserrat(
     fontSize: 12,
-    fontWeight: FontWeight.w600
+    fontWeight: FontWeight.w600,
+    letterSpacing: 1
   );
 }
 
 class Bold{
-  static const TextStyle h1 = TextStyle(
-    fontFamily: 'Montserrat',
+  static TextStyle h1 = GoogleFonts.montserrat(
     fontSize: 36,
-    fontWeight: FontWeight.w700
+    fontWeight: FontWeight.w700,
+    letterSpacing: -1.5
   );
-  static const TextStyle h2 = TextStyle(
-    fontFamily: 'Montserrat',
+
+  static TextStyle h2 = GoogleFonts.montserrat(
     fontSize: 28,
-    fontWeight: FontWeight.w700
+    fontWeight: FontWeight.w700,
+    letterSpacing: -1
   );
-  static const TextStyle h3 = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle h3 = GoogleFonts.montserrat(
     fontSize: 22,
-    fontWeight: FontWeight.w700
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.5
   );
-  static const TextStyle large = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle large = GoogleFonts.montserrat(
     fontSize: 18,
-    fontWeight: FontWeight.w700
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0
   );
-  static const TextStyle body = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle body = GoogleFonts.montserrat(
     fontSize: 14,
-    fontWeight: FontWeight.w700
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0.5
   );
-  static const TextStyle small = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle small = GoogleFonts.montserrat(
     fontSize: 12,
-    fontWeight: FontWeight.w700
+    fontWeight: FontWeight.w700,
+    letterSpacing: 1
   );
 }
 
 class Black{
-  static const TextStyle h1 = TextStyle(
-    fontFamily: 'Montserrat',
+  static TextStyle h1 = GoogleFonts.montserrat(
     fontSize: 36,
-    fontWeight: FontWeight.w900
+    fontWeight: FontWeight.w900,
+    letterSpacing: -1.5
   );
-  static const TextStyle h2 = TextStyle(
-    fontFamily: 'Montserrat',
+
+  static TextStyle h2 = GoogleFonts.montserrat(
     fontSize: 28,
-    fontWeight: FontWeight.w900
+    fontWeight: FontWeight.w900,
+    letterSpacing: -1
   );
-  static const TextStyle h3 = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle h3 = GoogleFonts.montserrat(
     fontSize: 22,
-    fontWeight: FontWeight.w900
+    fontWeight: FontWeight.w900,
+    letterSpacing: -0.5
   );
-  static const TextStyle large = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle large = GoogleFonts.montserrat(
     fontSize: 18,
-    fontWeight: FontWeight.w900
+    fontWeight: FontWeight.w900,
+    letterSpacing: 0
   );
-  static const TextStyle body = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle body = GoogleFonts.montserrat(
     fontSize: 14,
-    fontWeight: FontWeight.w900
+    fontWeight: FontWeight.w900,
+    letterSpacing: 0.5
   );
-  static const TextStyle small = TextStyle(
-    fontFamily: 'Montserrat',
+  
+  static TextStyle small = GoogleFonts.montserrat(
     fontSize: 12,
-    fontWeight: FontWeight.w900
+    fontWeight: FontWeight.w900,
+    letterSpacing: 1
   );
 }

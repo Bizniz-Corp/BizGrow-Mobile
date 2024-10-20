@@ -7,7 +7,7 @@ class BizGrowTheme{
     scaffoldBackgroundColor: Main.background,
     appBarTheme: AppBarTheme(
       backgroundColor: Main.darkBlue,
-      titleTextStyle: Bold.large.withColor(Monochrome.whiteDarkMode),
+      titleTextStyle: Bold.h3.withColor(Monochrome.whiteDarkMode),
       elevation: 48,
       titleSpacing: 32
     ),
