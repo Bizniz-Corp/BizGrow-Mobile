@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/screens/beranda/beranda_screen.dart';
 import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_screen.dart';

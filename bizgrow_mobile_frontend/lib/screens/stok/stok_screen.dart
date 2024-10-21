@@ -1,7 +1,6 @@
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 
@@ -36,7 +35,6 @@ class StokScreen extends StatelessWidget{
           ],
         ),
       ),
-      // bottomNavigationBar: MainNavigator(),
     );
   }
 }
