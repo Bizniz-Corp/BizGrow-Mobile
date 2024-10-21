@@ -17,38 +17,9 @@ class _MainNavigatorState extends State<MainNavigator> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index; // Mengubah indeks yang dipilih
+      _selectedIndex = index;
     });
     _pageController.jumpToPage(index);
-
-    // Menentukan navigasi berdasarkan indeks yang dipilih
-    // switch (index) {
-    //   case 0:
-    //     Navigator.pushReplacement(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => BerandaScreen()),
-    //     );
-    //     break;
-    //   case 1:
-    //     Navigator.pushReplacement(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => PenjualanScreen()),
-    //     );
-    //     break;
-    //   case 2:
-    //     Navigator.pushReplacement(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => StokScreen()),
-    //     );
-    //     break;
-    //   case 3:
-    //     Navigator.pushReplacement(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => ProfilScreen()),
-    //     );
-    //     break;
-    // }
-
   }
 
   final List<Widget> _pages = [
@@ -60,72 +31,6 @@ class _MainNavigatorState extends State<MainNavigator> {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   height: 80,
-    //   decoration: BoxDecoration(
-    //     border: const Border(
-    //       top: BorderSide(
-    //         color: Main.blueSecondary,
-    //         width: 8,
-    //       ),
-    //     ),
-    //   ),
-    //   child: BottomNavigationBar(
-    //     type: BottomNavigationBarType.fixed,
-    //     backgroundColor: Main.darkBlue,
-    //     selectedItemColor: Monochrome.whiteDarkMode,
-    //     unselectedItemColor: Monochrome.lightGrey,
-    //     currentIndex: _selectedIndex,
-    //     onTap: _onItemTapped,
-    //     items: [
-    //       BottomNavigationBarItem(
-    //         icon: ImageIcon(
-    //           AssetImage(
-    //             _selectedIndex == 0
-    //                 ? 'lib/assets/navbar_icon/selected/Beranda.png'
-    //                 : 'lib/assets/navbar_icon/default/Beranda.png',
-    //           ),
-    //           size: 24,
-    //         ),
-    //         label: 'Beranda',
-    //       ),
-    //       BottomNavigationBarItem(
-    //         icon: ImageIcon(
-    //           AssetImage(
-    //             _selectedIndex == 1
-    //                 ? 'lib/assets/navbar_icon/selected/Penjualan.png'
-    //                 : 'lib/assets/navbar_icon/default/Penjualan.png',
-    //           ),
-    //           size: 24,
-    //         ),
-    //         label: 'Penjualan',
-    //       ),
-    //       BottomNavigationBarItem(
-    //         icon: ImageIcon(
-    //           AssetImage(
-    //             _selectedIndex == 2
-    //                 ? 'lib/assets/navbar_icon/selected/Stok.png'
-    //                 : 'lib/assets/navbar_icon/default/Stok.png',
-    //           ),
-    //           size: 24,
-    //         ),
-    //         label: 'Stok',
-    //       ),
-    //       BottomNavigationBarItem(
-    //         icon: ImageIcon(
-    //           AssetImage(
-    //             _selectedIndex == 3
-    //                 ? 'lib/assets/navbar_icon/selected/Profil.png'
-    //                 : 'lib/assets/navbar_icon/default/Profil.png',
-    //           ),
-    //           size: 24,
-    //         ),
-    //         label: 'Profil',
-    //       ),
-    //     ],
-    //   ),
-    // );
-  
     return Scaffold(
       body: PageView(
         controller: _pageController,
@@ -139,8 +44,8 @@ class _MainNavigatorState extends State<MainNavigator> {
 
       bottomNavigationBar: Container(
         height: 80,
-        decoration: BoxDecoration(
-          border: const Border(
+        decoration: const BoxDecoration(
+          border: Border(
             top: BorderSide(
               color: Main.blueSecondary,
               width: 8,
