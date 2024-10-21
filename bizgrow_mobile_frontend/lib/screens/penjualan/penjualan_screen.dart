@@ -36,7 +36,7 @@ class PenjualanScreen extends StatelessWidget{
           ],
         ),
       ),
-      bottomNavigationBar: MainNavigator(),
+      // bottomNavigationBar: MainNavigator(),
     );
   }
 }

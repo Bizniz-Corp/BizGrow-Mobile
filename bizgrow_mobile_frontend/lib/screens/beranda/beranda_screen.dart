@@ -5,7 +5,7 @@ import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 
-class BerandaScreen extends StatelessWidget{
+class BerandaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,14 +19,18 @@ class BerandaScreen extends StatelessWidget{
           children: [
             Text(
               'Semua berjalan dengan baik',
-              style: GoogleFonts.montserrat(fontSize: 28, color: Monochrome.whiteDarkMode, 
-              letterSpacing: -0.5
+              style: GoogleFonts.montserrat(
+                fontSize: 28,
+                color: Monochrome.whiteDarkMode,
+                letterSpacing: -0.5,
               ),
             ),
             Text(
               'Semua berjalan dengan baik',
-              style: GoogleFonts.montserrat(fontSize: 28, color: Monochrome.whiteDarkMode, 
-              letterSpacing: -1
+              style: GoogleFonts.montserrat(
+                fontSize: 28,
+                color: Monochrome.whiteDarkMode,
+                letterSpacing: -1,
               ),
             ),
             Text(
@@ -36,7 +40,6 @@ class BerandaScreen extends StatelessWidget{
           ],
         ),
       ),
-      bottomNavigationBar: MainNavigator(),
     );
   }
 }

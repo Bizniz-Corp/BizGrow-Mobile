@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/screens/beranda/beranda_screen.dart';
+import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(BizGrowApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
+class BizGrowApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: BizGrowTheme.darkMode,
-      home: BerandaScreen()
+      theme: BizGrowTheme.darkMode, // Menggunakan tema dari BizGrowTheme
+      home: MainNavigator(), // MainNavigator sebagai layar utama
     );
   }
 }

@@ -36,7 +36,7 @@ class StokScreen extends StatelessWidget{
           ],
         ),
       ),
-      bottomNavigationBar: MainNavigator(),
+      // bottomNavigationBar: MainNavigator(),
     );
   }
 }

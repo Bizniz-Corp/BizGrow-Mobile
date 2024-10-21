@@ -36,7 +36,7 @@ class ProfilScreen extends StatelessWidget{
           ],
         ),
       ),
-      bottomNavigationBar: MainNavigator(),
+      // bottomNavigationBar: MainNavigator(),
     );
   }
 }
