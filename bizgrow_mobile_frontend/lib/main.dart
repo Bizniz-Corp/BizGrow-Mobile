@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
+import 'package:bizgrow_mobile_frontend/screens/beranda/beranda_screen.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(BizGrowApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
+class BizGrowApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Taest'),
-        ),
-        bottomNavigationBar: MainNavigator(), // Memasukkan MainNavigator sebagai bottomNavigationBar
-      ),
+      theme: BizGrowTheme.darkMode,
+      home: BerandaScreen(),
     );
   }
 }

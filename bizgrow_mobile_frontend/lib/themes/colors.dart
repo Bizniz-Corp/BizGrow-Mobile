@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MainColors {
+class Main {
   static const Color blue = Color.fromRGBO(13, 54, 179, 1);
   static const Color lightBlue = Color.fromRGBO(78, 105, 186, 1);
   static const Color darkBlue = Color.fromRGBO(21, 20, 54, 1);
   static const Color blueSecondary = Color.fromRGBO(34, 55, 119, 1); 
+  static const Color background = Color.fromRGBO(10, 9, 46, 1); 
 }
 
 class Monochrome{
