@@ -21,7 +21,7 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen>{
         margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
         child: Text("ini prediksi demand"),
       ),
-      bottomNavigationBar: MainNavigator(),
+      bottomNavigationBar: MainNavigator(selectedIndex: 1),
     );
   }
 }

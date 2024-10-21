@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:bizgrow_mobile_frontend/screens/penjualan/prediksi_demand_screen.dart';
+import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 
 class PenjualanScreen extends StatelessWidget{
   @override
@@ -35,7 +36,7 @@ class PenjualanScreen extends StatelessWidget{
             ),
             ElevatedButton(
               onPressed: (){
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => PrediksiDemandScreen(),
@@ -46,6 +47,7 @@ class PenjualanScreen extends StatelessWidget{
           ],
         ),
       ),
+      bottomNavigationBar: MainNavigator(selectedIndex: 1),
     );
   }
 }
