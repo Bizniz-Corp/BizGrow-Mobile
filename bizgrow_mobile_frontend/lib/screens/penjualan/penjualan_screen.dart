@@ -35,7 +35,7 @@ class PenjualanScreen extends StatelessWidget {
             SizedBox(height: 20),
             Expanded(
               child: GridView.count(
-                crossAxisCount: 2,  // Set ke 2 kolom
+                crossAxisCount: 3,  // Set ke 2 kolom
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
                 childAspectRatio: 1.2, // Mengatur tinggi kotak agar lebih besar
@@ -43,7 +43,7 @@ class PenjualanScreen extends StatelessWidget {
                   buildMenuButton(
                     context,
                     'Prediksi Demand',
-                    'lib/assets/navbar_icon/menu/Prediksi_Demand.png',
+                    'lib/assets/navbar_icon/Prediksi_Demand.png',
                     () {
                       // Navigasi ke halaman Prediksi Demand
                     },
@@ -51,7 +51,7 @@ class PenjualanScreen extends StatelessWidget {
                   buildMenuButton(
                     context,
                     'Riwayat Penjualan',
-                    'lib/assets/navbar_icon/menu/Riwayat.png',
+                    'lib/assets/navbar_icon/Riwayat.png',
                     () {
                       // Navigasi ke halaman Riwayat Penjualan
                     },
@@ -59,7 +59,7 @@ class PenjualanScreen extends StatelessWidget {
                   buildMenuButton(
                     context,
                     'Prediksi Profit',
-                    'lib/assets/navbar_icon/menu/Prediksi_Profit.png',
+                    'lib/assets/navbar_icon/Prediksi_Profit.png',
                     () {
                       // Navigasi ke halaman Prediksi Profit
                     },
@@ -67,7 +67,7 @@ class PenjualanScreen extends StatelessWidget {
                   buildMenuButton(
                     context,
                     'Input Data Penjualan',
-                    'lib/assets/navbar_icon/menu/Input.png',
+                    'lib/assets/navbar_icon/Input.png',
                     () {
                       Navigator.push(
                         context,
