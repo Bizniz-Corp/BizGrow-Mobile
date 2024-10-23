@@ -27,3 +27,8 @@ flutter:
     - lib/assets/navbar_icon/selected/Penjualan.png
     - lib/assets/navbar_icon/selected/Stok.png
     - lib/assets/navbar_icon/selected/Profil.png
+     - lib/assets/navbar_icon/Input.png
+    - lib/assets/navbar_icon/Riwayat.png
+    - lib/assets/navbar_icon/Prediksi_Profit.png
+    - lib/assets/navbar_icon/Prediksi_Stok.png
+    - lib/assets/navbar_icon/Prediksi_Demand.png
