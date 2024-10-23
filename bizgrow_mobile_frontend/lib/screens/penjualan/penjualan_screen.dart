@@ -35,7 +35,7 @@ class PenjualanScreen extends StatelessWidget {
             SizedBox(height: 20),
             Expanded(
               child: GridView.count(
-                crossAxisCount: 3,
+                crossAxisCount: 2,  // Set ke 2 kolom
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
                 childAspectRatio: 1.2, // Mengatur tinggi kotak agar lebih besar
@@ -43,6 +43,7 @@ class PenjualanScreen extends StatelessWidget {
                   buildMenuButton(
                     context,
                     'Prediksi Demand',
+                    'lib/assets/navbar_icon/menu/Prediksi_Demand.png',
                     () {
                       // Navigasi ke halaman Prediksi Demand
                     },
@@ -50,6 +51,7 @@ class PenjualanScreen extends StatelessWidget {
                   buildMenuButton(
                     context,
                     'Riwayat Penjualan',
+                    'lib/assets/navbar_icon/menu/Riwayat.png',
                     () {
                       // Navigasi ke halaman Riwayat Penjualan
                     },
@@ -57,6 +59,7 @@ class PenjualanScreen extends StatelessWidget {
                   buildMenuButton(
                     context,
                     'Prediksi Profit',
+                    'lib/assets/navbar_icon/menu/Prediksi_Profit.png',
                     () {
                       // Navigasi ke halaman Prediksi Profit
                     },
@@ -64,6 +67,7 @@ class PenjualanScreen extends StatelessWidget {
                   buildMenuButton(
                     context,
                     'Input Data Penjualan',
+                    'lib/assets/navbar_icon/menu/Input.png',
                     () {
                       Navigator.push(
                         context,
@@ -83,7 +87,8 @@ class PenjualanScreen extends StatelessWidget {
     );
   }
 
-  Widget buildMenuButton(BuildContext context, String title, VoidCallback onTap) {
+  // Tambahkan parameter `imagePath` untuk gambar
+  Widget buildMenuButton(BuildContext context, String title, String imagePath, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -91,16 +96,26 @@ class PenjualanScreen extends StatelessWidget {
           color: Color(0xFF2D2F7E), // Warna biru dari kotak menu
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Center(
-          child: Text(
-            title,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.montserrat(
-              fontSize: 16,
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              imagePath,
+              width: 50,
+              height: 50,
+              fit: BoxFit.contain,
             ),
-          ),
+            SizedBox(height: 10),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.montserrat(
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
         ),
       ),
     );
