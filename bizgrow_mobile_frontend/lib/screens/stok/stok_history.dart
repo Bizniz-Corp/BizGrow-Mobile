@@ -10,41 +10,41 @@ class PenjualanHistory extends StatefulWidget {
 }
 
 class _PenjualanHistoryState extends State<PenjualanHistory> {
-  final List<Map<String, dynamic>> dataPenjualan = [
+  final List<Map<String, dynamic>> dataStok = [
     {
       'Produk': 'Ayam Bakar Nashville',
       'ID': '001',
       'Tgl': '2024-10-22',
-      'Kuantitas': 100,
-      'Total': 2400000,
+      'Perubahan': 100,
+      'Total': 1000,
     },
     {
       'Produk': 'Sate Ayam',
       'ID': '002',
       'Tgl': '2024-10-21',
-      'Kuantitas': 5,
-      'Total': 125000,
+      'Perubahan': 5,
+      'Total': 505,
     },
     {
       'Produk': 'Nasi Goreng',
       'ID': '003',
       'Tgl': '2024-10-20',
-      'Kuantitas': 2,
-      'Total': 50000,
+      'Perubahan': 2,
+      'Total': 232,
     },
     {
       'Produk': 'Mie Goreng',
       'ID': '004',
       'Tgl': '2024-10-19',
-      'Kuantitas': 4,
-      'Total': 100000,
+      'Perubahan': 4,
+      'Total': 240,
     },
     {
       'Produk': 'Tahu Tempe',
       'ID': '005',
       'Tgl': '2024-10-18',
-      'Kuantitas': 10,
-      'Total': 70000,
+      'Perubahan': 10,
+      'Total': 266,
     },
   ];
 
@@ -69,7 +69,7 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
       appBar: AppBar(
         backgroundColor: Main.darkBlue,
         title: Text(
-          'Riwayat Penjualan',
+          'Riwayat Stok',
           style: Bold.large.withColor(Monochrome.whiteDarkMode),
         ),
         leading: IconButton(
@@ -135,7 +135,7 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
                 children: [
                   Text('Produk',
                       style: SemiBold.body.withColor(Monochrome.whiteDarkMode)),
-                  Text('Kuantitas',
+                  Text('Perubahan',
                       style: SemiBold.body.withColor(Monochrome.whiteDarkMode)),
                   Text('Total',
                       style: SemiBold.body.withColor(Monochrome.whiteDarkMode)),
@@ -147,7 +147,7 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
                 child: ListView.builder(
-                  itemCount: dataPenjualan.length, // Jumlah item di ListView
+                  itemCount: dataStok.length, // Jumlah item di ListView
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return Padding(
@@ -169,14 +169,14 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(dataPenjualan[index]['Produk'],
+                                    Text(dataStok[index]['Produk'],
                                         style: SemiBold.body.withColor(
                                             Monochrome.whiteDarkMode)),
                                     SizedBox(height: 4),
-                                    Text('ID ${dataPenjualan[index]['ID']}',
+                                    Text('ID ${dataStok[index]['ID']}',
                                         style: Regular.small.withColor(
                                             Monochrome.whiteDarkMode)),
-                                    Text(dataPenjualan[index]['Tgl'],
+                                    Text(dataStok[index]['Tgl'],
                                         style: Regular.small.withColor(
                                             Monochrome.whiteDarkMode)),
                                   ],
@@ -185,13 +185,14 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
                               Container(
                                 width: 50,
                                 child: Text(
-                                    dataPenjualan[index]['Kuantitas']
-                                        .toString(),
+                                    (dataStok[index]['Perubahan'] > 0
+                                            ? '+'
+                                            : '') +
+                                        dataStok[index]['Perubahan'].toString(),
                                     style: SemiBold.body
                                         .withColor(Monochrome.whiteDarkMode)),
                               ),
-                              Text(
-                                  'Rp${dataPenjualan[index]['Total'].toString()}',
+                              Text('Rp${dataStok[index]['Total'].toString()}',
                                   style: SemiBold.body
                                       .withColor(Monochrome.whiteDarkMode)),
                             ],

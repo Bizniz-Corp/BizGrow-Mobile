@@ -11,6 +11,7 @@ class BizGrowApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: BizGrowTheme.darkMode,
       home: BerandaScreen(),
     );
