@@ -39,30 +39,6 @@ class PenjualanScreen extends StatelessWidget {
               'Semua berjalan dengan baik',
               style: Regular.large.withColor(Monochrome.whiteDarkMode),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PrediksiDemandScreen(),
-                  ),
-                );
-              },
-              child: Text("ke prediksi demand"),
-            ),
-            SizedBox(height: 20), // Tambahkan jarak
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        PenjualanHistory(), // Navigasi ke halaman PenjualanHistory
-                  ),
-                );
-              },
-              child: Text("Lihat Riwayat Penjualan"),
-            ),
           ],
         ),
       ),
