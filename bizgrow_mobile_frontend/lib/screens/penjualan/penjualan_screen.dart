@@ -1,3 +1,5 @@
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_input_excel_screen.dart';
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_input_manual_screen.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -43,7 +45,27 @@ class PenjualanScreen extends StatelessWidget{
                   ),
                 );
               },
-              child: Text("ke prediksi demand"))
+              child: Text("ke prediksi demand")),
+              ElevatedButton(
+              onPressed: (){
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PenjualanInputManualScreen(),
+                  ),
+                );
+              },
+              child: Text("ke input data manual")),
+              ElevatedButton(
+              onPressed: (){
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PenjualanInputExcelScreen(),
+                  ),
+                );
+              },
+              child: Text("ke input data excel")),
           ],
         ),
       ),
