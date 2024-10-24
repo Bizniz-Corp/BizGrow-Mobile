@@ -1,0 +1,16 @@
+{
+    "forecastData": [
+      { "month": "Januari", "value": 30 },
+      { "month": "Februari", "value": 50 },
+      { "month": "Maret", "value": 70 },
+      { "month": "April", "value": 65 },
+      { "month": "Mei", "value": 80 },
+      { "month": "Juni", "value": 60 },
+      { "month": "Juli", "value": 90 },
+      { "month": "Agustus", "value": 85 },
+      { "month": "September", "value": 75 },
+      { "month": "Oktober", "value": 55 },
+      { "month": "November", "value": 40 },
+      { "month": "Desember", "value": 95 }
+    ]
+  }
