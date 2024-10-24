@@ -2,22 +2,64 @@ import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 
+// CONTOH PENGGUNAAN
+
+// CustomButton(
+//   text: 'Submit',
+//   size: 'large',
+//   onPressed: () {
+//     Navigator.pushReplacement(
+//         context,
+//         MaterialPageRoute((context) => PrediksiDemandScreen()),
+//     );
+//   },
+// )
+
+// CustomButton(
+//   text: 'Add',
+//   size: 'medium',
+//   iconPath: 'assets/icons/add_icon.png', // Path ikon
+//   iconPosition: 'leftIcon',
+//   onPressed: () {
+//     print('Button with left icon clicked');
+//   },
+// )
+
+// CustomButton(
+//   text: '', // Kosong karena hanya ikon
+//   size: 'medium',
+//   iconPath: 'assets/icons/settings_icon.png',
+//   iconPosition: 'icon only',
+//   onPressed: () {
+//     print('Icon-only button clicked');
+//   },
+// )
+
+// CustomButton(
+//   text: 'Submit',
+//   size: 'large',
+//   width: 300, // Lebar kustom
+//   onPressed: () {
+//     print('Large button with custom width clicked');
+//   },
+// )
+
 class CustomButton extends StatelessWidget {
   final String text; 
   final String size; 
-  final double? width; 
-  final String? iconPath; 
-  final String? buttonType; // Posisi icon: right, left, atau null
+  final double? width; // BISA NULL
+  final String? iconPath; // BISA NULL
+  final String? buttonType; // Posisi icon: right, left, atau BISA NULL
   final VoidCallback onPressed; // Fungsi yang dipanggil ketika button ditekan
-  final Color? color; 
-  final double? radius;
+  final Color? color; // BISA NULL
+  final double? radius; // BISA NULL
 
   CustomButton({
     required this.text,
     required this.size,
     this.width,
     this.iconPath,
-    this.buttonType = 'no icon',
+    this.buttonType = 'noIcon',
     required this.onPressed,
     this.color = Main.blueSecondary,
     this.radius,
@@ -84,7 +126,7 @@ class CustomButton extends StatelessWidget {
               ),
 
             // text Text
-            if (buttonType != 'icon only') 
+            if (buttonType != 'iconOnly') 
               Text(
                 text,
                 style: textStyle.copyWith(color: Colors.white),
@@ -98,7 +140,7 @@ class CustomButton extends StatelessWidget {
               ),
             
             // Jika tipe `icon only`
-            if (buttonType == 'icon only' && iconPath != null)
+            if (buttonType == 'iconOnly' && iconPath != null)
               Image.asset(iconPath!, height: 24, width: 24),
           ],
         ),
