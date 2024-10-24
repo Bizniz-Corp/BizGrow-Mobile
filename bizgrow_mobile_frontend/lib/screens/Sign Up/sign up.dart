@@ -48,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: 50.0),
             // Logo at the top
             Image.asset(
-              'assets/logo.png', // Replace with your logo path
+              'lib/assets/navbar_icon/Logo.png', // Replace with your logo path
               height: 80.0,
             ),
             SizedBox(height: 30.0),
