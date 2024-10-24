@@ -1,4 +1,4 @@
-name: bizgrow_mobile_frontend
+ame: bizgrow_mobile_frontend
 description: "A new Flutter project."
 publish_to: 'none'
 version: 0.1.0
@@ -27,3 +27,5 @@ flutter:
     - lib/assets/navbar_icon/selected/Penjualan.png
     - lib/assets/navbar_icon/selected/Stok.png
     - lib/assets/navbar_icon/selected/Profil.png
+    - lib/assets/navbar_icon/Logo.png
+
