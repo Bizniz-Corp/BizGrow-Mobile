@@ -28,3 +28,4 @@ flutter:
     - lib/assets/navbar_icon/selected/Penjualan.png
     - lib/assets/navbar_icon/selected/Stok.png
     - lib/assets/navbar_icon/selected/Profil.png
+    - lib/assets/data/data_dummy.json
