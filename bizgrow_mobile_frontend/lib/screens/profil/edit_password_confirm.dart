@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toastification/toastification.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
@@ -39,6 +40,14 @@ class EditPasswordConfirm extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // TODO: Add save password logic here
+                toastification.show(
+                  context: context,
+                  title: Text('Password Baru Berhasil Disimpan'),
+                  type: ToastificationType.success,
+                  style: ToastificationStyle.fillColored,
+                  autoCloseDuration: const Duration(seconds: 5),
+                  showProgressBar: false,
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Main.blueSecondary,

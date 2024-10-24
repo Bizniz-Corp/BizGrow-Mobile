@@ -40,6 +40,7 @@ class EditPassword extends StatelessWidget {
               obscureText: true, // Untuk menyembunyikan teks (password)
               style: Regular.body.withColor(Monochrome.whiteDarkMode),
               decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(vertical: 10),
                 hintText: 'Password lama', // Label dalam input field
                 hintStyle:
                     Regular.body.withColor(Monochrome.lightGrey), // Warna hint
