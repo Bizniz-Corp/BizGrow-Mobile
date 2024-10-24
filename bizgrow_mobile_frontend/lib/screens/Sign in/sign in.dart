@@ -27,7 +27,7 @@ class SignInScreen extends StatelessWidget {
             SizedBox(height: 50.0),
             // Logo at the top
             Image.asset(
-              'Logo/logo.png', // Replace with your logo path
+              'lib/assets/navbar_icon/Logo.png', // Replace with your logo path
             ),
             SizedBox(height: 30.0),
             // Sign In Text
