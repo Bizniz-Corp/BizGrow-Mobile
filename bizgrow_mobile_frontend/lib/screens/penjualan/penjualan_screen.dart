@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
-import 'package:bizgrow_mobile_frontend/screens/penjualan/prediksi_demand_screen.dart';
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_prediksi_demand_screen.dart';
 import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_history.dart'; // Tambahkan import PenjualanHistory
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 

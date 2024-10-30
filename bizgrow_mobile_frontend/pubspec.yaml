@@ -12,6 +12,7 @@ dependencies:
   google_fonts: ^6.2.1
   intl: ^0.18.0
   toastification: ^2.3.0
+  fl_chart: ^0.69.0
 
 dev_dependencies:
   flutter_test:
@@ -29,6 +30,7 @@ flutter:
     - lib/assets/navbar_icon/selected/Penjualan.png
     - lib/assets/navbar_icon/selected/Stok.png
     - lib/assets/navbar_icon/selected/Profil.png
+    - lib/assets/data/data_dummy.json
     - lib/assets/essential_icon/arrow-circle-down-icon.png
     - lib/assets/essential_icon/refresh-circle-icon.png
     - lib/assets/essential_icon/filter-icon.png
