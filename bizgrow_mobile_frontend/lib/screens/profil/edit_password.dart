@@ -1,3 +1,4 @@
+import 'package:bizgrow_mobile_frontend/screens/profil/profil_screen.dart';
 import 'package:flutter/material.dart';
 import 'edit_password_confirm.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
@@ -17,7 +18,12 @@ class EditPassword extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Monochrome.whiteDarkMode),
           onPressed: () {
-            Navigator.pop(context); // Ini untuk kembali ke halaman sebelumnya
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfilScreen(),
+              ),
+            ); // Ini untuk kembali ke halaman sebelumnya
           },
         ),
         titleSpacing: 0,
@@ -67,7 +73,7 @@ class EditPassword extends StatelessWidget {
             SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>

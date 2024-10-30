@@ -1,3 +1,4 @@
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
@@ -70,12 +71,17 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
         backgroundColor: Main.darkBlue,
         title: Text(
           'Riwayat Penjualan',
-          style: Bold.large.withColor(Monochrome.whiteDarkMode),
         ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Monochrome.whiteDarkMode),
           onPressed: () {
-            Navigator.pop(context); // Ini untuk kembali ke halaman sebelumnya
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    PenjualanScreen(), // Navigasi ke halaman PenjualanHistory
+              ),
+            ); // Ini untuk kembali ke halaman sebelumnya
           },
         ),
         titleSpacing: 0,
@@ -91,10 +97,19 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
                 GestureDetector(
                   onTap: () =>
                       _showFilterDialog(context), // Memunculkan dialog filter
-                  child: Image.asset(
-                    'lib/assets/essential_icon/filter-icon.png',
-                    width: 30,
-                    height: 30,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'lib/assets/essential_icon/filter-icon.png',
+                        width: 30,
+                        height: 30,
+                      ),
+                      Text('Filter',
+                          style: SemiBold.small
+                              .withColor(Monochrome.whiteDarkMode))
+                    ],
                   ),
                 ),
                 SizedBox(width: 8),
@@ -111,11 +126,20 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
                 ),
                 SizedBox(width: 8),
                 GestureDetector(
-                  onTap: _resetFilters, // Reset ketika refresh icon ditekan
-                  child: Image.asset(
-                    'lib/assets/essential_icon/refresh-circle-icon.png',
-                    width: 30,
-                    height: 30,
+                  onTap: _resetFilters,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'lib/assets/essential_icon/refresh-circle-icon.png',
+                        width: 30,
+                        height: 30,
+                      ),
+                      Text('Reset',
+                          style: SemiBold.small
+                              .withColor(Monochrome.whiteDarkMode))
+                    ],
                   ),
                 ),
               ],

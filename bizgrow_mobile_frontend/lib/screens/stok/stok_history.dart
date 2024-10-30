@@ -4,12 +4,12 @@ import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 
-class PenjualanHistory extends StatefulWidget {
+class StokHistory extends StatefulWidget {
   @override
-  _PenjualanHistoryState createState() => _PenjualanHistoryState();
+  _StokHistoryState createState() => _StokHistoryState();
 }
 
-class _PenjualanHistoryState extends State<PenjualanHistory> {
+class _StokHistoryState extends State<StokHistory> {
   final List<Map<String, dynamic>> dataStok = [
     {
       'Produk': 'Ayam Bakar Nashville',

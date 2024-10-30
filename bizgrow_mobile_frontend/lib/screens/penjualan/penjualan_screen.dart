@@ -39,6 +39,16 @@ class PenjualanScreen extends StatelessWidget {
               'Semua berjalan dengan baik',
               style: Regular.large.withColor(Monochrome.whiteDarkMode),
             ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PenjualanHistory(),
+                    ),
+                  );
+                },
+                child: Text("ke history test"))
           ],
         ),
       ),
