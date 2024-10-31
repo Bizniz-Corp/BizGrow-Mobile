@@ -16,7 +16,7 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text("prediksi"),
+        title: Text("Prediksi Demand"),
       ),
       body: Container(
         margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
