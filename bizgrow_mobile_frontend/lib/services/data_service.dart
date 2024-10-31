@@ -5,9 +5,8 @@ import 'package:fl_chart/fl_chart.dart';
 
 Future<List<dynamic>> readJsonFile(String filePath) async {
   var input = await File(filePath).readAsString();
-  var data = jsonDecode(input);
 
-  return data;
+  return jsonDecode(input) as List<dynamic>;
 }
 
 Future<List<List<dynamic>>> getChartData(String filePath) async {
@@ -26,11 +25,5 @@ Future<List<List<dynamic>>> getChartData(String filePath) async {
     dateForXBar.add(jsonData[i]['date']);
   }
 
-  List<List<dynamic>> allData = [];
-
-  allData.add(dataReal);
-  allData.add(dataForecast);
-  allData.add(dateForXBar);
-
-  return allData;
+  return [dataReal, dataForecast, dateForXBar];
 }

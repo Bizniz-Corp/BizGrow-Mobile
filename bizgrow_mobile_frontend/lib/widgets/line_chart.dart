@@ -12,11 +12,12 @@ class CustomLineChart extends StatefulWidget {
 }
 
 class _CustomLineChartState extends State<CustomLineChart> {
-  final data = readJsonFile('lib/assets/data/data_dummy.json');
+  final data = getChartData('lib/assets/data/data_dummy.json');
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return FutureBuilder<List<FlSpot>>(
+      future: future, builder: builder
+    );
   }
 }
