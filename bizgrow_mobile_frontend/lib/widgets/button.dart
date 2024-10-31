@@ -45,14 +45,15 @@ import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 // )
 
 class CustomButton extends StatelessWidget {
-  final String text; 
-  final String size; 
+  final String text;
+  final String size;
   final double? width; // BISA NULL
   final String? iconPath; // BISA NULL
   final String? buttonType; // Posisi icon: right, left, atau BISA NULL
   final VoidCallback onPressed; // Fungsi yang dipanggil ketika button ditekan
   final Color? color; // BISA NULL
   final double? radius; // BISA NULL
+  final double? iconSize;
 
   CustomButton({
     required this.text,
@@ -63,6 +64,7 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.color = Main.blueSecondary,
     this.radius,
+    this.iconSize
   });
 
   @override
@@ -71,7 +73,6 @@ class CustomButton extends StatelessWidget {
     double horizontalPadding;
     TextStyle textStyle;
     double radius;
-    
 
     switch (size) {
       case 'large':
@@ -99,7 +100,8 @@ class CustomButton extends StatelessWidget {
         textStyle = SemiBold.large.withColor(Monochrome.whiteDarkMode);
     }
 
-    double widthDefault = (textStyle.fontSize! * text.length) + (horizontalPadding * 2);
+    double widthDefault =
+        (textStyle.fontSize! * text.length) + (horizontalPadding * 2);
 
     return SizedBox(
       width: width ?? widthDefault,
@@ -116,32 +118,31 @@ class CustomButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             // Icon di sebelah kiri jika `left icon`
-            
-            if (iconPath != null && buttonType == 'leftIcon') 
+
+            if (iconPath != null && buttonType == 'leftIcon')
               Padding(
-                padding: const EdgeInsets.only(right: 8.0), 
-                child: Image.asset(iconPath!, height: 24, width: 24),
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Image.asset(iconPath!, height: iconSize, width: iconSize),
               ),
 
             // text Text
-            if (buttonType != 'iconOnly') 
+            if (buttonType != 'iconOnly')
               Text(
                 text,
                 style: textStyle.copyWith(color: Colors.white),
               ),
 
             // Icon di sebelah kanan jika `right icon`
-            if (iconPath != null && buttonType == 'rightIcon') 
+            if (iconPath != null && buttonType == 'rightIcon')
               Padding(
-                padding: const EdgeInsets.only(left: 8.0), 
-                child: Image.asset(iconPath!, height: 24, width: 24),
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Image.asset(iconPath!, height: iconSize, width: iconSize),
               ),
-            
+
             // Jika tipe `icon only`
             if (buttonType == 'iconOnly' && iconPath != null)
-              Image.asset(iconPath!, height: 24, width: 24),
+              Image.asset(iconPath!, height: iconSize, width: iconSize),
           ],
         ),
       ),
