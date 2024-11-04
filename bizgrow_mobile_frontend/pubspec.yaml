@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^6.2.1
-  intl: ^0.18.0
+  intl: ^0.19.0
   toastification: ^2.3.0
   fl_chart: ^0.69.0
 
@@ -34,3 +34,5 @@ flutter:
     - lib/assets/essential_icon/arrow-circle-down-icon.png
     - lib/assets/essential_icon/refresh-circle-icon.png
     - lib/assets/essential_icon/filter-icon.png
+    - lib/assets/data/penjualan.json
+    - lib/assets/data/stok.json

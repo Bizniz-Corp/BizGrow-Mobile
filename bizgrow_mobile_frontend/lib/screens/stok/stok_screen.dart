@@ -1,3 +1,4 @@
+import 'package:bizgrow_mobile_frontend/screens/stok/stok_history.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,6 +36,16 @@ class StokScreen extends StatelessWidget {
               'Semua berjalan dengan baik',
               style: Regular.large.withColor(Monochrome.whiteDarkMode),
             ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StokHistory(),
+                    ),
+                  );
+                },
+                child: Text("ke history test"))
           ],
         ),
       ),
