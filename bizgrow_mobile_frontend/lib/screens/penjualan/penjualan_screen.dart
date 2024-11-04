@@ -4,9 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_prediksi_demand_screen.dart';
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_history.dart'; // Tambahkan import PenjualanHistory
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 
-class PenjualanScreen extends StatelessWidget{
+class PenjualanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,14 +21,18 @@ class PenjualanScreen extends StatelessWidget{
           children: [
             Text(
               'Semua berjalan dengan baik',
-              style: GoogleFonts.montserrat(fontSize: 28, color: Monochrome.whiteDarkMode, 
-              letterSpacing: -0.5
+              style: GoogleFonts.montserrat(
+                fontSize: 28,
+                color: Monochrome.whiteDarkMode,
+                letterSpacing: -0.5,
               ),
             ),
             Text(
               'Semua berjalan dengan baik',
-              style: GoogleFonts.montserrat(fontSize: 28, color: Monochrome.whiteDarkMode, 
-              letterSpacing: -1
+              style: GoogleFonts.montserrat(
+                fontSize: 28,
+                color: Monochrome.whiteDarkMode,
+                letterSpacing: -1,
               ),
             ),
             Text(
@@ -35,15 +40,15 @@ class PenjualanScreen extends StatelessWidget{
               style: Regular.large.withColor(Monochrome.whiteDarkMode),
             ),
             ElevatedButton(
-              onPressed: (){
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PrediksiDemandScreen(),
-                  ),
-                );
-              },
-              child: Text("ke prediksi demand"))
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PenjualanHistory(),
+                    ),
+                  );
+                },
+                child: Text("ke history test"))
           ],
         ),
       ),
