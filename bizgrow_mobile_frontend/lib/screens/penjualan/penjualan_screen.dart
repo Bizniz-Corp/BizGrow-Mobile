@@ -39,10 +39,10 @@ class PenjualanScreen extends StatelessWidget {
             SizedBox(height: 20),
             Expanded(
               child: GridView.count(
-                crossAxisCount: 3,  // Set ke 2 kolom
+                crossAxisCount: 3, // Set ke 2 kolom
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
-                childAspectRatio: 1.2, // Mengatur tinggi kotak agar lebih besar
+                childAspectRatio: 1.0, // Mengatur tinggi kotak agar lebih besar
                 children: [
                   buildMenuButton(
                     context,
@@ -92,7 +92,8 @@ class PenjualanScreen extends StatelessWidget {
   }
 
   // Tambahkan parameter `imagePath` untuk gambar
-  Widget buildMenuButton(BuildContext context, String title, String imagePath, VoidCallback onTap) {
+  Widget buildMenuButton(BuildContext context, String title, String imagePath,
+      VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
