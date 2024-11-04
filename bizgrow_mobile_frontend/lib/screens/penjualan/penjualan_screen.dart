@@ -9,11 +9,13 @@ import 'package:bizgrow_mobile_frontend/screens/penjualan/prediksi_demand_screen
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 
 class PenjualanScreen extends StatelessWidget{
+  const PenjualanScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Penjualan'),
+        title: const Text('Penjualan'),
       ),
       body: Container(
         margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
@@ -45,7 +47,7 @@ class PenjualanScreen extends StatelessWidget{
                   ),
                 );
               },
-              child: Text("ke prediksi demand")),
+              child: const Text("ke prediksi demand")),
               ElevatedButton(
               onPressed: (){
                 Navigator.pushReplacement(
@@ -55,7 +57,7 @@ class PenjualanScreen extends StatelessWidget{
                   ),
                 );
               },
-              child: Text("ke input data manual")),
+              child: const Text("ke input data manual")),
               ElevatedButton(
               onPressed: (){
                 Navigator.pushReplacement(
@@ -65,7 +67,7 @@ class PenjualanScreen extends StatelessWidget{
                   ),
                 );
               },
-              child: Text("ke input data excel")),
+              child: const Text("ke input data excel")),
           ],
         ),
       ),

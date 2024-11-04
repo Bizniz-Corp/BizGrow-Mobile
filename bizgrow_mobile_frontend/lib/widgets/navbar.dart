@@ -120,7 +120,7 @@ import 'package:bizgrow_mobile_frontend/screens/profil/profil_screen.dart';
 class MainNavigator extends StatefulWidget {
   final int selectedIndex;
 
-  MainNavigator({required this.selectedIndex});
+  const MainNavigator({super.key, required this.selectedIndex});
 
   @override
   _MainNavigatorState createState() => _MainNavigatorState();

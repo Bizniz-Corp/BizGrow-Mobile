@@ -8,11 +8,13 @@ import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 
 class StokScreen extends StatelessWidget{
+  const StokScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stok'),
+        title: const Text('Stok'),
       ),
       body: Container(
         margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
@@ -44,7 +46,7 @@ class StokScreen extends StatelessWidget{
                   ),
                 );
               },
-              child: Text("Input Excel")),
+              child: const Text("Input Excel")),
             ElevatedButton(
               onPressed: (){
                 Navigator.pushReplacement(
@@ -54,7 +56,7 @@ class StokScreen extends StatelessWidget{
                   ),
                 );
               },
-              child: Text("Input Manual"))
+              child: const Text("Input Manual"))
           ],
         ),
       ),
