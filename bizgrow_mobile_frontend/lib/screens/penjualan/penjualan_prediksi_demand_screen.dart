@@ -5,6 +5,7 @@ import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 
+
 class PrediksiDemandScreen extends StatefulWidget{
   @override
   _PrediksiDemandScreenState createState() => _PrediksiDemandScreenState();
