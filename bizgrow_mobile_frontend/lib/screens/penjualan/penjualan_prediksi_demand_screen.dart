@@ -5,20 +5,19 @@ import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 
-
-class PrediksiDemandScreen extends StatefulWidget{
+class PrediksiDemandScreen extends StatefulWidget {
   const PrediksiDemandScreen({super.key});
 
   @override
   _PrediksiDemandScreenState createState() => _PrediksiDemandScreenState();
 }
 
-class _PrediksiDemandScreenState extends State<PrediksiDemandScreen>{
+class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("prediksi"),
+        title: Text("Prediksi Demand"),
       ),
       body: Container(
         margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
