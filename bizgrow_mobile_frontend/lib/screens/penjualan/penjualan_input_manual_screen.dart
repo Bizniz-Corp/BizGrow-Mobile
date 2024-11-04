@@ -5,7 +5,7 @@ import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class PenjualanInputManualScreen extends StatefulWidget {
   const PenjualanInputManualScreen({super.key});
@@ -18,26 +18,26 @@ class PenjualanInputManualScreen extends StatefulWidget {
 class _PenjualanInputManualScreenState
     extends State<PenjualanInputManualScreen> {
   DateTime selectedDate = DateTime.now();
-  late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+  // late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
   @override
   void initState() {
     super.initState();
-    _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    // _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     _initializeNotifications();
   }
 
   void _initializeNotifications() async {
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+    // const AndroidInitializationSettings initializationSettingsAndroid =
+    //     AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
-      android: initializationSettingsAndroid,
-      // iOS settings can be added here if needed
-    );
+    // const InitializationSettings initializationSettings =
+    //     InitializationSettings(
+    //   android: initializationSettingsAndroid,
+    //   // iOS settings can be added here if needed
+    // );
 
-    await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    // await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
   Widget build(BuildContext context) {
@@ -138,25 +138,25 @@ class _PenjualanInputManualScreenState
   }
 
   Future<void> _showNotification() async {
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-      'channelId',
-      'channelName',
-      channelDescription: 'lorem ipsum dolor sit amet',
-      importance: Importance.high,
-      priority: Priority.high,
-      showWhen: false,
-    );
+    // const AndroidNotificationDetails androidPlatformChannelSpecifics =
+    //     AndroidNotificationDetails(
+    //   'channelId',
+    //   'channelName',
+    //   channelDescription: 'lorem ipsum dolor sit amet',
+    //   importance: Importance.high,
+    //   priority: Priority.high,
+    //   showWhen: false,
+    // );
 
-    const NotificationDetails platformChannelSpecifics =
-        NotificationDetails(android: androidPlatformChannelSpecifics);
+    // const NotificationDetails platformChannelSpecifics =
+    //     NotificationDetails(android: androidPlatformChannelSpecifics);
 
-    await _flutterLocalNotificationsPlugin.show(
-      0,
-      'Data Terkirim',
-      'Data penjualan Anda telah berhasil dikirim.',
-      platformChannelSpecifics,
-    );
+    // await _flutterLocalNotificationsPlugin.show(
+    //   0,
+    //   'Data Terkirim',
+    //   'Data penjualan Anda telah berhasil dikirim.',
+    //   platformChannelSpecifics,
+    // );
   }
 }
 
