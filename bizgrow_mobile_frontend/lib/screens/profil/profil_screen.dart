@@ -7,11 +7,13 @@ import 'package:bizgrow_mobile_frontend/screens/profil/edit_password.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 
 class ProfilScreen extends StatelessWidget {
+  const ProfilScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profil'),
+        title: const Text('Profil'),
       ),
       body: Container(
         margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),

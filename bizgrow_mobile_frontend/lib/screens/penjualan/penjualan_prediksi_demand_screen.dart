@@ -7,6 +7,8 @@ import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 
 
 class PrediksiDemandScreen extends StatefulWidget{
+  const PrediksiDemandScreen({super.key});
+
   @override
   _PrediksiDemandScreenState createState() => _PrediksiDemandScreenState();
 }
@@ -16,11 +18,11 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text("prediksi"),
+        title: const Text("prediksi"),
       ),
       body: Container(
         margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
-        child: Text("ini prediksi demand"),
+        child: const Text("ini prediksi demand"),
       ),
       bottomNavigationBar: MainNavigator(selectedIndex: 1),
     );

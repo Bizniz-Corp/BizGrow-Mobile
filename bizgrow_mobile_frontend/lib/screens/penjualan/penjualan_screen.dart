@@ -1,3 +1,5 @@
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_input_excel_screen.dart';
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_input_manual_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
@@ -8,6 +10,8 @@ import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:bizgrow_mobile_frontend/screens/penjualan/input_data_penjualan.dart'; // Pastikan ini diimpor
 
 class PenjualanScreen extends StatelessWidget {
+  const PenjualanScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

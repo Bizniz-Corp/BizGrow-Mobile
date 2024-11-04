@@ -13,6 +13,8 @@ void main() {
 }
 
 class BizGrowApp extends StatelessWidget {
+  const BizGrowApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
