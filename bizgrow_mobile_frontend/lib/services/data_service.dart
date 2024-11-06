@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:fl_chart/fl_chart.dart';
+
 
 
 Future<List<dynamic>> readJsonFile(String filePath) async {
@@ -9,21 +9,14 @@ Future<List<dynamic>> readJsonFile(String filePath) async {
   return jsonDecode(input) as List<dynamic>;
 }
 
-Future<List<List<dynamic>>> getChartData(String filePath) async {
-  List<dynamic> jsonData = await readJsonFile(filePath);
-  
-  List<FlSpot> dataReal = [];
-  List<FlSpot> dataForecast = [];
-  List<String> dateForXBar = [];
+Future<void> main() async {
+  print('test');
+  List<dynamic> data = await readJsonFile(
+      '../assets/data/data_dummy.json');
 
-  for (int i = 0; i < jsonData.length; i++){
-    if (jsonData[i]['state'] == 0){
-      dataReal.add(FlSpot(i.toDouble(), jsonData[i]['value'].toDouble()));
-    }else if (jsonData[i].State == 1){
-      dataForecast.add(FlSpot(i.toDouble(), jsonData[i]['value'].toDouble()));
-    }
-    dateForXBar.add(jsonData[i]['date']);
+  if (data != null) {
+    print('${data[0]['value']}');
+  } else {
+    print('No');
   }
-
-  return [dataReal, dataForecast, dateForXBar];
 }
