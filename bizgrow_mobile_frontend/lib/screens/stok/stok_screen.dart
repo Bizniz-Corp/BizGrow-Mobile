@@ -1,13 +1,12 @@
-import 'package:bizgrow_mobile_frontend/screens/stok/stok_input_excel_screen.dart';
-import 'package:bizgrow_mobile_frontend/screens/stok/stok_input_manual_screen.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:bizgrow_mobile_frontend/screens/stok/input_data_stok.dart'; // Pastikan ini diimpor
-import 'package:bizgrow_mobile_frontend/screens/stok/stok_history.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
+import 'package:bizgrow_mobile_frontend/screens/stok/input_data_stok.dart'; 
+import 'package:bizgrow_mobile_frontend/screens/stok/stok_history.dart';
+import 'package:bizgrow_mobile_frontend/screens/stok/stok_prediksi_screen.dart';
 
 class StokScreen extends StatelessWidget {
   const StokScreen({super.key});
@@ -53,7 +52,12 @@ class StokScreen extends StatelessWidget {
                     'Prediksi Stok',
                     'lib/assets/navbar_icon/Prediksi_Stok.png',
                     () {
-                      // Navigasi ke halaman Prediksi Demand
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InputDataStokScreen(),
+                        ),
+                      );
                     },
                   ),
                   buildMenuButton(
@@ -61,7 +65,12 @@ class StokScreen extends StatelessWidget {
                     'Riwayat Stok',
                     'lib/assets/navbar_icon/Riwayat.png',
                     () {
-                      // Navigasi ke halaman Riwayat Penjualan
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StokHistory(),
+                        ),
+                      );
                     },
                   ),
                   buildMenuButton(

@@ -1,4 +1,4 @@
-ame: bizgrow_mobile_frontend
+name: bizgrow_mobile_frontend
 description: "A new Flutter project."
 publish_to: "none"
 version: 0.1.0
@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   flutter_local_notifications: ^18.0.0
   google_fonts: ^6.2.1
-  carousel_slider: ^4.1.1
+  carousel_slider: ^5.0.0
   intl: ^0.19.0
   toastification: ^2.3.0
   fl_chart: ^0.69.0
@@ -46,4 +46,3 @@ flutter:
     - lib/assets/essential_icon/filter-icon.png
     - lib/assets/data/penjualan.json
     - lib/assets/data/stok.json
-    - lib/assets/navbar_icon/Logo.png

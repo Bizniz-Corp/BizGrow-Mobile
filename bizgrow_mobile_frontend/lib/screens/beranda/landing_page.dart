@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:bizgrow_mobile_frontend/screens/Sign in/sign in.dart';
+import 'package:bizgrow_mobile_frontend/screens/Sign up/sign up.dart';
 
 class LandingPageScreen extends StatelessWidget {
   @override
@@ -19,13 +21,13 @@ class LandingPageScreen extends StatelessWidget {
             children: [
               // Logo
               Image.asset(
-                'lib/assets/navbar_icon/logo1.png', // Pastikan path logo benar
-                height: 120,
+                'lib/assets/navbar_icon/logo1.png',
+                height: 70,
                 fit: BoxFit.contain,
               ),
               SizedBox(height: 24),
 
-              // Tagline atau informasi aplikasi
+              // Nama apk
               Text(
                 'BizGrow',
                 style: GoogleFonts.montserrat(
@@ -46,13 +48,16 @@ class LandingPageScreen extends StatelessWidget {
               ),
               SizedBox(height: 40),
 
-              // Tombol Sign In dan Sign Up
+              // Tombol Sign In Sign Up
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/signIn');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignInScreen()),
+                      );
                     },
                     child: Text('Sign In'),
                     style: ElevatedButton.styleFrom(
@@ -72,7 +77,10 @@ class LandingPageScreen extends StatelessWidget {
                   SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/signUp');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignUpScreen()),
+                      );
                     },
                     child: Text('Sign Up'),
                     style: ElevatedButton.styleFrom(
@@ -91,9 +99,8 @@ class LandingPageScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 70),
 
-              // Fitur utama dengan CarouselSlider
               Text(
                 'Our Features',
                 style: GoogleFonts.montserrat(
@@ -104,34 +111,42 @@ class LandingPageScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
 
+              // Carousel
               CarouselSlider(
                 options: CarouselOptions(
-                  height: 200,
+                  height: 240,
                   autoPlay: true,
                   enlargeCenterPage: true,
                   aspectRatio: 2.0,
                 ),
                 items: [
-                  featureCard(
-                    context,
-                    'Demand Prediction',
-                    'Predict future demand to optimize your stock and avoid shortages.',
-                    'lib/assets/navbar_icon/landing_page1.png',
+                  Flexible(
+                    child: featureCard(
+                      context,
+                      'Demand Prediction',
+                      'Predict future demand to optimize your stock and avoid shortages.',
+                      'lib/assets/navbar_icon/landing_page1.jpg',
+                    ),
                   ),
-                  featureCard(
-                    context,
-                    'Profit Prediction',
-                    'Analyze profit trends to make informed financial decisions.',
-                    'lib/assets/navbar_icon/landing_page1.png',
+                  Flexible(
+                    child: featureCard(
+                      context,
+                      'Profit Prediction',
+                      'Analyze profit trends to make informed financial decisions.',
+                      'lib/assets/navbar_icon/landing_page1.jpg',
+                    ),
                   ),
-                  featureCard(
-                    context,
-                    'Sales History Tracking',
-                    'Review past sales data to better understand customer behavior.',
-                    'lib/assets/navbar_icon/landing_page1.png',
+                  Flexible(
+                    child: featureCard(
+                      context,
+                      'Sales History Tracking',
+                      'Review past sales data to better understand customer behavior.',
+                      'lib/assets/navbar_icon/landing_page1.jpg',
+                    ),
                   ),
                 ],
               ),
+              SizedBox(height: 180),
             ],
           ),
         ),
@@ -141,40 +156,45 @@ class LandingPageScreen extends StatelessWidget {
 
   Widget featureCard(BuildContext context, String title, String description, String imagePath) {
     return Container(
-      width: double.infinity,
       padding: EdgeInsets.all(16),
+      margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         color: Color(0xFF2D2F7E),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Column(
-        children: [
-          Image.asset(
-            imagePath,
-            width: 80,
-            height: 80,
-            fit: BoxFit.contain,
-          ),
-          SizedBox(height: 16),
-          Text(
-            title,
-            style: GoogleFonts.montserrat(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              imagePath,
+              width: 80,
+              height: 80,
+              fit: BoxFit.contain,
             ),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 8),
-          Text(
-            description,
-            style: GoogleFonts.montserrat(
-              fontSize: 14,
-              color: Colors.white70,
+            SizedBox(height: 16),
+            Text(
+              title,
+              style: GoogleFonts.montserrat(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+            SizedBox(height: 8),
+            Text(
+              description,
+              style: GoogleFonts.montserrat(
+                fontSize: 14,
+                color: Colors.white70,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

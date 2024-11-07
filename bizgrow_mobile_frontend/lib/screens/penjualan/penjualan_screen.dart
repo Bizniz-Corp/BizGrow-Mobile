@@ -1,13 +1,11 @@
-import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_input_excel_screen.dart';
-import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_input_manual_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
-import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_prediksi_demand_screen.dart';
-import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_history.dart'; // Tambahkan import PenjualanHistory
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
-import 'package:bizgrow_mobile_frontend/screens/penjualan/input_data_penjualan.dart'; // Pastikan ini diimpor
+import 'package:bizgrow_mobile_frontend/screens/penjualan/input_data_penjualan.dart'; 
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_prediksi_demand_screen.dart';
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_history.dart'; 
 
 class PenjualanScreen extends StatelessWidget {
   const PenjualanScreen({super.key});
@@ -53,7 +51,12 @@ class PenjualanScreen extends StatelessWidget {
                     'Prediksi Demand',
                     'lib/assets/navbar_icon/Prediksi_Demand.png',
                     () {
-                      // Navigasi ke halaman Prediksi Demand
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PrediksiDemandScreen(),
+                        ),
+                      );
                     },
                   ),
                   buildMenuButton(
@@ -61,7 +64,12 @@ class PenjualanScreen extends StatelessWidget {
                     'Riwayat Penjualan',
                     'lib/assets/navbar_icon/Riwayat.png',
                     () {
-                      // Navigasi ke halaman Riwayat Penjualan
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PenjualanHistory(),
+                        ),
+                      );
                     },
                   ),
                   buildMenuButton(
@@ -69,7 +77,12 @@ class PenjualanScreen extends StatelessWidget {
                     'Prediksi Profit',
                     'lib/assets/navbar_icon/Prediksi_Profit.png',
                     () {
-                      // Navigasi ke halaman Prediksi Profit
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InputDataPenjualanScreen(),
+                        ),
+                      );
                     },
                   ),
                   buildMenuButton(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_input_excel_screen.dart';
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_input_manual_screen.dart';
 
 class InputDataPenjualanScreen extends StatelessWidget {
   @override
@@ -43,14 +45,24 @@ class InputDataPenjualanScreen extends StatelessWidget {
                     context,
                     'Input Data Manual',
                     () {
-                      // Navigasi ke halaman Prediksi Demand
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PenjualanInputManualScreen(),
+                        ),
+                      );
                     },
                   ),
                   buildMenuButton(
                     context,
                     'Input Data File',
                     () {
-                      // Navigasi ke halaman Riwayat Penjualan
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PenjualanInputExcelScreen(),
+                        ),
+                      );
                     },
                   ),
                 ],
