@@ -1,3 +1,4 @@
+import 'package:bizgrow_mobile_frontend/screens/beranda/beranda_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 
@@ -16,7 +17,7 @@ class BizGrowApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: BizGrowTheme.darkMode,
-      home: LandingPageScreen(),
+      home: BerandaScreen(),
     );
   }
 }
