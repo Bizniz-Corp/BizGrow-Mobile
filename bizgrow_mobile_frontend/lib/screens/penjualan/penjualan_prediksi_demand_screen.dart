@@ -7,6 +7,7 @@ import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/services/data_service.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:searchfield/searchfield.dart';
 
 class PrediksiDemandScreen extends StatefulWidget {
   @override
@@ -36,7 +37,7 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
             children: [
               Container(
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.7,
+                height: 175,
                 child: Column(
                   children: [
                     Padding(
@@ -46,7 +47,49 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
                         style: Regular.large.withColor(Monochrome.whiteDarkMode),),
                     ),
                     Container(
-                      // child: SearchField(),
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            blurRadius: 10,
+                            offset: Offset(0, 10)
+                          )
+                        ]
+                      ),
+                      child: SearchField(
+                        hint: 'Cari Produk',
+                        searchInputDecoration: SearchInputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Monochrome.whiteDarkMode,
+                              width: 1
+                            ),
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Main.lightBlue,
+                              width: 2
+                            ),
+                            borderRadius: BorderRadius.circular(10)
+                          )
+                        ),
+                        itemHeight: 50,
+                        maxSuggestionsInViewPort: 5,
+                        suggestionsDecoration: SuggestionDecoration(
+                          color: Main.lightBlue,
+                          borderRadius: BorderRadius.circular(10),
+                          selectionColor: Monochrome.whiteDarkMode
+                        ),
+                        suggestions: [
+                          SearchFieldListItem('Ayam Bakar Nashviled'),
+                          SearchFieldListItem('Ayam Goreng Nashviled'),
+                          SearchFieldListItem('Ayam Rebus Nashviled'),
+                        ],
+                      ),
                     )
                   ],
                 ),
