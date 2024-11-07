@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:bizgrow_mobile_frontend/screens/Sign in/sign in.dart';
 void main() {
   runApp(MyApp());
 }
@@ -48,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: 50.0),
             // Logo at the top
             Image.asset(
-              'lib/assets/navbar_icon/Logo.png', // Replace with your logo path
+              'lib/assets/navbar_icon/logo1.png', // Replace with your logo path
               height: 80.0,
             ),
             SizedBox(height: 30.0),
@@ -208,10 +208,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
+                child: GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SignInScreen(),
+                    ),
+                  );
+                },
                 child: Text(
                   'Sign Up',
-                  style: TextStyle(fontSize: 16.0),
+                  style: TextStyle(color: Colors.white),
                 ),
+              ),
               ),
             ),
             SizedBox(height: 20.0),
@@ -219,7 +229,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Center(
               child: GestureDetector(
                 onTap: () {
-                  // Handle the "already have an account" action
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SignInScreen(),
+                    ),
+                  );
                 },
                 child: Text(
                   'Sudah punya akun? Klik Di Sini',

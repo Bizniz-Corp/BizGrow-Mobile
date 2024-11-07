@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:bizgrow_mobile_frontend/screens/Sign Up/sign up.dart';
+import 'package:bizgrow_mobile_frontend/screens/beranda/beranda_screen.dart';
 void main() {
   runApp(MyApp());
 }
@@ -27,7 +28,7 @@ class SignInScreen extends StatelessWidget {
             SizedBox(height: 50.0),
             // Logo at the top
             Image.asset(
-              'lib/assets/navbar_icon/Logo.png', // Replace with your logo path
+              'lib/assets/navbar_icon/logo1.png', // Replace with your logo path
             ),
             SizedBox(height: 30.0),
             // Sign In Text
@@ -132,10 +133,20 @@ class SignInScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                child: GestureDetector(
+                onTap: () {
+                                 Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BerandaScreen(),
+                    ),
+                  );                                                             
+                },
                 child: Text(
                   'Sign In',
-                  style: TextStyle(fontSize: 16.0),
+                  style: TextStyle(color: Colors.white),
                 ),
+              ),
               ),
             ),
             SizedBox(height: 20.0),
@@ -143,7 +154,12 @@ class SignInScreen extends StatelessWidget {
             Center(
               child: GestureDetector(
                 onTap: () {
-                  // Handle the "register" link action
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SignInScreen(),
+                    ),
+                  );
                 },
                 child: Text(
                   'Belum punya akun? Klik Di Sini',
