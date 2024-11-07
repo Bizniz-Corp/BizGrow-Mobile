@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
+
 import 'package:bizgrow_mobile_frontend/screens/beranda/landing_page.dart';
 import 'package:bizgrow_mobile_frontend/screens/stok/stok_screen.dart';
-
-
 
 void main() {
   runApp(BizGrowApp());
