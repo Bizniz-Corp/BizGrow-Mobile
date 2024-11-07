@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:bizgrow_mobile_frontend/widgets/line_chart.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
+import 'package:bizgrow_mobile_frontend/widgets/drop_down_search_product.dart';
 import 'package:bizgrow_mobile_frontend/services/data_service.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -59,29 +60,7 @@ class _PrediksiStokScreenState extends State<PrediksiStokScreen> {
                                 blurRadius: 10,
                                 offset: Offset(0, 10))
                           ]),
-                      child: SearchField(
-                        hint: 'Cari Produk',
-                        searchInputDecoration: SearchInputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Monochrome.whiteDarkMode, width: 1),
-                                borderRadius: BorderRadius.circular(10)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Main.lightBlue, width: 2),
-                                borderRadius: BorderRadius.circular(10))),
-                        itemHeight: 50,
-                        maxSuggestionsInViewPort: 5,
-                        suggestionsDecoration: SuggestionDecoration(
-                            color: Main.lightBlue,
-                            borderRadius: BorderRadius.circular(10),
-                            selectionColor: Monochrome.whiteDarkMode),
-                        suggestions: [
-                          SearchFieldListItem('Ayam Bakar Nashviled'),
-                          SearchFieldListItem('Ayam Goreng Nashviled'),
-                          SearchFieldListItem('Ayam Rebus Nashviled'),
-                        ],
-                      ),
+                      child: DropDownSearchProduct(),
                     )
                   ],
                 ),
