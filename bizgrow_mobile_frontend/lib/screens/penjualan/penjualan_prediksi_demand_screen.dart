@@ -29,10 +29,35 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
       appBar: AppBar(
         title: Text("Prediksi Demand"),
       ),
-      body: Container(
-        margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
-        child: CustomLineChart(
-            jsonPath: _path),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.7,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Text(
+                        'Pilih Produk',
+                        style: Regular.large.withColor(Monochrome.whiteDarkMode),),
+                    ),
+                    Container(
+                      // child: SearchField(),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                height: 200,
+                child: CustomLineChart(jsonPath: _path),
+              ),
+            ],
+          ),
+        ),
       ),
       bottomNavigationBar: MainNavigator(selectedIndex: 1),
     );

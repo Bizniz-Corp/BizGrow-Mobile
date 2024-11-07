@@ -18,7 +18,7 @@ class _CustomLineChartState extends State<CustomLineChart> {
   List<List<dynamic>> _chartData = [];
   List<dynamic> _data = [];
   late LineTitles lineTitles;
-  late double _maxX, _maxY;
+  late double _maxX, _minY, _maxY, _maxYUp;
 
   @override
   void initState() {
@@ -32,7 +32,6 @@ class _CustomLineChartState extends State<CustomLineChart> {
 
   @override
   Widget build(BuildContext context) {
-
     _chartData = getChartData(_data);
     if (_chartData.isEmpty || _data.isEmpty) {
       return Center(child: CircularProgressIndicator());
@@ -41,20 +40,25 @@ class _CustomLineChartState extends State<CustomLineChart> {
     List<FlSpot> dataReal = _chartData[0] as List<FlSpot>;
     List<FlSpot> dataForecast = _chartData[1] as List<FlSpot>;
     List<String> dateForXBar = _chartData[2] as List<String>;
-    _maxY = getMaxY(_data);
+    _minY = getMaxY(_data)[0];
+    _maxY = getMaxY(_data)[1];
+    _maxYUp = getMaxY(_data)[2];
     _maxX = _data.length as double;
     lineTitles = LineTitles(xLabels: dateForXBar);
 
     return LineChart(LineChartData(
         minX: 0,
-        maxX: _maxX,
-        minY: 0,
-        maxY: _maxY,
+        maxX: _maxX - 1,
+        minY: _minY - (_maxYUp - _maxY),
+        maxY: _maxYUp,
         titlesData: lineTitles.getTitleData(),
         gridData: FlGridData(
             show: true,
             getDrawingHorizontalLine: (value) {
-              return FlLine(color: Monochrome.whiteDarkMode, strokeWidth: 0.5);
+              return FlLine(
+                color: Monochrome.whiteDarkMode,
+                strokeWidth: 0.5,
+              );
             },
             getDrawingVerticalLine: (value) {
               return FlLine(strokeWidth: 0);
@@ -74,7 +78,8 @@ class _CustomLineChartState extends State<CustomLineChart> {
               spots: dataForecast,
               isCurved: true,
               color: Main.lightBlue,
-              dotData: FlDotData(show: false))
+              dotData: FlDotData(show: false),
+              dashArray: [5])
         ]));
   }
 }
@@ -112,31 +117,33 @@ class LineTitles {
   }
 }
 
-double getMaxY(var dataChart) {
+List<double> getMaxY(var dataChart) {
   double maxY = 0;
+  double maxYUp = 0;
+  double minY = 0;
 
   maxY = dataChart[0]['value'];
+  minY = dataChart[0]['value'];
 
   for (var data in dataChart) {
     if (maxY < data['value']) {
       maxY = data['value'];
     }
+    if (minY > data['value']) {
+      minY = data['value'];
+    }
   }
 
-  maxY = roundUpToNearest(maxY);
+  maxYUp = roundUpToNearest(maxY);
 
-  return maxY;
+  return [minY, maxY, maxYUp];
 }
 
 double roundUpToNearest(double value) {
-  int magnitude = (value == 0)
-      ? 1
-      : (log(value) / log(10)).floor();
-  double scale =
-      pow(10, magnitude).toDouble();
+  int magnitude = (value == 0) ? 1 : (log(value) / log(10)).floor();
+  double scale = pow(10, magnitude).toDouble();
   return (value / scale).ceil() * scale;
 }
-
 
 List<List<dynamic>> getChartData(var data) {
   List<FlSpot> dataReal = [];
