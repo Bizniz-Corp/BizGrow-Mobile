@@ -55,7 +55,7 @@ class StokScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PrediksiStokScreen(),
+                          builder: (context) => PrediksiStockScreen(),
                         ),
                       );
                     },
