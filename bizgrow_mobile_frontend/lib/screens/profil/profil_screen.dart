@@ -2,11 +2,9 @@ import 'package:bizgrow_mobile_frontend/screens/profil/profil_edit.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
-import 'package:bizgrow_mobile_frontend/screens/profil/edit_password.dart';
-import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
+import 'package:bizgrow_mobile_frontend/screens/Sign in/sign in.dart';
 
 class ProfilScreen extends StatelessWidget {
   const ProfilScreen({super.key});
@@ -22,7 +20,7 @@ class ProfilScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
+            const Center(
               child: Stack(
                 children: [
                   CircleAvatar(
@@ -37,24 +35,21 @@ class ProfilScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Text(
               'Nama',
-              style: GoogleFonts.montserrat(
-                  fontSize: 28,
-                  color: Monochrome.whiteDarkMode,
-                  letterSpacing: -1),
+              style: Regular.h2.withColor(Monochrome.whiteDarkMode),
             ),
             // DI SINI INPUT BORDER
             TextField(
               readOnly: true,
               decoration: InputDecoration(
-                hintText: 'Masukkan nama Anda', // Placeholder
+                hintText: 'Budi',
                 labelStyle: TextStyle(
-                  color: Monochrome.white, // Warna label
+                  color: Monochrome.white,  
                 ),
                 hintStyle: TextStyle(
-                  color: Monochrome.white, // Warna placeholder
+                  color: Monochrome.white, 
                 ),
                 fillColor: Main.lightBlue,
                 filled: true,
@@ -67,10 +62,7 @@ class ProfilScreen extends StatelessWidget {
             SizedBox(height: 30),
             Text(
               'Email',
-              style: GoogleFonts.montserrat(
-                  fontSize: 28,
-                  color: Monochrome.whiteDarkMode,
-                  letterSpacing: -1),
+              style: Regular.h2.withColor(Monochrome.whiteDarkMode)
             ),
             // DI SINI INPUT BORDER
             TextField(
@@ -114,7 +106,36 @@ class ProfilScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/profil/prof');
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Konfirmasi Hapus Akun'),
+                          content: Text('Apakah Anda yakin ingin menghapus akun ini?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); 
+                              },
+                              child: Text('Batal',)
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SignInScreen(),
+                                  ),
+                                );
+                                // Belum diisi karena menunggu api dari website 
+                              },
+                              child: Text('Hapus Akun', style: Regular.body.withColor(additionalColor.red)),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                   child: Text('Hapus Akun'),
                   style: ElevatedButton.styleFrom(
@@ -125,13 +146,43 @@ class ProfilScreen extends StatelessWidget {
                     backgroundColor: additionalColor.red,
                     foregroundColor: Monochrome.white,
                   ),
-                ),
+                ),              
               ],
             ),
             SizedBox(height: 30),
             Center(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Konfirmasi Keluar'),
+                        content: Text('Apakah Anda yakin ingin keluar?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Batal'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop(); 
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignInScreen(),
+                                ),
+                              );
+                            },
+                            child: Text('Keluar', style: Regular.body.withColor(additionalColor.red)),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   shape: RoundedRectangleBorder(
@@ -141,8 +192,8 @@ class ProfilScreen extends StatelessWidget {
                   foregroundColor: Monochrome.white,
                 ),
                 child: Text('Keluar'),
-              ),
-            )
+              ),     
+            ),
           ],
         ),
       ),

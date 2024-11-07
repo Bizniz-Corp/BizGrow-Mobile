@@ -3,19 +3,18 @@ import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:bizgrow_mobile_frontend/widgets/line_chart.dart';
-import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/widgets/drop_down_search_product.dart';
+import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/services/data_service.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:searchfield/searchfield.dart';
 
-class PrediksiDemandScreen extends StatefulWidget {
+class PrediksiProfitScreen extends StatefulWidget {
   @override
-  _PrediksiDemandScreenState createState() => _PrediksiDemandScreenState();
+  _PrediksiProfitScreenState createState() => _PrediksiProfitScreenState();
 }
 
-class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
+class _PrediksiProfitScreenState extends State<PrediksiProfitScreen> {
   List<dynamic> _data = [];
 
   @override
@@ -46,21 +45,21 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
                       padding: EdgeInsets.all(20),
                       child: Text(
                         'Pilih Produk',
-                        style: Regular.large.withColor(Monochrome.whiteDarkMode),),
+                        style:
+                            Regular.large.withColor(Monochrome.whiteDarkMode),
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            blurRadius: 10,
-                            offset: Offset(0, 10)
-                          )
-                        ]
-                      ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                blurRadius: 10,
+                                offset: Offset(0, 10))
+                          ]),
                       child: DropDownSearchProduct(),
                     )
                   ],
@@ -73,7 +72,6 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
             ],
           ),
         ),
-
       ),
       bottomNavigationBar: MainNavigator(selectedIndex: 1),
     );

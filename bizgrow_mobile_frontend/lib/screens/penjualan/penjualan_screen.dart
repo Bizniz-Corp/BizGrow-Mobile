@@ -6,6 +6,7 @@ import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:bizgrow_mobile_frontend/screens/penjualan/input_data_penjualan.dart'; 
 import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_prediksi_demand_screen.dart';
 import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_history.dart'; 
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_prediksi_profit_screen.dart';
 
 class PenjualanScreen extends StatelessWidget {
   const PenjualanScreen({super.key});
@@ -79,7 +80,7 @@ class PenjualanScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => InputDataPenjualanScreen(),
+                          builder: (context) => PrediksiProfitScreen(),
                         ),
                       );
                     },
