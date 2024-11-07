@@ -202,7 +202,7 @@ class _StokHistoryState extends State<StokHistory> {
           ],
         ),
       ),
-      bottomNavigationBar: MainNavigator(selectedIndex: 1),
+      bottomNavigationBar: MainNavigator(selectedIndex: 2),
     );
   }
 
