@@ -1,0 +1,122 @@
+[
+    {
+        "tanggal": "01/10/2024",
+        "id": "123-4567",
+        "produk": "Nasi Goreng",
+        "kuantitas": 2,
+        "harga": 20000,
+        "total": 40000
+    },
+    {
+        "tanggal": "02/25/2024",
+        "id": "234-5678",
+        "produk": "Mie Ayam",
+        "kuantitas": 1,
+        "harga": 35000,
+        "total": 35000
+    },
+    {
+        "tanggal": "03/10/2024",
+        "id": "345-6789",
+        "produk": "Bakso",
+        "kuantitas": 4,
+        "harga": 15000,
+        "total": 60000
+    },
+    {
+        "tanggal": "04/02/2024",
+        "id": "456-7890",
+        "produk": "Sate Ayam",
+        "kuantitas": 3,
+        "harga": 12000,
+        "total": 36000
+    },
+    {
+        "tanggal": "05/20/2024",
+        "id": "567-8901",
+        "produk": "Rendang",
+        "kuantitas": 5,
+        "harga": 10000,
+        "total": 50000
+    },
+    {
+        "tanggal": "06/09/2024",
+        "id": "678-9012",
+        "produk": "Soto Ayam",
+        "kuantitas": 2,
+        "harga": 25000,
+        "total": 50000
+    },
+    {
+        "tanggal": "07/10/2024",
+        "id": "789-0123",
+        "produk": "Ayam Bakar",
+        "kuantitas": 3,
+        "harga": 18000,
+        "total": 54000
+    },
+    {
+        "tanggal": "08/10/2024",
+        "id": "890-1234",
+        "produk": "Gado-Gado",
+        "kuantitas": 1,
+        "harga": 45000,
+        "total": 45000
+    },
+    {
+        "tanggal": "09/10/2024",
+        "id": "901-2345",
+        "produk": "Pecel Lele",
+        "kuantitas": 6,
+        "harga": 8000,
+        "total": 48000
+    },
+    {
+        "tanggal": "10/10/2024",
+        "id": "012-3456",
+        "produk": "Nasi Uduk",
+        "kuantitas": 7,
+        "harga": 9000,
+        "total": 63000
+    },
+    {
+        "tanggal": "11/01/2024",
+        "id": "123-4567",
+        "produk": "Nasi Goreng",
+        "kuantitas": 2,
+        "harga": 30000,
+        "total": 60000
+    },
+    {
+        "tanggal": "4/19/2024",
+        "id": "234-5678",
+        "produk": "Sop Buntut",
+        "kuantitas": 4,
+        "harga": 14000,
+        "total": 56000
+    },
+    {
+        "tanggal": "01/05/2024",
+        "id": "345-6789",
+        "produk": "Sop Buntut",
+        "kuantitas": 3,
+        "harga": 14000,
+        "total": 42000
+    },
+    {
+        "tanggal": "9/15/2024",
+        "id": "678-9012",
+        "produk": "Bakso",
+        "kuantitas": 2,
+        "harga": 15000,
+        "total": 30000
+    },
+    {
+        "tanggal": "10/12/2024",
+        "id": "789-0123",
+        "produk": "Sate Ayam",
+        "kuantitas": 4,
+        "harga": 12000,
+        "total": 48000
+    }
+]

@@ -1,21 +1,17 @@
-import 'package:bizgrow_mobile_frontend/screens/profil/profil_edit.dart';
+import 'package:bizgrow_mobile_frontend/screens/profil/profil_edit_photo.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
-import 'package:bizgrow_mobile_frontend/screens/profil/edit_password.dart';
-import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 
-class ProfilScreen extends StatelessWidget {
-  const ProfilScreen({super.key});
-
+class ProfilEditScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profil'),
+        title: Text('Edit Profil'),
       ),
       body: Container(
         margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
@@ -34,6 +30,27 @@ class ProfilScreen extends StatelessWidget {
                       color: Monochrome.grey,
                     ),
                   ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilEditPhotoScreen()));
+                      },
+                      child: CircleAvatar(
+                        radius: 15,
+                        backgroundColor: Colors.blue,
+                        child: Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -47,22 +64,21 @@ class ProfilScreen extends StatelessWidget {
             ),
             // DI SINI INPUT BORDER
             TextField(
-              readOnly: true,
               decoration: InputDecoration(
-                hintText: 'Masukkan nama Anda', // Placeholder
+                hintText: 'Budi', // Placeholder
                 labelStyle: TextStyle(
                   color: Monochrome.white, // Warna label
                 ),
                 hintStyle: TextStyle(
                   color: Monochrome.white, // Warna placeholder
                 ),
-                fillColor: Main.lightBlue,
-                filled: true,
+
                 border: OutlineInputBorder(
                   borderRadius:
                       BorderRadius.circular(10.0), // Border melengkung
                 ),
               ),
+              style: TextStyle(color: Monochrome.white),
             ),
             SizedBox(height: 30),
             Text(
@@ -74,7 +90,6 @@ class ProfilScreen extends StatelessWidget {
             ),
             // DI SINI INPUT BORDER
             TextField(
-              readOnly: true,
               decoration: InputDecoration(
                 hintText: 'a@gmail.com', // Placeholder
                 labelStyle: TextStyle(
@@ -83,50 +98,12 @@ class ProfilScreen extends StatelessWidget {
                 hintStyle: TextStyle(
                   color: Monochrome.white, // Warna placeholder
                 ),
-                fillColor: Main.lightBlue,
-                filled: true,
                 border: OutlineInputBorder(
                   borderRadius:
                       BorderRadius.circular(10.0), // Border melengkung
                 ),
               ),
-            ),
-            SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfilEditScreen()));
-                  },
-                  child: Text('Edit Profil'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    backgroundColor: Main.blueSecondary,
-                    foregroundColor: Monochrome.white,
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/profil/prof');
-                  },
-                  child: Text('Hapus Akun'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    backgroundColor: additionalColor.red,
-                    foregroundColor: Monochrome.white,
-                  ),
-                ),
-              ],
+              style: TextStyle(color: Monochrome.white),
             ),
             SizedBox(height: 30),
             Center(
@@ -137,10 +114,27 @@ class ProfilScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  backgroundColor: additionalColor.red,
+                  backgroundColor: Main.blueSecondary,
                   foregroundColor: Monochrome.white,
                 ),
-                child: Text('Keluar'),
+                child: Text('Ubah Password'),
+              ),
+            ),
+            SizedBox(height: 30),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  backgroundColor: Main.blueSecondary,
+                  foregroundColor: Monochrome.white,
+                ),
+                child: Text('Simpan'),
               ),
             )
           ],

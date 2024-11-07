@@ -26,6 +26,7 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
   Widget build(BuildContext context) {
     var _path =
         'https://raw.githubusercontent.com/Bizniz-Corp/BizGrow-Mobile/refs/heads/1302223041-Syahreza/bizgrow_mobile_frontend/lib/assets/data/data_dummy1.json';
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Prediksi Demand"),
@@ -101,6 +102,7 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
             ],
           ),
         ),
+
       ),
       bottomNavigationBar: MainNavigator(selectedIndex: 1),
     );

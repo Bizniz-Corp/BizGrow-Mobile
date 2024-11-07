@@ -55,17 +55,16 @@ class CustomButton extends StatelessWidget {
   final double? radius; // BISA NULL
   final double? iconSize;
 
-  CustomButton({
-    required this.text,
-    required this.size,
-    this.width,
-    this.iconPath,
-    this.buttonType = 'noIcon',
-    required this.onPressed,
-    this.color = Main.blueSecondary,
-    this.radius,
-    this.iconSize
-  });
+  CustomButton(
+      {required this.text,
+      required this.size,
+      this.width,
+      this.iconPath,
+      this.buttonType = 'noIcon',
+      required this.onPressed,
+      this.color = Main.blueSecondary,
+      this.radius,
+      this.iconSize});
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +122,8 @@ class CustomButton extends StatelessWidget {
             if (iconPath != null && buttonType == 'leftIcon')
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
-                child: Image.asset(iconPath!, height: iconSize, width: iconSize),
+                child:
+                    Image.asset(iconPath!, height: iconSize, width: iconSize),
               ),
 
             // text Text
@@ -137,7 +137,8 @@ class CustomButton extends StatelessWidget {
             if (iconPath != null && buttonType == 'rightIcon')
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: Image.asset(iconPath!, height: iconSize, width: iconSize),
+                child:
+                    Image.asset(iconPath!, height: iconSize, width: iconSize),
               ),
 
             // Jika tipe `icon only`

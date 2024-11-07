@@ -1,0 +1,107 @@
+[
+    {
+        "tanggal": "10/01/2024",
+        "id": "111-001",
+        "produk": "Nasi Goreng",
+        "perubahan": 50,
+        "total": 150
+    },
+    {
+        "tanggal": "10/02/2024",
+        "id": "111-002",
+        "produk": "Bakso",
+        "perubahan": -20,
+        "total": 80
+    },
+    {
+        "tanggal": "10/03/2024",
+        "id": "111-003",
+        "produk": "Sate Ayam",
+        "perubahan": 30,
+        "total": 120
+    },
+    {
+        "tanggal": "10/04/2024",
+        "id": "111-004",
+        "produk": "Mie Goreng",
+        "perubahan": -15,
+        "total": 60
+    },
+    {
+        "tanggal": "10/05/2024",
+        "id": "111-005",
+        "produk": "Ayam Geprek",
+        "perubahan": 25,
+        "total": 90
+    },
+    {
+        "tanggal": "10/06/2024",
+        "id": "111-006",
+        "produk": "Nasi Goreng",
+        "perubahan": 40,
+        "total": 190
+    },
+    {
+        "tanggal": "10/07/2024",
+        "id": "111-007",
+        "produk": "Bakso",
+        "perubahan": -10,
+        "total": 70
+    },
+    {
+        "tanggal": "10/08/2024",
+        "id": "111-008",
+        "produk": "Sate Ayam",
+        "perubahan": 20,
+        "total": 140
+    },
+    {
+        "tanggal": "10/09/2024",
+        "id": "111-009",
+        "produk": "Mie Goreng",
+        "perubahan": 35,
+        "total": 95
+    },
+    {
+        "tanggal": "10/10/2024",
+        "id": "111-010",
+        "produk": "Ayam Geprek",
+        "perubahan": -5,
+        "total": 85
+    },
+    {
+        "tanggal": "10/11/2024",
+        "id": "111-011",
+        "produk": "Nasi Goreng",
+        "perubahan": -10,
+        "total": 180
+    },
+    {
+        "tanggal": "10/12/2024",
+        "id": "111-012",
+        "produk": "Bakso",
+        "perubahan": 15,
+        "total": 85
+    },
+    {
+        "tanggal": "10/13/2024",
+        "id": "111-013",
+        "produk": "Sate Ayam",
+        "perubahan": -25,
+        "total": 115
+    },
+    {
+        "tanggal": "10/14/2024",
+        "id": "111-014",
+        "produk": "Mie Goreng",
+        "perubahan": 10,
+        "total": 70
+    },
+    {
+        "tanggal": "10/15/2024",
+        "id": "111-015",
+        "produk": "Ayam Geprek",
+        "perubahan": -15,
+        "total": 55
+    }
+]
