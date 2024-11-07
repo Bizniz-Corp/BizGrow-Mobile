@@ -1,10 +1,10 @@
-import 'dart:io'; // For File
+import 'dart:io';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 
 class ProfilEditPhotoScreen extends StatefulWidget {
   @override
@@ -13,13 +13,11 @@ class ProfilEditPhotoScreen extends StatefulWidget {
 
 class _ProfilEditPhotoScreenState extends State<ProfilEditPhotoScreen> {
   File? _image; // Variable to hold the selected image
+  final picker = ImagePicker();
 
-  // Function to pick an image
-  Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.getImage(
-        source: ImageSource
-            .gallery); // You can change to ImageSource.camera for camera access
+  // Function to pick an image from gallery
+  Future<void> _pickImageFromGallery() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       setState(() {
@@ -28,11 +26,59 @@ class _ProfilEditPhotoScreenState extends State<ProfilEditPhotoScreen> {
     }
   }
 
+  // Function to pick an image from camera
+  Future<void> _pickImageFromCamera() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
+
+  // Function to show the bottom sheet to select image source
+  void _showImageSourceSelector() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.photo_library),
+                title: Text('Galeri'),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  _pickImageFromGallery();
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.camera_alt),
+                title: Text('Kamera'),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  _pickImageFromCamera();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Profil'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Monochrome.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Container(
         margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
@@ -43,10 +89,7 @@ class _ProfilEditPhotoScreenState extends State<ProfilEditPhotoScreen> {
             Center(
               child: Text(
                 'Upload Image',
-                style: GoogleFonts.montserrat(
-                    fontSize: 28,
-                    color: Monochrome.whiteDarkMode,
-                    letterSpacing: -1),
+                style: Regular.body.withColor(Monochrome.white),
               ),
             ),
             SizedBox(height: 30),
@@ -62,12 +105,9 @@ class _ProfilEditPhotoScreenState extends State<ProfilEditPhotoScreen> {
                 ),
               ),
               child: _image == null
-                  ? Center(
-                      child:
-                          Text('Belum ada fotonya kocak')) // Placeholder text
+                  ? Center(child: Text('Belum ada fotonya kocak')) // Placeholder text
                   : ClipRRect(
-                      borderRadius:
-                          BorderRadius.circular(8), // Rounded corners for image
+                      borderRadius: BorderRadius.circular(8), // Rounded corners for image
                       child: Image.file(
                         _image!,
                         fit: BoxFit.cover,
@@ -77,7 +117,7 @@ class _ProfilEditPhotoScreenState extends State<ProfilEditPhotoScreen> {
             SizedBox(height: 30),
             Center(
               child: ElevatedButton(
-                onPressed: _pickImage, // Call _pickImage when pressed
+                onPressed: _showImageSourceSelector, // Show the option to select source
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   shape: RoundedRectangleBorder(
@@ -96,3 +136,4 @@ class _ProfilEditPhotoScreenState extends State<ProfilEditPhotoScreen> {
     );
   }
 }
+

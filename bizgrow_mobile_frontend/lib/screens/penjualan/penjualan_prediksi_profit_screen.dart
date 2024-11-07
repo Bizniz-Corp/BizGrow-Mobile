@@ -9,12 +9,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:searchfield/searchfield.dart';
 
-class PrediksiDemandScreen extends StatefulWidget {
+class PrediksiProfitScreen extends StatefulWidget {
   @override
-  _PrediksiDemandScreenState createState() => _PrediksiDemandScreenState();
+  _PrediksiProfitScreenState createState() => _PrediksiProfitScreenState();
 }
 
-class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
+class _PrediksiProfitScreenState extends State<PrediksiProfitScreen> {
   List<dynamic> _data = [];
 
   @override
@@ -45,46 +45,38 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
                       padding: EdgeInsets.all(20),
                       child: Text(
                         'Pilih Produk',
-                        style: Regular.large.withColor(Monochrome.whiteDarkMode),),
+                        style:
+                            Regular.large.withColor(Monochrome.whiteDarkMode),
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            blurRadius: 10,
-                            offset: Offset(0, 10)
-                          )
-                        ]
-                      ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                blurRadius: 10,
+                                offset: Offset(0, 10))
+                          ]),
                       child: SearchField(
                         hint: 'Cari Produk',
                         searchInputDecoration: SearchInputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Monochrome.whiteDarkMode,
-                              width: 1
-                            ),
-                            borderRadius: BorderRadius.circular(10)
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Main.lightBlue,
-                              width: 2
-                            ),
-                            borderRadius: BorderRadius.circular(10)
-                          )
-                        ),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Monochrome.whiteDarkMode, width: 1),
+                                borderRadius: BorderRadius.circular(10)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Main.lightBlue, width: 2),
+                                borderRadius: BorderRadius.circular(10))),
                         itemHeight: 50,
                         maxSuggestionsInViewPort: 5,
                         suggestionsDecoration: SuggestionDecoration(
-                          color: Main.lightBlue,
-                          borderRadius: BorderRadius.circular(10),
-                          selectionColor: Monochrome.whiteDarkMode
-                        ),
+                            color: Main.lightBlue,
+                            borderRadius: BorderRadius.circular(10),
+                            selectionColor: Monochrome.whiteDarkMode),
                         suggestions: [
                           SearchFieldListItem('Ayam Bakar Nashviled'),
                           SearchFieldListItem('Ayam Goreng Nashviled'),
@@ -102,7 +94,6 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
             ],
           ),
         ),
-
       ),
       bottomNavigationBar: MainNavigator(selectedIndex: 1),
     );

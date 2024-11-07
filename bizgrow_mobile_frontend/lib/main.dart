@@ -1,9 +1,9 @@
-import 'package:bizgrow_mobile_frontend/screens/profil/edit_password.dart';
+import 'package:bizgrow_mobile_frontend/screens/beranda/beranda_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
-import 'package:bizgrow_mobile_frontend/screens/beranda/beranda_screen.dart';
-import 'package:bizgrow_mobile_frontend/screens/profil/edit_password.dart';
-import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_history.dart';
+
+import 'package:bizgrow_mobile_frontend/screens/beranda/landing_page.dart';
+import 'package:bizgrow_mobile_frontend/screens/stok/stok_screen.dart';
 
 void main() {
   runApp(BizGrowApp());
