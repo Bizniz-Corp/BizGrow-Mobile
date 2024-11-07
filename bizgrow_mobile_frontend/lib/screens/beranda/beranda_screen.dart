@@ -10,11 +10,28 @@ class BerandaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Beranda'),
-        backgroundColor: const Color.fromARGB(255, 13, 1, 107), // Custom color
+        title: Text(
+          'Beranda',
+          style: GoogleFonts.montserrat(
+            fontSize: 28,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Main.background,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Image.asset(
+              'lib/assets/navbar_icon/Logo.png', // Sesuaikan path logo Anda
+              height: 40,
+            ),
+          ),
+        ],
       ),
       body: Container(
-        margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        color: Main.background,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,7 +50,7 @@ class BerandaScreen extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 13, 1, 107),
+                color: Color(0xFF2D2F7E),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
@@ -42,8 +59,9 @@ class BerandaScreen extends StatelessWidget {
                   Text(
                     'Semua berjalan dengan baik',
                     style: GoogleFonts.montserrat(
-                      fontSize: 18,
+                      fontSize: 16,
                       color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Icon(
@@ -60,7 +78,7 @@ class BerandaScreen extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 13, 1, 107),
+                color: Color(0xFF2D2F7E),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
@@ -71,9 +89,13 @@ class BerandaScreen extends StatelessWidget {
                     style: GoogleFonts.montserrat(
                       fontSize: 16,
                       color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(
+                    height: 10,
+                    width: 500,
+                  ),
                   Text(
                     'Rp700.000,00',
                     style: GoogleFonts.montserrat(
@@ -87,6 +109,17 @@ class BerandaScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
 
+            // Quick Access Title
+            Text(
+              'Akses Fitur Cepat',
+              style: GoogleFonts.montserrat(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+
             // Quick access grid
             Expanded(
               child: GridView.count(
@@ -96,38 +129,32 @@ class BerandaScreen extends StatelessWidget {
                 children: [
                   _buildQuickAccessButton(
                     context,
-                    Icons
-                        .people, // Replaced FontAwesome with standard Flutter icon
+                    Icons.people,
                     'Demand',
                   ),
                   _buildQuickAccessButton(
                     context,
-                    Icons
-                        .inventory, // Replaced FontAwesome with standard Flutter icon
+                    Icons.inventory,
                     'Buffer Stock',
                   ),
                   _buildQuickAccessButton(
                     context,
-                    Icons
-                        .show_chart, // Replaced FontAwesome with standard Flutter icon
+                    Icons.show_chart,
                     'Profit',
                   ),
                   _buildQuickAccessButton(
                     context,
-                    Icons
-                        .history, // Replaced FontAwesome with standard Flutter icon
+                    Icons.list_alt,
                     'Riwayat Penjualan',
                   ),
                   _buildQuickAccessButton(
                     context,
-                    Icons
-                        .list_alt, // Replaced FontAwesome with standard Flutter icon
+                    Icons.list_alt,
                     'Riwayat Stok',
                   ),
                   _buildQuickAccessButton(
                     context,
-                    Icons
-                        .upload, // Replaced FontAwesome with standard Flutter icon
+                    Icons.upload,
                     'Input Data Penjualan',
                   ),
                 ],
@@ -142,30 +169,38 @@ class BerandaScreen extends StatelessWidget {
 
   // Helper function to create Quick Access Buttons
   Widget _buildQuickAccessButton(
-      BuildContext context, IconData icon, String label) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 13, 1, 107),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: Colors.white,
-            size: 32,
-          ),
-          SizedBox(height: 8),
-          Text(
-            label,
-            style: GoogleFonts.montserrat(
-              fontSize: 14,
+    BuildContext context,
+    IconData icon,
+    String label,
+  ) {
+    return GestureDetector(
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+        decoration: BoxDecoration(
+          color: Color(0xFF2D2F7E),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
               color: Colors.white,
+              size: 50,
             ),
-          ),
-        ],
+            SizedBox(height: 4),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.montserrat(
+                fontSize: 12,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
