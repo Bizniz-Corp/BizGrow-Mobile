@@ -43,7 +43,7 @@ class _CustomLineChartState extends State<CustomLineChart> {
     List<String> dateForXBar = _chartData[2] as List<String>;
     _maxY = getMaxY(_data);
     _maxX = _data.length as double;
-    lineTitles = LineTitles(xLabels: ['$_maxY', '$_maxX']);
+    lineTitles = LineTitles(xLabels: dateForXBar);
 
     return LineChart(LineChartData(
         minX: 0,
@@ -131,9 +131,9 @@ double getMaxY(var dataChart) {
 double roundUpToNearest(double value) {
   int magnitude = (value == 0)
       ? 1
-      : (log(value) / log(10)).floor(); // Menentukan besaran kelipatan
+      : (log(value) / log(10)).floor();
   double scale =
-      pow(10, magnitude).toDouble(); // Membulatkan ke kelipatan 10^magnitude
+      pow(10, magnitude).toDouble();
   return (value / scale).ceil() * scale;
 }
 
