@@ -129,10 +129,14 @@ double getMaxY(var dataChart) {
 }
 
 double roundUpToNearest(double value) {
-  int magnitude = (value / 10).floor().toString().length - 1;
-  double scale = pow(10, magnitude).toDouble();
+  int magnitude = (value == 0)
+      ? 1
+      : (log(value) / log(10)).floor(); // Menentukan besaran kelipatan
+  double scale =
+      pow(10, magnitude).toDouble(); // Membulatkan ke kelipatan 10^magnitude
   return (value / scale).ceil() * scale;
 }
+
 
 List<List<dynamic>> getChartData(var data) {
   List<FlSpot> dataReal = [];
