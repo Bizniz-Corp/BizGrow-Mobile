@@ -3,6 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:bizgrow_mobile_frontend/services/data_service.dart';
+import 'dart:math';
 
 class CustomLineChart extends StatefulWidget {
   final String jsonPath;
@@ -17,29 +18,7 @@ class _CustomLineChartState extends State<CustomLineChart> {
   List<List<dynamic>> _chartData = [];
   List<dynamic> _data = [];
   late LineTitles lineTitles;
-  late double _minX, _minY, _maxX, _maxY;
-
-
-  // Function to convert data from json format to chart data
-
-  List<List<dynamic>> getChartData(var data) {
-    List<FlSpot> dataReal = [];
-    List<FlSpot> dataForecast = [];
-    List<String> dateForXBar = [];
-
-    if (data.isNotEmpty) {
-      for (int i = 0; i < data.length; i++) {
-        if (data[i]['state'] == 0) {
-          dataReal.add(FlSpot(i.toDouble(), data[i]['value'].toDouble()));
-        } else if (data[i]['state'] == 1) {
-          dataForecast.add(FlSpot(i.toDouble(), data[i]['value'].toDouble()));
-        }
-        dateForXBar.add(data[i]['date']);
-      }
-    }
-
-    return [dataReal, dataForecast, dateForXBar];
-  }
+  late double _maxX, _maxY;
 
   @override
   void initState() {
@@ -48,22 +27,29 @@ class _CustomLineChartState extends State<CustomLineChart> {
         _data.addAll(value);
       });
     });
-    _chartData = getChartData(_data);
-    lineTitles = LineTitles(xLabels: ['1', 'ada']);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    _chartData = getChartData(_data);
+    if (_chartData.isEmpty || _data.isEmpty) {
+      return Center(child: CircularProgressIndicator());
+    }
+
     List<FlSpot> dataReal = _chartData[0] as List<FlSpot>;
     List<FlSpot> dataForecast = _chartData[1] as List<FlSpot>;
     List<String> dateForXBar = _chartData[2] as List<String>;
+    _maxY = getMaxY(_data);
+    _maxX = _data.length as double;
+    lineTitles = LineTitles(xLabels: ['$_maxY', '$_maxX']);
 
     return LineChart(LineChartData(
         minX: 0,
-        maxX: 11,
+        maxX: _maxX,
         minY: 0,
-        maxY: 6,
+        maxY: _maxY,
         titlesData: lineTitles.getTitleData(),
         gridData: FlGridData(
             show: true,
@@ -80,94 +66,17 @@ class _CustomLineChartState extends State<CustomLineChart> {
                     BorderSide(width: 0.5, color: Monochrome.whiteDarkMode))),
         lineBarsData: [
           LineChartBarData(
-              spots: [FlSpot(0, 3), FlSpot(2, 1), FlSpot(8, 2)],
+              spots: dataReal,
               isCurved: true,
               color: Monochrome.whiteDarkMode,
               dotData: FlDotData(show: false)),
           LineChartBarData(
-              spots: [FlSpot(2, 5), FlSpot(4, 6), FlSpot(5, 1)],
+              spots: dataForecast,
               isCurved: true,
               color: Main.lightBlue,
               dotData: FlDotData(show: false))
         ]));
-
-    return LineChart(
-      LineChartData(
-          titlesData: FlTitlesData(
-            bottomTitles: AxisTitles(
-              sideTitles: SideTitles(getTitlesWidget: (value, _) {
-                int index = value.toInt();
-                if (index >= 0 && index < dateForXBar.length) {
-                  return Text(dateForXBar[index]);
-                } else {
-                  return Text('');
-                }
-              }),
-            ),
-          ),
-          lineBarsData: [
-            LineChartBarData(
-                spots: dataReal, color: Monochrome.whiteDarkMode, barWidth: 3),
-            LineChartBarData(
-                spots: dataForecast, color: additionalColor.green, barWidth: 3)
-          ]),
-    );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return FutureBuilder<List<List<dynamic>>>(
-  //       future: _chartData,
-  //       builder: (context, snapshot) {
-  //         if (snapshot.hasData) {
-  //           List<FlSpot> dataReal = snapshot.data![0] as List<FlSpot>;
-  //           List<FlSpot> dataForecast = snapshot.data![1] as List<FlSpot>;
-  //           List<String> dateForXBar = snapshot.data![2] as List<String>;
-
-  //           print(dataReal);
-  //           print(dataForecast);
-  //           print(dateForXBar);
-  //         } else {
-  //           print('tidak ada data');
-  //         }
-  //         if (snapshot.connectionState == ConnectionState.waiting) {
-  //           return CircularProgressIndicator();
-  //         } else if (snapshot.hasError) {
-  //           return Text('Error: ${snapshot.error}',
-  //               style: Bold.h3.withColor(Monochrome.whiteDarkMode));
-  //         } else {
-  //           List<FlSpot> dataReal = snapshot.data![0] as List<FlSpot>;
-  //           List<FlSpot> dataForecast = snapshot.data![1] as List<FlSpot>;
-  //           List<String> dateForXBar = snapshot.data![2] as List<String>;
-
-  //           return LineChart(
-  //             LineChartData(
-  //                 titlesData: FlTitlesData(
-  //                   bottomTitles: AxisTitles(
-  //                     sideTitles: SideTitles(getTitlesWidget: (value, _) {
-  //                       int index = value.toInt();
-  //                       if (index >= 0 && index < dateForXBar.length) {
-  //                         return Text(dateForXBar[index]);
-  //                       } else {
-  //                         return Text('');
-  //                       }
-  //                     }),
-  //                   ),
-  //                 ),
-  //                 lineBarsData: [
-  //                   LineChartBarData(
-  //                       spots: dataReal,
-  //                       color: Monochrome.whiteDarkMode,
-  //                       barWidth: 3),
-  //                   LineChartBarData(
-  //                       spots: dataForecast,
-  //                       color: additionalColor.green,
-  //                       barWidth: 3)
-  //                 ]),
-  //           );
-  //         }
-  //       });
-  // }
 }
 
 class LineTitles {
@@ -203,3 +112,48 @@ class LineTitles {
   }
 }
 
+double getMaxY(var dataChart) {
+  double maxY = 0;
+
+  maxY = dataChart[0]['value'];
+
+  for (var data in dataChart) {
+    if (maxY < data['value']) {
+      maxY = data['value'];
+    }
+  }
+
+  maxY = roundUpToNearest(maxY);
+
+  return maxY;
+}
+
+double roundUpToNearest(double value) {
+  int magnitude = (value / 10).floor().toString().length - 1;
+  double scale = pow(10, magnitude).toDouble();
+  return (value / scale).ceil() * scale;
+}
+
+List<List<dynamic>> getChartData(var data) {
+  List<FlSpot> dataReal = [];
+  List<FlSpot> dataForecast = [];
+  List<String> dateForXBar = [];
+
+  if (data.isNotEmpty) {
+    for (int i = 0; i < data.length; i++) {
+      if (data[i]['state'] == 0) {
+        dataReal.add(FlSpot(i.toDouble(), data[i]['value'].toDouble()));
+      } else if (data[i]['state'] == 1) {
+        dataForecast.add(FlSpot(i.toDouble(), data[i]['value'].toDouble()));
+      }
+      dateForXBar.add(data[i]['date']);
+    }
+
+    // Jika dataReal tidak kosong, salin elemen terakhir ke awal dataForecast
+    if (dataReal.isNotEmpty) {
+      dataForecast.insert(0, dataReal.last);
+    }
+  }
+
+  return [dataReal, dataForecast, dateForXBar];
+}

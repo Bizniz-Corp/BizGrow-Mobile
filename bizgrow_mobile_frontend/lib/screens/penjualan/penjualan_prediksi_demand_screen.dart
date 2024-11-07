@@ -16,30 +16,8 @@ class PrediksiDemandScreen extends StatefulWidget {
 class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
   List<dynamic> _data = [];
 
-  Future<List<dynamic>> fetchNotes() async {
-    var url =
-        'https://raw.githubusercontent.com/Bizniz-Corp/BizGrow-Mobile/refs/heads/main/bizgrow_mobile_frontend/lib/assets/data/data_dummy.json';
-    var response = await http.get(Uri.parse(url));
-
-    List<dynamic> data = [];
-
-    if (response.statusCode == 200) {
-      var dataJson = json.decode(response.body);
-      for (var dj in dataJson) {
-        data.add(dj);
-      }
-    }
-
-    return data;
-  }
-
   @override
   void initState() {
-    fetchNotes().then((value) {
-      setState(() {
-        _data.addAll(value);
-      });
-    });
     super.initState();
   }
 
@@ -53,7 +31,6 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
       ),
       body: Container(
         margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
-        // child: Text('${_data[0]}', style: SemiBold.h1.withColor(Monochrome.whiteDarkMode),),
         child: CustomLineChart(
             jsonPath: _path),
       ),
