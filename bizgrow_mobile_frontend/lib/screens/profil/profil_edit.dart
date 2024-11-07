@@ -2,9 +2,9 @@ import 'package:bizgrow_mobile_frontend/screens/profil/profil_edit_photo.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
+import 'package:bizgrow_mobile_frontend/screens/profil/edit_password.dart';
 
 class ProfilEditScreen extends StatelessWidget {
   @override
@@ -12,6 +12,12 @@ class ProfilEditScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Profil'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Monochrome.whiteDarkMode),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Container(
         margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
@@ -57,10 +63,7 @@ class ProfilEditScreen extends StatelessWidget {
             SizedBox(height: 30),
             Text(
               'Nama',
-              style: GoogleFonts.montserrat(
-                  fontSize: 28,
-                  color: Monochrome.whiteDarkMode,
-                  letterSpacing: -1),
+              style: Regular.h2.withColor(Monochrome.whiteDarkMode),
             ),
             // DI SINI INPUT BORDER
             TextField(
@@ -83,10 +86,7 @@ class ProfilEditScreen extends StatelessWidget {
             SizedBox(height: 30),
             Text(
               'Email',
-              style: GoogleFonts.montserrat(
-                  fontSize: 28,
-                  color: Monochrome.whiteDarkMode,
-                  letterSpacing: -1),
+              style: Regular.h2.withColor(Monochrome.whiteDarkMode), 
             ),
             // DI SINI INPUT BORDER
             TextField(
@@ -108,7 +108,12 @@ class ProfilEditScreen extends StatelessWidget {
             SizedBox(height: 30),
             Center(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditPassword()));
+                },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   shape: RoundedRectangleBorder(
