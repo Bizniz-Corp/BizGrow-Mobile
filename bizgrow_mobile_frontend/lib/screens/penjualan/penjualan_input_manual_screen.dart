@@ -5,6 +5,8 @@ import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:intl/intl.dart';
+
+import 'input_data_penjualan.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class PenjualanInputManualScreen extends StatefulWidget {
@@ -44,6 +46,18 @@ class _PenjualanInputManualScreenState
     return Scaffold(
         appBar: AppBar(
           title: const Text("Input Data Penjualan"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Monochrome.whiteDarkMode),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      InputDataPenjualanScreen(), // Navigasi ke halaman PenjualanHistory
+                ),
+              ); // Ini untuk kembali ke halaman sebelumnya
+            },
+          ),
         ),
         body: Container(
             margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),

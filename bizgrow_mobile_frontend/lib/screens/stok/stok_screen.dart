@@ -23,10 +23,9 @@ class StokScreen extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFF1D1B46), // Warna biru tua dari gambar
       ),
       body: Container(
-        color: Color(0xFF1D1B46), // Latar belakang warna biru tua
+        color: Color(0xFF0A092E), 
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,10 +41,10 @@ class StokScreen extends StatelessWidget {
             SizedBox(height: 20),
             Expanded(
               child: GridView.count(
-                crossAxisCount: 3, // Set ke 2 kolom
+                crossAxisCount: 3, 
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
-                childAspectRatio: 1.0, // Mengatur tinggi kotak agar lebih besar
+                childAspectRatio: 1.0, 
                 children: [
                   buildMenuButton(
                     context,
@@ -96,14 +95,13 @@ class StokScreen extends StatelessWidget {
     );
   }
 
-  // Tambahkan parameter `imagePath` untuk gambar
   Widget buildMenuButton(BuildContext context, String title, String imagePath,
       VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xFF2D2F7E), // Warna biru dari kotak menu
+          color: const Color.fromARGB(255, 13, 1, 107),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
