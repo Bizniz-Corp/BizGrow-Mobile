@@ -5,122 +5,10 @@ import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_screen.dart'
 import 'package:bizgrow_mobile_frontend/screens/stok/stok_screen.dart';
 import 'package:bizgrow_mobile_frontend/screens/profil/profil_screen.dart';
 
-// class MainNavigator extends StatefulWidget {
-//   @override
-//   _MainNavigatorState createState() => _MainNavigatorState();
-// }
-
-// class _MainNavigatorState extends State<MainNavigator> {
-//   int _selectedIndex = 0;
-//   final PageController _pageController = PageController();
-
-
-//   void _onItemTapped(int index) {
-//     setState(() {
-//       _selectedIndex = index;
-//     });
-//     _pageController.jumpToPage(index);
-//   }
-
-//   final List<Widget> _pages = [
-//     BerandaScreen(),
-//     PenjualanScreen(),
-//     StokScreen(),
-//     ProfilScreen(),
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: PageView(
-//         controller: _pageController,
-//         onPageChanged: (index) {
-//           setState(() {
-//             _selectedIndex = index;
-//           });
-//         },
-//         children: _pages,
-//       ),
-
-//       bottomNavigationBar: Container(
-//         height: 80,
-//         decoration: const BoxDecoration(
-//           border: Border(
-//             top: BorderSide(
-//               color: Main.blueSecondary,
-//               width: 8,
-//             ),
-//           ),
-//         ),
-//         child: BottomNavigationBar(
-//           type: BottomNavigationBarType.fixed,
-//           backgroundColor: Main.darkBlue,
-//           selectedItemColor: Monochrome.whiteDarkMode,
-//           unselectedItemColor: Monochrome.lightGrey,
-//           currentIndex: _selectedIndex,
-//           onTap: _onItemTapped,
-//           items: [
-//             BottomNavigationBarItem(
-//               icon: ImageIcon(
-//                 AssetImage(
-//                   _selectedIndex == 0
-//                       ? 'lib/assets/navbar_icon/selected/Beranda.png'
-//                       : 'lib/assets/navbar_icon/default/Beranda.png',
-//                 ),
-//                 size: 24,
-//               ),
-//               label: 'Beranda',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: ImageIcon(
-//                 AssetImage(
-//                   _selectedIndex == 1
-//                       ? 'lib/assets/navbar_icon/selected/Penjualan.png'
-//                       : 'lib/assets/navbar_icon/default/Penjualan.png',
-//                 ),
-//                 size: 24,
-//               ),
-//               label: 'Penjualan',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: ImageIcon(
-//                 AssetImage(
-//                   _selectedIndex == 2
-//                       ? 'lib/assets/navbar_icon/selected/Stok.png'
-//                       : 'lib/assets/navbar_icon/default/Stok.png',
-//                 ),
-//                 size: 24,
-//               ),
-//               label: 'Stok',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: ImageIcon(
-//                 AssetImage(
-//                   _selectedIndex == 3
-//                       ? 'lib/assets/navbar_icon/selected/Profil.png'
-//                       : 'lib/assets/navbar_icon/default/Profil.png',
-//                 ),
-//                 size: 24,
-//               ),
-//               label: 'Profil',
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-
-//   @override
-//   void dispose(){
-//     _pageController.dispose();
-//     super.dispose();
-//   }
-// }
-
 class MainNavigator extends StatefulWidget {
   final int selectedIndex;
 
-  MainNavigator({required this.selectedIndex});
+  const MainNavigator({super.key, required this.selectedIndex});
 
   @override
   _MainNavigatorState createState() => _MainNavigatorState();
@@ -154,59 +42,77 @@ class _MainNavigatorState extends State<MainNavigator> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Main.darkBlue,
-      selectedItemColor: Monochrome.whiteDarkMode,
-      unselectedItemColor: Monochrome.lightGrey,
-      currentIndex: _currentIndex,
-      onTap: _onItemTapped,
-      items: [
-        BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage(
-              _currentIndex == 0
-                  ? 'lib/assets/navbar_icon/selected/Beranda.png'
-                  : 'lib/assets/navbar_icon/default/Beranda.png',
-            ),
-            size: 24,
+    return Container(
+      height: 80,
+      decoration: const BoxDecoration(
+        color: Main.darkBlue,
+        border: Border(
+          top: BorderSide(
+            color: Main.blueSecondary,
+            width: 8,
           ),
-          label: 'Beranda',
         ),
-        BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage(
-              _currentIndex == 1
-                  ? 'lib/assets/navbar_icon/selected/Penjualan.png'
-                  : 'lib/assets/navbar_icon/default/Penjualan.png',
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
+
+      child: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Main.darkBlue,
+        selectedItemColor: Monochrome.whiteDarkMode,
+        unselectedItemColor: Monochrome.lightGrey,
+        currentIndex: _currentIndex,
+        onTap: _onItemTapped,
+      
+        items: [
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                _currentIndex == 0
+                    ? 'lib/assets/navbar_icon/selected/Beranda.png'
+                    : 'lib/assets/navbar_icon/default/Beranda.png',
+              ),
+              size: 24,
             ),
-            size: 24,
+            label: 'Beranda',
           ),
-          label: 'Penjualan',
-        ),
-        BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage(
-              _currentIndex == 2
-                  ? 'lib/assets/navbar_icon/selected/Stok.png'
-                  : 'lib/assets/navbar_icon/default/Stok.png',
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                _currentIndex == 1
+                    ? 'lib/assets/navbar_icon/selected/Penjualan.png'
+                    : 'lib/assets/navbar_icon/default/Penjualan.png',
+              ),
+              size: 24,
             ),
-            size: 24,
+            label: 'Penjualan',
           ),
-          label: 'Stok',
-        ),
-        BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage(
-              _currentIndex == 3
-                  ? 'lib/assets/navbar_icon/selected/Profil.png'
-                  : 'lib/assets/navbar_icon/default/Profil.png',
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                _currentIndex == 2
+                    ? 'lib/assets/navbar_icon/selected/Stok.png'
+                    : 'lib/assets/navbar_icon/default/Stok.png',
+              ),
+              size: 24,
             ),
-            size: 24,
+            label: 'Stok',
           ),
-          label: 'Profil',
-        ),
-      ],
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                _currentIndex == 3
+                    ? 'lib/assets/navbar_icon/selected/Profil.png'
+                    : 'lib/assets/navbar_icon/default/Profil.png',
+              ),
+              size: 24,
+            ),
+            label: 'Profil',
+          ),
+        ],
+      )
     );
   }
 }

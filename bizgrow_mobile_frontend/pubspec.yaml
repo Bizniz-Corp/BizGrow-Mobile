@@ -1,6 +1,6 @@
-name: bizgrow_mobile_frontend
+ame: bizgrow_mobile_frontend
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -9,7 +9,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^18.0.0
   google_fonts: ^6.2.1
+  carousel_slider: ^4.1.1
+  intl: ^0.19.0
+  toastification: ^2.3.0
+  fl_chart: ^0.69.0
   image_picker: ^0.8.4+4
 
 dev_dependencies:
@@ -28,3 +33,17 @@ flutter:
     - lib/assets/navbar_icon/selected/Penjualan.png
     - lib/assets/navbar_icon/selected/Stok.png
     - lib/assets/navbar_icon/selected/Profil.png
+    - lib/assets/navbar_icon/Input.png
+    - lib/assets/navbar_icon/Riwayat.png
+    - lib/assets/navbar_icon/Prediksi_Profit.png
+    - lib/assets/navbar_icon/Prediksi_Stok.png
+    - lib/assets/navbar_icon/Prediksi_Demand.png
+    - lib/assets/navbar_icon/logo1.png
+    - lib/assets/navbar_icon/landing_page1.jpg
+    - lib/assets/data/data_dummy.json
+    - lib/assets/essential_icon/arrow-circle-down-icon.png
+    - lib/assets/essential_icon/refresh-circle-icon.png
+    - lib/assets/essential_icon/filter-icon.png
+    - lib/assets/data/penjualan.json
+    - lib/assets/data/stok.json
+    - lib/assets/navbar_icon/Logo.png
