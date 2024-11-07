@@ -10,9 +10,9 @@ class CustomLineChart extends StatefulWidget {
 
   CustomLineChart({required this.jsonPath});
 
-//   @override
-//   _CustomLineChartState createState() => _CustomLineChartState();
-// }
+  @override
+  _CustomLineChartState createState() => _CustomLineChartState();
+}
 
 class _CustomLineChartState extends State<CustomLineChart> {
   List<List<dynamic>> _chartData = [];
