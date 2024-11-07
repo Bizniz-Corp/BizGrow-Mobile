@@ -9,12 +9,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:searchfield/searchfield.dart';
 
-class PrediksiDemandScreen extends StatefulWidget {
+class PrediksiStokScreen extends StatefulWidget {
   @override
-  _PrediksiDemandScreenState createState() => _PrediksiDemandScreenState();
+  _PrediksiStokScreenState createState() => _PrediksiStokScreenState();
 }
 
-class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
+class _PrediksiStokScreenState extends State<PrediksiStokScreen> {
   List<dynamic> _data = [];
 
   @override
