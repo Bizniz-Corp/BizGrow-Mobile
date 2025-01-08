@@ -1,5 +1,5 @@
-import 'package:bizgrow_mobile_frontend/screens/profil/profil_screen.dart';
 import 'package:flutter/material.dart';
+import 'profil_screen.dart';
 import 'edit_password_confirm.dart';
 import 'package:toastification/toastification.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
@@ -7,10 +7,66 @@ import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:bizgrow_mobile_frontend/widgets/button.dart';
+import 'package:bizgrow_mobile_frontend/services/api_service.dart';
 
-class EditPassword extends StatelessWidget {
+class EditPassword extends StatefulWidget {
+  @override
+  State<EditPassword> createState() => _EditPasswordState();
+}
+
+class _EditPasswordState extends State<EditPassword> {
   final TextEditingController passwordController = TextEditingController();
-  final String passLama = 'iniPass123';
+  final ApiService apiService = ApiService();
+  final String token =
+      "9|8h5vfax7jPtZff4xFAw78GqYdZHCzJWKMvU1TDwwba6f6d63"; // Replace dengan token sebenarnya
+
+  bool isLoading = false;
+
+  void _checkPassword() async {
+    // Update UI untuk menampilkan loader
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      String message = await apiService.checkPassword(
+        token,
+        passwordController.text.trim(),
+      );
+
+      // Jika berhasil, tampilkan toast dan navigasi ke halaman berikutnya
+      toastification.show(
+        context: context,
+        title: Text(message),
+        type: ToastificationType.success,
+        style: ToastificationStyle.fillColored,
+        autoCloseDuration: const Duration(seconds: 5),
+        showProgressBar: false,
+      );
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EditPasswordConfirm(),
+        ),
+      );
+    } catch (e) {
+      // Tangkap error dan tampilkan pesan error
+      toastification.show(
+        context: context,
+        title: Text(e.toString().replaceAll("Exception: ", "")),
+        type: ToastificationType.error,
+        style: ToastificationStyle.fillColored,
+        autoCloseDuration: const Duration(seconds: 5),
+        showProgressBar: false,
+      );
+    } finally {
+      // Set isLoading kembali ke false
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,31 +131,20 @@ class EditPassword extends StatelessWidget {
             ),
             SizedBox(height: 32),
             CustomButton(
-                text: 'Berikutnya',
-                size: 'small',
-                onPressed: () {
-                  if (passwordController.text == passLama) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditPasswordConfirm(),
-                      ),
-                    );
-                  } else {
-                    toastification.show(
-                      context: context,
-                      title: Text('Password salah! Coba lagi'),
-                      type: ToastificationType.error,
-                      style: ToastificationStyle.fillColored,
-                      autoCloseDuration: const Duration(seconds: 5),
-                      showProgressBar: false,
-                    );
-                  }
-                }),
+              text: isLoading ? 'Memproses...' : 'Berikutnya',
+              size: 'small',
+              onPressed: isLoading ? null : () => _checkPassword(),
+            ),
           ],
         ),
       ),
       bottomNavigationBar: MainNavigator(selectedIndex: 3),
     );
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
   }
 }

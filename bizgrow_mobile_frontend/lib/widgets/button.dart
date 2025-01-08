@@ -50,7 +50,7 @@ class CustomButton extends StatelessWidget {
   final double? width; // BISA NULL
   final String? iconPath; // BISA NULL
   final String? buttonType; // Posisi icon: right, left, atau BISA NULL
-  final VoidCallback onPressed; // Fungsi yang dipanggil ketika button ditekan
+  final VoidCallback? onPressed; // Fungsi yang dipanggil ketika button ditekan
   final Color? color; // BISA NULL
   final double? radius; // BISA NULL
   final double? iconSize;
