@@ -17,7 +17,7 @@ class _EditPasswordConfirmState extends State<EditPasswordConfirm> {
   final TextEditingController passBaru = TextEditingController();
   final TextEditingController passBaruKonfirm = TextEditingController();
   final ApiService apiService = ApiService();
-  final String token = "9|8h5vfax7jPtZff4xFAw78GqYdZHCzJWKMvU1TDwwba6f6d63";
+  final String token = "27|aDo5BrgsVfh5eG3rR0PztKm4dPLUtGJk9XWsqzAgd26b4ad8";
   bool _isLoading = false;
 
   void _savePassword() async {

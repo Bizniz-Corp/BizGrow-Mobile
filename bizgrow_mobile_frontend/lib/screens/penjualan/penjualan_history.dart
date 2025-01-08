@@ -9,7 +9,6 @@ import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/widgets/button.dart';
 import 'package:bizgrow_mobile_frontend/models/sales_transaction.dart';
 import 'package:bizgrow_mobile_frontend/models/pagination.dart';
-import 'package:bizgrow_mobile_frontend/models/product.dart';
 import 'package:bizgrow_mobile_frontend/services/api_service.dart';
 
 class PenjualanHistory extends StatefulWidget {
@@ -22,12 +21,10 @@ class PenjualanHistory extends StatefulWidget {
 
 class _PenjualanHistoryState extends State<PenjualanHistory> {
   final ApiService apiService = ApiService();
-  // late Future<List<SalesTransaction>> futureSalesHistory;
 
   final String token = "27|aDo5BrgsVfh5eG3rR0PztKm4dPLUtGJk9XWsqzAgd26b4ad8";
 
   List<SalesTransaction> penjualanList = [];
-  // List<SalesTransaction> filteredPenjualanList = [];
 
   // DateTime selectedDateFrom = DateTime.now().subtract(Duration(days: 30));
   DateTime? selectedDateFrom;
@@ -132,7 +129,7 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
     return NumberFormat.currency(
       locale: 'id', // Locale untuk Indonesia
       symbol: 'Rp', // Simbol rupiah
-      decimalDigits: 0, // Tampilkan dua digit desimal
+      decimalDigits: 0,
     ).format(amount);
   }
 
@@ -148,9 +145,9 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
     if (pickedDate != null) {
       setState(() {
         if (isFromDate) {
-          selectedDateFrom = pickedDate; // Update 'Date From'
+          selectedDateFrom = pickedDate;
         } else {
-          selectedDateTo = pickedDate; // Update 'Date To'
+          selectedDateTo = pickedDate;
         }
         applyFilters(selectedProduct, selectedDateFrom, selectedDateTo);
       });
@@ -460,24 +457,3 @@ class FilterDateOption extends StatelessWidget {
     );
   }
 }
-
-
-// TextFormField(
-//                 decoration: InputDecoration(
-//                   labelText: 'Cari Produk',
-//                   hintText: 'Masukkan nama produk',
-//                   labelStyle: Regular.body.withColor(Monochrome.whiteDarkMode),
-//                   hintStyle: Regular.body.withColor(Monochrome.grey),
-//                   enabledBorder: const UnderlineInputBorder(
-//                     borderSide: BorderSide(color: Monochrome.grey),
-//                   ),
-//                   focusedBorder: const UnderlineInputBorder(
-//                     borderSide: BorderSide(color: Main.lightBlue),
-//                   ),
-//                 ),
-//                 style: Regular.body.withColor(
-//                     Monochrome.whiteDarkMode), // Ubah warna teks input
-//                 onChanged: (value) {
-//                   // Implement your search filtering logic here
-//                 },
-//               ),

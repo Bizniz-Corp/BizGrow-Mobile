@@ -59,19 +59,6 @@ class ApiService {
     } catch (error) {
       throw Exception('Error: $error');
     }
-    // final response = await http.get(
-    //   Uri.parse("$baseUrl/sales-history"),
-    //   headers: {
-    //     'Authorization': 'Bearer $token',
-    //   },
-    // );
-
-    // if (response.statusCode == 200) {
-    //   final List<dynamic> data = json.decode(response.body)['data'];
-    //   return data.map((e) => SalesTransaction.fromJson(e)).toList();
-    // } else {
-    //   throw Exception("Failed to fetch sales history");
-    // }
   }
 
   Future<List<Product>> fetchAllProduct(String token) async {
@@ -98,19 +85,55 @@ class ApiService {
   }
 
   //Menarik data perubahan stok dari server
-  Future<List<StockChange>> fetchStockHistory(String token) async {
-    final response = await http.get(
-      Uri.parse("$baseUrl/stocks-history"),
-      headers: {
-        'Authorization': 'Bearer $token',
-      },
-    );
+  Future<Map<String, dynamic>> fetchStockHistory({
+    required String token,
+    required int page,
+    int perPage = 10,
+    String? productName,
+    String? startDate,
+    String? endDate,
+  }) async {
+    try {
+      final queryParams = {
+        'per_page': perPage.toString(),
+        'page': page.toString(),
+        if (productName != null &&
+            productName.isNotEmpty &&
+            productName != 'Semua')
+          'product_name': productName,
+        if (startDate != "null" && endDate != "null") ...{
+          'start_date': startDate,
+          'end_date': endDate,
+        },
+      };
+      print('Query Parameters: $queryParams');
 
-    if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body)['data'];
-      return data.map((e) => StockChange.fromJson(e)).toList();
-    } else {
-      throw Exception("Failed to fetch stock history");
+      final uri = Uri.parse('$baseUrl/stocks-history')
+          .replace(queryParameters: queryParams);
+
+      final response = await http.get(uri, headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      });
+
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        print(jsonResponse);
+        print(jsonResponse['pagination']);
+        final stockData = (jsonResponse['data'] as List)
+            .map((data) => StockChange.fromJson(data))
+            .toList();
+        final pagination = Pagination.fromJson(jsonResponse['pagination']);
+        return {
+          'stockData': stockData,
+          'pagination': pagination,
+        };
+      } else {
+        throw Exception(
+            'Failed to fetch stock history: ${response.statusCode}');
+      }
+    } catch (error) {
+      throw Exception('Error: $error');
     }
   }
 

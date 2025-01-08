@@ -17,8 +17,7 @@ class EditPassword extends StatefulWidget {
 class _EditPasswordState extends State<EditPassword> {
   final TextEditingController passwordController = TextEditingController();
   final ApiService apiService = ApiService();
-  final String token =
-      "9|8h5vfax7jPtZff4xFAw78GqYdZHCzJWKMvU1TDwwba6f6d63"; // Replace dengan token sebenarnya
+  final String token = "27|aDo5BrgsVfh5eG3rR0PztKm4dPLUtGJk9XWsqzAgd26b4ad8";
 
   bool isLoading = false;
 
