@@ -8,6 +8,70 @@ import 'package:bizgrow_mobile_frontend/models/product.dart';
 class ApiService {
   final String baseUrl = "http://10.0.2.2:8000/api";
 
+  Future<Map<String, dynamic>> getMonthlyProfit(String token) async {
+    final url = Uri.parse("$baseUrl/profit");
+
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Accept': 'application/json',
+        },
+      );
+
+      print(response.body);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        if (data['success'] == true) {
+          return {
+            'total_pembelian': data['data']['total_pembelian'],
+            'total_penjualan': data['data']['total_penjualan'],
+          };
+        } else {
+          throw Exception("Gagal mendapatkan data dari server.");
+        }
+      } else {
+        throw Exception(
+            "Error: ${response.statusCode}, ${response.reasonPhrase}");
+      }
+    } catch (e) {
+      throw Exception("Terjadi kesalahan: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> getProfile(String token) async {
+  final String url = "$baseUrl/profile";
+
+  try {
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      if (data['success'] == true) {
+        return {
+          'name': data['data']['name'],
+        };
+      } else {
+        throw Exception("Gagal mendapatkan data profil.");
+      }
+    } else {
+      throw Exception(
+          "Error: ${response.statusCode}, ${response.reasonPhrase}");
+    }
+  } catch (e) {
+    throw Exception("Terjadi kesalahan: $e");
+  }
+}
+
+
   //Menarik data penjualan dari server
   Future<Map<String, dynamic>> fetchSalesHistory({
     required String token,
