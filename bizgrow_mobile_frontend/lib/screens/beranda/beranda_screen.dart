@@ -5,6 +5,12 @@ import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:bizgrow_mobile_frontend/services/api_service.dart';
 import 'package:intl/intl.dart';
+import 'package:bizgrow_mobile_frontend/screens/penjualan/input_data_penjualan.dart';
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_history.dart';
+import 'package:bizgrow_mobile_frontend/screens/stok/stok_history.dart';
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_prediksi_demand_screen.dart';
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_prediksi_profit_screen.dart';
+import 'package:bizgrow_mobile_frontend/screens/stok/stok_prediksi_screen.dart';
 
 class BerandaScreen extends StatefulWidget {
   const BerandaScreen({super.key});
@@ -111,38 +117,38 @@ class _BerandaScreenState extends State<BerandaScreen> {
                           context,
                           Icons.people,
                           'Demand',
-                          Placeholder(),
+                          PrediksiDemandScreen(),
                         ),
                         _buildQuickAccessButton(
                           context,
                           Icons.inventory,
                           'Buffer Stock',
-                          Placeholder(),
+                          PrediksiStokScreen(),
                         ),
                         _buildQuickAccessButton(
                           context,
                           Icons.show_chart,
                           'Profit',
-                          Placeholder(),
+                          PrediksiProfitScreen(),
                         ),
                         _buildQuickAccessButton(
                           context,
                           Icons.history,
                           'Riwayat Penjualan',
-                          Placeholder(),
+                          PenjualanHistory(),
                         ),
                         _buildQuickAccessButton(
                           context,
                           Icons.list_alt,
                           'Riwayat Stok',
-                          Placeholder(),
+                          StokHistory(),
                         ),
                         _buildQuickAccessButton(
                           context,
                           Icons.upload,
                           'Input Data Penjualan',
-                          Placeholder(),
-                        ),
+                          InputDataPenjualanScreen(),
+                        ),  
                       ],
                     ),
                   ),
