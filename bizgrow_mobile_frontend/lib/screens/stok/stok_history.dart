@@ -6,22 +6,30 @@ import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:bizgrow_mobile_frontend/screens/stok/stok_screen.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/widgets/button.dart';
-import 'package:bizgrow_mobile_frontend/models/stok.dart';
-import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:bizgrow_mobile_frontend/services/api_service.dart';
+import 'package:bizgrow_mobile_frontend/models/stock_change.dart';
 
 class StokHistory extends StatefulWidget {
+  // final String token;
+  const StokHistory({super.key});
+
   @override
   _StokHistoryState createState() => _StokHistoryState();
 }
 
 class _StokHistoryState extends State<StokHistory> {
+  final ApiService apiService = ApiService();
+  late Future<List<StockChange>> futureStockHistory;
+
+  final String token = "9|8h5vfax7jPtZff4xFAw78GqYdZHCzJWKMvU1TDwwba6f6d63";
+
   DateTime selectedDateFrom = DateTime.now();
   DateTime selectedDateTo = DateTime.now();
   String? selectedProduct;
 
-  List<Stok> stokList = [];
-  List<Stok> filteredStokList = [];
+  List<StockChange> stokList = [];
+  List<StockChange> filteredStokList = [];
 
   // Fungsi untuk mereset filter
   void _resetFilters() {
@@ -34,22 +42,22 @@ class _StokHistoryState extends State<StokHistory> {
   }
 
   // Fungsi untuk membaca file JSON dan mengubahnya ke objek Penjualan
-  Future<void> loadStokData() async {
-    String jsonString =
-        await rootBundle.loadString('lib/assets/data/stok.json');
+  // Future<void> loadStokData() async {
+  //   String jsonString =
+  //       await rootBundle.loadString('lib/assets/data/stok.json');
 
-    // Parsing JSON
-    List<dynamic> jsonResponse = json.decode(jsonString);
-    setState(() {
-      stokList = jsonResponse.map((data) => Stok.fromJson(data)).toList();
-      filteredStokList = stokList;
-    });
-  }
+  //   // Parsing JSON
+  //   List<dynamic> jsonResponse = json.decode(jsonString);
+  //   setState(() {
+  //     stokList = jsonResponse.map((data) => Stok.fromJson(data)).toList();
+  //     filteredStokList = stokList;
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
-    loadStokData();
+    futureStockHistory = apiService.fetchStockHistory(token);
   }
 
   @override
@@ -73,135 +81,152 @@ class _StokHistoryState extends State<StokHistory> {
           },
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(margin),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomButton(
-                  width: MediaQuery.of(context).size.width * 0.35,
-                  text: 'Filter',
-                  size: 'small',
-                  iconPath: 'lib/assets/essential_icon/filter-icon.png',
-                  buttonType: 'leftIcon',
-                  onPressed: () {
-                    _showFilterDialog(context);
-                  },
-                ),
-                SizedBox(width: 8),
-                CustomButton(
-                  width: MediaQuery.of(context).size.width * 0.35,
-                  text: 'Reset',
-                  size: 'small',
-                  iconPath: 'lib/assets/essential_icon/refresh-circle-icon.png',
-                  buttonType: 'leftIcon',
-                  onPressed: () {
-                    _resetFilters();
-                  },
-                ),
-              ],
-            ),
-            SizedBox(height: 8),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FilterDateOption(
-                  title: 'Tanggal Awal',
-                  selectedDate: selectedDateFrom,
-                  onSelectDate: () => _selectDate(context, true),
-                ),
-                SizedBox(width: 8),
-                FilterDateOption(
-                  title: 'Tanggal Akhir',
-                  selectedDate: selectedDateTo,
-                  onSelectDate: () => _selectDate(context, false),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Container(
-                width: double.infinity,
-                height: 1,
-                color: Colors.white,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.25,
-                    child: Text('Produk',
-                        style:
-                            SemiBold.body.withColor(Monochrome.whiteDarkMode)),
-                  ),
-                  Text('Perubahan',
-                      style: SemiBold.body.withColor(Monochrome.whiteDarkMode)),
-                  Text('Total',
-                      style: SemiBold.body.withColor(Monochrome.whiteDarkMode)),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: filteredStokList.length, // Jumlah item di ListView
-                physics: BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  Stok stok = filteredStokList[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Main.blueSecondary,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(stok.produk,
-                                      style: SemiBold.body
-                                          .withColor(Monochrome.whiteDarkMode)),
-                                  Text('ID ${stok.id}',
-                                      style: Regular.small
-                                          .withColor(Monochrome.whiteDarkMode)),
-                                  Text(formatTanggal(stok.tanggal),
-                                      style: Regular.small
-                                          .withColor(Monochrome.whiteDarkMode)),
-                                ],
-                              ),
-                            ),
-                            Text(stok.perubahan.toString(),
-                                style: SemiBold.body
-                                    .withColor(Monochrome.whiteDarkMode)),
-                            Text('${stok.total.toString()} Stok',
-                                style: SemiBold.body
-                                    .withColor(Monochrome.whiteDarkMode)),
-                          ],
+      body: FutureBuilder<List<StockChange>>(
+          future: futureStockHistory,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('Tidak ada data penjualan'));
+            } else {
+              final stockHistory = snapshot.data!;
+              return Padding(
+                padding: EdgeInsets.all(margin),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomButton(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          text: 'Filter',
+                          size: 'small',
+                          iconPath: 'lib/assets/essential_icon/filter-icon.png',
+                          buttonType: 'leftIcon',
+                          onPressed: () {
+                            _showFilterDialog(context);
+                          },
                         ),
+                        SizedBox(width: 8),
+                        CustomButton(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          text: 'Reset',
+                          size: 'small',
+                          iconPath:
+                              'lib/assets/essential_icon/refresh-circle-icon.png',
+                          buttonType: 'leftIcon',
+                          onPressed: () {
+                            _resetFilters();
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        FilterDateOption(
+                          title: 'Tanggal Awal',
+                          selectedDate: selectedDateFrom,
+                          onSelectDate: () => _selectDate(context, true),
+                        ),
+                        SizedBox(width: 8),
+                        FilterDateOption(
+                          title: 'Tanggal Akhir',
+                          selectedDate: selectedDateTo,
+                          onSelectDate: () => _selectDate(context, false),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Container(
+                        width: double.infinity,
+                        height: 1,
+                        color: Colors.white,
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            child: Text('Produk',
+                                style: SemiBold.body
+                                    .withColor(Monochrome.whiteDarkMode)),
+                          ),
+                          Text('Perubahan',
+                              style: SemiBold.body
+                                  .withColor(Monochrome.whiteDarkMode)),
+                          Text('Total',
+                              style: SemiBold.body
+                                  .withColor(Monochrome.whiteDarkMode)),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount:
+                            stockHistory.length, // Jumlah item di ListView
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final stok = stockHistory[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Main.blueSecondary,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(stok.productName,
+                                              style: SemiBold.body.withColor(
+                                                  Monochrome.whiteDarkMode)),
+                                          Text(stok.changesDate,
+                                              style: Regular.small.withColor(
+                                                  Monochrome.whiteDarkMode)),
+                                        ],
+                                      ),
+                                    ),
+                                    Text(stok.changesQuantity.toString(),
+                                        style: SemiBold.body.withColor(
+                                            Monochrome.whiteDarkMode)),
+                                    Text('${stok.totalStock.toString()} Stok',
+                                        style: SemiBold.body.withColor(
+                                            Monochrome.whiteDarkMode)),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+          }),
       bottomNavigationBar: MainNavigator(selectedIndex: 1),
     );
   }
@@ -237,12 +262,12 @@ class _StokHistoryState extends State<StokHistory> {
   }
 
   //Function untuk mendapatkan listproduk untuk list di filter
-  List<String> getListProduk(List<Stok> stokList) {
+  List<String> getListProduk(List<StockChange> stokList) {
     List<String> temp = [];
 
     for (var item in stokList) {
-      if (!temp.contains(item.produk)) {
-        temp.add(item.produk);
+      if (!temp.contains(item.productName)) {
+        temp.add(item.productName);
       }
     }
     temp.sort();
@@ -264,14 +289,14 @@ class _StokHistoryState extends State<StokHistory> {
     setState(() {
       filteredStokList = stokList.where((stok) {
         // Filter berdasarkan rentang tanggal
-        DateTime stokDate = DateFormat("MM/dd/yyyy").parse(stok.tanggal);
+        DateTime stokDate = DateFormat("MM/dd/yyyy").parse(stok.changesDate);
         bool dateMatches =
             stokDate.isAfter(selectedDateFrom.subtract(Duration(days: 1))) &&
                 stokDate.isBefore(selectedDateTo.add(Duration(days: 1)));
 
         // Filter berdasarkan produk
         bool productMatches =
-            selectedProduct == "Semua" || stok.produk == selectedProduct;
+            selectedProduct == "Semua" || stok.productName == selectedProduct;
 
         // Gabungkan kedua filter
         return dateMatches && productMatches;

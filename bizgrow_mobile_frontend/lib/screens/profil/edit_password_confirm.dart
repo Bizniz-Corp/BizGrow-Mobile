@@ -1,15 +1,79 @@
 import 'package:flutter/material.dart';
+import 'profil_screen.dart';
 import 'package:toastification/toastification.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
-import 'package:bizgrow_mobile_frontend/screens/profil/profil_screen.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/widgets/button.dart';
+import 'package:bizgrow_mobile_frontend/services/api_service.dart';
 
-class EditPasswordConfirm extends StatelessWidget {
+class EditPasswordConfirm extends StatefulWidget {
+  @override
+  State<EditPasswordConfirm> createState() => _EditPasswordConfirmState();
+}
+
+class _EditPasswordConfirmState extends State<EditPasswordConfirm> {
   final TextEditingController passBaru = TextEditingController();
   final TextEditingController passBaruKonfirm = TextEditingController();
+  final ApiService apiService = ApiService();
+  final String token = "9|8h5vfax7jPtZff4xFAw78GqYdZHCzJWKMvU1TDwwba6f6d63";
+  bool _isLoading = false;
+
+  void _savePassword() async {
+    if (passBaru.text.trim() != passBaruKonfirm.text.trim()) {
+      toastification.show(
+        context: context,
+        title: Text('Password Baru Tidak Sama!'),
+        type: ToastificationType.error,
+        style: ToastificationStyle.fillColored,
+        autoCloseDuration: const Duration(seconds: 3),
+        showProgressBar: false,
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      String message = await apiService.editPassword(
+        token,
+        passBaru.text.trim(),
+      );
+
+      // Jika berhasil
+      toastification.show(
+        context: context,
+        title: Text(message),
+        type: ToastificationType.success,
+        style: ToastificationStyle.fillColored,
+        autoCloseDuration: const Duration(seconds: 3),
+        showProgressBar: false,
+      );
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => ProfilScreen()),
+        );
+      });
+    } catch (e) {
+      // Jika ada error
+      toastification.show(
+        context: context,
+        title: Text(e.toString().replaceAll("Exception: ", "")),
+        type: ToastificationType.error,
+        style: ToastificationStyle.fillColored,
+        autoCloseDuration: const Duration(seconds: 3),
+        showProgressBar: false,
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,34 +166,9 @@ class EditPasswordConfirm extends StatelessWidget {
             ),
             SizedBox(height: 40),
             CustomButton(
-              text: 'Simpan',
+              text: _isLoading ? 'Menyimpan...' : 'Simpan',
               size: 'small',
-              onPressed: () {
-                if (passBaru.text == passBaruKonfirm.text) {
-                  toastification.show(
-                    context: context,
-                    title: Text('Password Baru Berhasil Disimpan'),
-                    type: ToastificationType.success,
-                    style: ToastificationStyle.fillColored,
-                    autoCloseDuration: const Duration(seconds: 3),
-                    showProgressBar: false,
-                  );
-                  Future.delayed(const Duration(seconds: 3), () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfilScreen()));
-                  });
-                } else {
-                  toastification.show(
-                      context: context,
-                      title: Text('Password Baru Tidak Sama!'),
-                      type: ToastificationType.error,
-                      style: ToastificationStyle.fillColored,
-                      autoCloseDuration: const Duration(seconds: 3),
-                      showProgressBar: false);
-                }
-              },
+              onPressed: _isLoading ? null : _savePassword,
             ),
           ],
         ),
