@@ -1,13 +1,12 @@
-import 'package:bizgrow_mobile_frontend/screens/stok/stok_input_excel_screen.dart';
-import 'package:bizgrow_mobile_frontend/screens/stok/stok_input_manual_screen.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:bizgrow_mobile_frontend/screens/stok/input_data_stok.dart'; // Pastikan ini diimpor
-import 'package:bizgrow_mobile_frontend/screens/stok/stok_history.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
+import 'package:bizgrow_mobile_frontend/screens/stok/input_data_stok.dart'; 
+import 'package:bizgrow_mobile_frontend/screens/stok/stok_history.dart';
+import 'package:bizgrow_mobile_frontend/screens/stok/stok_prediksi_screen.dart';
 
 class StokScreen extends StatelessWidget {
   const StokScreen({super.key});
@@ -24,10 +23,9 @@ class StokScreen extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFF1D1B46), // Warna biru tua dari gambar
       ),
       body: Container(
-        color: Color(0xFF1D1B46), // Latar belakang warna biru tua
+        color: Color(0xFF0A092E), 
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,17 +41,22 @@ class StokScreen extends StatelessWidget {
             SizedBox(height: 20),
             Expanded(
               child: GridView.count(
-                crossAxisCount: 3, // Set ke 2 kolom
+                crossAxisCount: 3, 
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
-                childAspectRatio: 1.0, // Mengatur tinggi kotak agar lebih besar
+                childAspectRatio: 1.0, 
                 children: [
                   buildMenuButton(
                     context,
                     'Prediksi Stok',
                     'lib/assets/navbar_icon/Prediksi_Stok.png',
                     () {
-                      // Navigasi ke halaman Prediksi Demand
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StokHistory(),
+                        ),
+                      );
                     },
                   ),
                   buildMenuButton(
@@ -61,7 +64,12 @@ class StokScreen extends StatelessWidget {
                     'Riwayat Stok',
                     'lib/assets/navbar_icon/Riwayat.png',
                     () {
-                      // Navigasi ke halaman Riwayat Penjualan
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StokHistory(),
+                        ),
+                      );
                     },
                   ),
                   buildMenuButton(
@@ -87,14 +95,13 @@ class StokScreen extends StatelessWidget {
     );
   }
 
-  // Tambahkan parameter `imagePath` untuk gambar
   Widget buildMenuButton(BuildContext context, String title, String imagePath,
       VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xFF2D2F7E), // Warna biru dari kotak menu
+          color: const Color.fromARGB(255, 13, 1, 107),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
