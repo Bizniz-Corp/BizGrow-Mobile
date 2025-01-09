@@ -66,7 +66,6 @@ class _StokHistoryState extends State<StokHistory> {
 
     try {
       final result = await apiService.fetchStockHistory(
-        token: token,
         page: currentPage,
         productName: selectedProduct,
         startDate: selectedDateFrom.toString(),
@@ -145,7 +144,7 @@ class _StokHistoryState extends State<StokHistory> {
   //Function untuk mendapatkan listproduk untuk list di filter
   Future<List<String>> getListProduk() async {
     List<String> temp = [];
-    final products = await apiService.fetchAllProduct(token);
+    final products = await apiService.fetchAllProduct();
     print(products);
     for (var product in products) {
       temp.add(product.productName);

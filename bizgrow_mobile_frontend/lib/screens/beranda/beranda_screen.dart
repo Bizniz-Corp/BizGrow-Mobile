@@ -20,7 +20,8 @@ class BerandaScreen extends StatefulWidget {
 }
 
 class _BerandaScreenState extends State<BerandaScreen> {
-  final String token = "1|0Qv5q5hDpjU1no6CpwvTpzaT9D9N2PihAmc8ibSw410e7fc4"; // Token untuk autentikasi API
+  final String token =
+      "1|0Qv5q5hDpjU1no6CpwvTpzaT9D9N2PihAmc8ibSw410e7fc4"; // Token untuk autentikasi API
 
   double totalPembelian = 0.0;
   double totalPenjualan = 0.0;
@@ -38,13 +39,18 @@ class _BerandaScreenState extends State<BerandaScreen> {
 
     try {
       // Ambil data profit
-      final profitData = await apiService.getMonthlyProfit(token);
+      final profitData = await apiService.getMonthlyProfit();
       // Ambil data profil
-      final profileData = await apiService.getProfile(token);
+      final profileData = await apiService.getProfile();
+
+      final authToken = await apiService.getToken(); // Tambahkan await di sini
+      print('Auth Token: $authToken');
 
       setState(() {
-        totalPembelian = double.tryParse(profitData['total_pembelian'].toString()) ?? 0.0;
-        totalPenjualan = double.tryParse(profitData['total_penjualan'].toString()) ?? 0.0;
+        totalPembelian =
+            double.tryParse(profitData['total_pembelian'].toString()) ?? 0.0;
+        totalPenjualan =
+            double.tryParse(profitData['total_penjualan'].toString()) ?? 0.0;
         umkmName = profileData['name'] ?? "Nama UMKM";
         isLoading = false;
       });
@@ -148,7 +154,7 @@ class _BerandaScreenState extends State<BerandaScreen> {
                           Icons.upload,
                           'Input Data Penjualan',
                           InputDataPenjualanScreen(),
-                        ),  
+                        ),
                       ],
                     ),
                   ),

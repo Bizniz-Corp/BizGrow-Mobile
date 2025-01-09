@@ -5,10 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:bizgrow_mobile_frontend/screens/Sign in/sign in.dart';
+import 'package:bizgrow_mobile_frontend/services/api_service.dart';
 
-class ProfilScreen extends StatelessWidget {
+class ProfilScreen extends StatefulWidget {
   const ProfilScreen({super.key});
 
+  @override
+  State<ProfilScreen> createState() => _ProfilScreenState();
+}
+
+class _ProfilScreenState extends State<ProfilScreen> {
+  final ApiService apiService = ApiService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,10 +53,10 @@ class ProfilScreen extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: 'Budi',
                 labelStyle: TextStyle(
-                  color: Monochrome.white,  
+                  color: Monochrome.white,
                 ),
                 hintStyle: TextStyle(
-                  color: Monochrome.white, 
+                  color: Monochrome.white,
                 ),
                 fillColor: Main.lightBlue,
                 filled: true,
@@ -60,10 +67,8 @@ class ProfilScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            Text(
-              'Email',
-              style: Regular.h2.withColor(Monochrome.whiteDarkMode)
-            ),
+            Text('Email',
+                style: Regular.h2.withColor(Monochrome.whiteDarkMode)),
             // DI SINI INPUT BORDER
             TextField(
               readOnly: true,
@@ -111,14 +116,16 @@ class ProfilScreen extends StatelessWidget {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text('Konfirmasi Hapus Akun'),
-                          content: Text('Apakah Anda yakin ingin menghapus akun ini?'),
+                          content: Text(
+                              'Apakah Anda yakin ingin menghapus akun ini?'),
                           actions: [
                             TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop(); 
-                              },
-                              child: Text('Batal',)
-                            ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(
+                                  'Batal',
+                                )),
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
@@ -128,9 +135,11 @@ class ProfilScreen extends StatelessWidget {
                                     builder: (context) => SignInScreen(),
                                   ),
                                 );
-                                // Belum diisi karena menunggu api dari website 
+                                // Belum diisi karena menunggu api dari website
                               },
-                              child: Text('Hapus Akun', style: Regular.body.withColor(additionalColor.red)),
+                              child: Text('Hapus Akun',
+                                  style: Regular.body
+                                      .withColor(additionalColor.red)),
                             ),
                           ],
                         );
@@ -146,7 +155,7 @@ class ProfilScreen extends StatelessWidget {
                     backgroundColor: additionalColor.red,
                     foregroundColor: Monochrome.white,
                   ),
-                ),              
+                ),
               ],
             ),
             SizedBox(height: 30),
@@ -168,7 +177,8 @@ class ProfilScreen extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.of(context).pop(); 
+                              apiService.logout();
+                              Navigator.of(context).pop();
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
@@ -176,7 +186,9 @@ class ProfilScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: Text('Keluar', style: Regular.body.withColor(additionalColor.red)),
+                            child: Text('Keluar',
+                                style: Regular.body
+                                    .withColor(additionalColor.red)),
                           ),
                         ],
                       );
@@ -192,7 +204,7 @@ class ProfilScreen extends StatelessWidget {
                   foregroundColor: Monochrome.white,
                 ),
                 child: Text('Keluar'),
-              ),     
+              ),
             ),
           ],
         ),

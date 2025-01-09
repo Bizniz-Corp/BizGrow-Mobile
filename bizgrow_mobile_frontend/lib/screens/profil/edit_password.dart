@@ -29,7 +29,6 @@ class _EditPasswordState extends State<EditPassword> {
 
     try {
       String message = await apiService.checkPassword(
-        token,
         passwordController.text.trim(),
       );
 

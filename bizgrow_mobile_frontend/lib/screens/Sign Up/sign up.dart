@@ -1,23 +1,9 @@
-import 'dart:convert';
 import 'dart:io';
+import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bizgrow_mobile_frontend/screens/Sign%20in/sign%20in.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SignUpScreen(),
-    );
-  }
-}
+import 'package:bizgrow_mobile_frontend/services/api_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -30,7 +16,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController npwpController = TextEditingController();
-
+  final apiService = ApiService();
   String selectedFile = 'No File Selected';
   File? file;
 
@@ -42,48 +28,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     passwordController.dispose();
     npwpController.dispose();
     super.dispose();
-  }
-
-  // Fungsi untuk sign-up dan mendapatkan token dari API Laravel
-  Future<void> signUp() async {
-    final url = Uri.parse(
-        'https://your-laravel-api.com/api/register'); // Ganti dengan URL API Laravel Anda
-
-    var request = http.MultipartRequest('POST', url);
-    request.fields['name'] = nameController.text;
-    request.fields['email'] = emailController.text;
-    request.fields['password'] = passwordController.text;
-    request.fields['npwp'] = npwpController.text;
-
-    if (file != null) {
-      // Menambahkan file ke dalam request
-      request.files.add(await http.MultipartFile.fromPath('file', file!.path));
-    }
-
-    var response = await request.send();
-
-    if (response.statusCode == 200) {
-      final responseData = await response.stream.bytesToString();
-      final data = jsonDecode(responseData);
-      print("Token: ${data['token']}");
-
-      // Simpan token untuk digunakan dalam permintaan selanjutnya
-      saveToken(data['token']);
-    } else {
-      print("Failed to sign up: ${response.reasonPhrase}");
-    }
-  }
-
-  // Fungsi untuk menyimpan token ke SharedPreferences
-  Future<void> saveToken(String token) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('auth_token', token); // Menyimpan token
-  }
-
-  // Fungsi untuk mengambil token dari SharedPreferences
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('auth_token'); // Mengambil token
   }
 
   // Fungsi untuk pick file
@@ -104,10 +48,55 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
+  Future<void> signUp() async {
+    if (nameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        passwordController.text.isEmpty ||
+        file == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Harap lengkapi semua data!")),
+      );
+      return;
+    }
+
+    // Data yang akan dikirim
+    Map<String, String> data = {
+      'name': nameController.text,
+      'email': emailController.text,
+      'password': passwordController.text,
+      'npwp': npwpController.text,
+    };
+
+    try {
+      // Kirim request
+      var response = await apiService.register(data, file!.path);
+
+      if (response['success']) {
+        // Beri tahu user dan arahkan ke halaman sign in
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Registrasi berhasil!")),
+        );
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => SignInScreen()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message'] ?? "Registrasi gagal")),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Terjadi kesalahan: $e")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF0F1636), // Dark blue background
+      backgroundColor: Main.background, // Dark blue background
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -127,7 +116,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 'Sign Up',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Monochrome.whiteDarkMode,
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -138,9 +127,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: nameController,
                 decoration: InputDecoration(
                   labelText: 'Nama',
-                  labelStyle: TextStyle(color: Colors.white),
+                  labelStyle: TextStyle(color: Monochrome.whiteDarkMode),
                   filled: true,
-                  fillColor: Color(0xFF1E2640),
+                  fillColor: Main.darkBlue,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide(
@@ -150,11 +139,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide(
-                      color: Colors.blue,
+                      color: Main.lightBlue,
                     ),
                   ),
                 ),
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Monochrome.whiteDarkMode),
               ),
               SizedBox(height: 20.0),
               // Email TextField
@@ -162,9 +151,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  labelStyle: TextStyle(color: Colors.white),
+                  labelStyle: TextStyle(color: Monochrome.whiteDarkMode),
                   filled: true,
-                  fillColor: Color(0xFF1E2640),
+                  fillColor: Main.darkBlue,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide(
@@ -174,11 +163,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide(
-                      color: Colors.blue,
+                      color: Main.lightBlue,
                     ),
                   ),
                 ),
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Monochrome.whiteDarkMode),
               ),
               SizedBox(height: 20.0),
               // Password TextField
@@ -187,9 +176,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  labelStyle: TextStyle(color: Colors.white),
+                  labelStyle: TextStyle(color: Monochrome.whiteDarkMode),
                   filled: true,
-                  fillColor: Color(0xFF1E2640),
+                  fillColor: Main.darkBlue,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide(
@@ -199,11 +188,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide(
-                      color: Colors.blue,
+                      color: Main.lightBlue,
                     ),
                   ),
                 ),
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Monochrome.whiteDarkMode),
               ),
               SizedBox(height: 20.0),
               // NPWP TextField
@@ -211,9 +200,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: npwpController,
                 decoration: InputDecoration(
                   labelText: 'Nomor Pokok Wajib Pajak',
-                  labelStyle: TextStyle(color: Colors.white),
+                  labelStyle: TextStyle(color: Monochrome.whiteDarkMode),
                   filled: true,
-                  fillColor: Color(0xFF1E2640),
+                  fillColor: Main.darkBlue,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide(
@@ -223,11 +212,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide(
-                      color: Colors.blue,
+                      color: Main.lightBlue,
                     ),
                   ),
                 ),
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Monochrome.whiteDarkMode),
               ),
               SizedBox(height: 20.0),
               // File Picker for SIUP (Optional)
@@ -235,14 +224,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   Text(
                     'Surat Izin Usaha Perusahaan',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Monochrome.whiteDarkMode),
                   ),
                   Spacer(),
                   GestureDetector(
                     onTap: pickFile,
                     child: Text(
                       'Pilih Berkas',
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(color: Main.lightBlue),
                     ),
                   ),
                 ],
@@ -250,7 +239,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 10.0),
               Text(
                 selectedFile,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Monochrome.whiteDarkMode),
               ),
               SizedBox(height: 20.0),
               // Sign Up Button
@@ -268,7 +257,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Color(0xFF2E4379)),
+                        MaterialStateProperty.all(Main.blueSecondary),
                     padding: MaterialStateProperty.all(
                       EdgeInsets.symmetric(vertical: 16.0),
                     ),
@@ -282,7 +271,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   child: Text(
                     'Sign Up',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Monochrome.whiteDarkMode),
                   ),
                 ),
               ),
@@ -300,7 +289,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                   child: Text(
                     'Sudah punya akun? Klik Di Sini',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Monochrome.whiteDarkMode),
                   ),
                 ),
               ),

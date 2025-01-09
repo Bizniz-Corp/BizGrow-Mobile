@@ -39,7 +39,6 @@ class _EditPasswordConfirmState extends State<EditPasswordConfirm> {
 
     try {
       String message = await apiService.editPassword(
-        token,
         passBaru.text.trim(),
       );
 

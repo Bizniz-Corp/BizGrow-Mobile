@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/screens/Sign Up/sign up.dart';
 import 'package:bizgrow_mobile_frontend/screens/beranda/beranda_screen.dart';
+import 'package:bizgrow_mobile_frontend/services/api_service.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -9,16 +10,27 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final ApiService apiService = ApiService();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool _rememberMe = false;
 
-  Future<void> _handleSignIn() async {
-    // Logika sign-in dummy untuk demonstrasi
-    final email = _emailController.text;
-    final password = _passwordController.text;
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
 
-    if (email.isNotEmpty && password.isNotEmpty) {
+  void _handleSignIn() async {
+    // Logika sign-in dummy untuk demonstrasi
+    final result =
+        await apiService.login(_emailController.text, _passwordController.text);
+
+    if (result['success']) {
+      final authToken = await apiService.getToken(); // Tambahkan await di sini
+      print('Auth Token: $authToken');
+
       // Navigasi ke layar berikutnya
       Navigator.pushReplacement(
         context,
@@ -34,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF0F1636),
+      backgroundColor: Main.background,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -57,7 +69,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     'Sign In',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Monochrome.white,
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -67,9 +79,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     controller: _emailController,
                     decoration: InputDecoration(
                       labelText: 'Email',
-                      labelStyle: TextStyle(color: Colors.white),
+                      labelStyle: TextStyle(color: Monochrome.white),
                       filled: true,
-                      fillColor: Color(0xFF1E2640),
+                      fillColor: Main.darkBlue,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         borderSide: BorderSide(
@@ -79,11 +91,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         borderSide: BorderSide(
-                          color: Colors.blue,
+                          color: Main.lightBlue,
                         ),
                       ),
                     ),
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Monochrome.whiteDarkMode),
                   ),
                   SizedBox(height: 20.0),
                   TextField(
@@ -91,9 +103,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      labelStyle: TextStyle(color: Colors.white),
+                      labelStyle: TextStyle(color: Monochrome.whiteDarkMode),
                       filled: true,
-                      fillColor: Color(0xFF1E2640),
+                      fillColor: Main.darkBlue,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         borderSide: BorderSide(
@@ -103,11 +115,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         borderSide: BorderSide(
-                          color: Colors.blue,
+                          color: Main.lightBlue,
                         ),
                       ),
                     ),
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Monochrome.whiteDarkMode),
                   ),
                   SizedBox(height: 10.0),
                   Row(
@@ -119,13 +131,13 @@ class _SignInScreenState extends State<SignInScreen> {
                             _rememberMe = value ?? false;
                           });
                         },
-                        checkColor: Colors.white,
+                        checkColor: Monochrome.whiteDarkMode,
                         fillColor: MaterialStateProperty.resolveWith(
                             (states) => Colors.blue),
                       ),
                       Text(
                         'Biarkan tetap masuk?',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Monochrome.whiteDarkMode),
                       ),
                       Spacer(),
                       GestureDetector(
@@ -134,7 +146,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                         child: Text(
                           'Lupa password?',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Monochrome.whiteDarkMode),
                         ),
                       ),
                     ],
@@ -147,7 +159,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           _handleSignIn, // Pastikan onPressed tidak dihapus
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Color(0xFF2E4379)),
+                            MaterialStateProperty.all(Main.blueSecondary),
                         padding: MaterialStateProperty.all(
                           EdgeInsets.symmetric(vertical: 16.0),
                         ),
@@ -160,7 +172,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       child: Text(
                         'Sign In',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Monochrome.whiteDarkMode),
                       ),
                     ),
                   ),
@@ -177,7 +189,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       },
                       child: Text(
                         'Belum punya akun? Klik Di Sini',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Monochrome.whiteDarkMode),
                       ),
                     ),
                   ),

@@ -69,7 +69,6 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
 
     try {
       final result = await apiService.fetchSalesHistory(
-        token: token,
         page: currentPage,
         productName: selectedProduct,
         startDate: selectedDateFrom.toString(),
@@ -157,7 +156,7 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
   //Function untuk mendapatkan listproduk untuk list di filter
   Future<List<String>> getListProduk() async {
     List<String> temp = [];
-    final products = await apiService.fetchAllProduct(token);
+    final products = await apiService.fetchAllProduct();
     print(products);
     for (var product in products) {
       temp.add(product.productName);
