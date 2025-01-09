@@ -416,4 +416,49 @@ class ApiService {
       };
     }
   }
+
+  Future<Map<String, dynamic>> insertSalesTransaction({
+    required String token,
+    required int productId,
+    required String salesDate,
+    required String salesQuantity,
+    required String pricePerItem,
+    required int total,
+  }) async {
+    final String url = "$baseUrl/"; // !! ISI WEY JANLUP
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'product_id': productId,
+          'sales_date': salesDate,
+          'sales_quantity': salesQuantity,
+          'price_per_item': pricePerItem,
+          'total': total,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        if (data['status'] == 'success') {
+          return {
+            'status': 'success',
+            'message': 'Data inserted successfully',
+          };
+        } else {
+          throw Exception('Failed to insert data');
+        }
+      } else {
+        throw Exception(
+            'Error: ${response.statusCode}, ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Terjadi kesalahan: $e');
+    }
+  }
 }

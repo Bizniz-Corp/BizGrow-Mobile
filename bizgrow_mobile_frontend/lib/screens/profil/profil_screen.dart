@@ -3,6 +3,7 @@ import 'package:bizgrow_mobile_frontend/screens/profil/profil_edit.dart';
 import 'package:bizgrow_mobile_frontend/services/api_service.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
+import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
@@ -16,12 +17,19 @@ class ProfilScreen extends StatefulWidget {
 }
 
 class _ProfilScreenState extends State<ProfilScreen> {
-  final List<String> entries = <String>['Ubah Profil', 'Ganti Password', 'Keluar'];
-  final List<Icon> icons = <Icon>[Icon(Icons.edit), Icon(Icons.lock), Icon(Icons.logout)];
+  final List<String> entries = <String>[
+    'Ubah Profil',
+    'Ganti Password',
+    'Keluar'
+  ];
+  final List<Icon> icons = <Icon>[
+    Icon(Icons.edit),
+    Icon(Icons.lock),
+    Icon(Icons.logout)
+  ];
   Map<String, dynamic> profileData = {};
   String? profileImagePath;
   final ApiService apiService = ApiService();
-
 
   @override
   void initState() {
@@ -79,7 +87,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
               onPressed: _logout,
               child: Text(
                 'Keluar',
-                style: SemiBold.body.withColor(additionalColor.red), 
+                style: SemiBold.body.withColor(additionalColor.red),
               ),
             ),
           ],
@@ -154,39 +162,50 @@ class _ProfilScreenState extends State<ProfilScreen> {
                       if (index == 0) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const ProfilEditScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => const ProfilEditScreen()),
                         );
                       } else if (index == 1) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => EditPassword()),
+                          MaterialPageRoute(
+                              builder: (context) => EditPassword()),
                         );
                       } else if (index == 2) {
                         confirmLogout();
                       }
                     },
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 10), // Add vertical padding
-                      margin: const EdgeInsets.symmetric(vertical: 8), // Add vertical margin
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10), // Add vertical padding
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 8), // Add vertical margin
                       child: Row(
                         children: [
                           const SizedBox(width: 16),
                           CircleAvatar(
                             radius: 24,
-                            backgroundColor: index == 2 ? additionalColor.red : Main.lightBlue,
+                            backgroundColor: index == 2
+                                ? additionalColor.red
+                                : Main.lightBlue,
                             child: Icon(
                               icons[index].icon,
                               color: Monochrome.whiteDarkMode,
                             ),
                           ),
                           const SizedBox(width: 20),
-                          Text(entries[index], style: SemiBold.body.withColor(Monochrome.whiteDarkMode)),
+                          Text(entries[index],
+                              style: SemiBold.body
+                                  .withColor(Monochrome.whiteDarkMode)),
                         ],
                       ),
                     ),
                   );
                 },
-                separatorBuilder: (BuildContext context, int index) => const Divider(height: 20,), 
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(
+                  height: 20,
+                ),
               ),
             ),
           ],

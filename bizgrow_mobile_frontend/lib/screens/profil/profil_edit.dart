@@ -52,7 +52,8 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
     }
   }
 
-  Future<void> _updateProfile(File? profileImage, String name, String email) async {
+  Future<void> _updateProfile(
+      File? profileImage, String name, String email) async {
     try {
       final response = await ApiService().updateProfile({
         'name': name,
@@ -139,8 +140,10 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfilScreen()));
-                _updateProfile(_profileImageFile, _nameController.text, _emailController.text);
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => ProfilScreen()));
+                _updateProfile(_profileImageFile, _nameController.text,
+                    _emailController.text);
               },
               child: Text(
                 'Simpan',
@@ -183,7 +186,8 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
                             : _profileImageUrl != null
                                 ? NetworkImage(_profileImageUrl!)
                                 : null,
-                        child: _profileImageFile == null && _profileImageUrl == null
+                        child: _profileImageFile == null &&
+                                _profileImageUrl == null
                             ? const Icon(
                                 Icons.person,
                                 size: 50,
@@ -219,12 +223,14 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
                 TextField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                    hintText: profileData['name'] ?? 'Nama', // Placeholder from JSON
+                    hintText:
+                        profileData['name'] ?? 'Nama', // Placeholder from JSON
                     hintStyle: const TextStyle(
                       color: Monochrome.grey, // Warna placeholder
                     ),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0), // Border melengkung
+                      borderRadius:
+                          BorderRadius.circular(10.0), // Border melengkung
                     ),
                   ),
                   style: const TextStyle(color: Monochrome.white),
@@ -238,12 +244,14 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
                 TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
-                    hintText: profileData['email'] ?? 'Email', // Placeholder from JSON
+                    hintText: profileData['email'] ??
+                        'Email', // Placeholder from JSON
                     hintStyle: const TextStyle(
                       color: Monochrome.grey, // Warna placeholder
                     ),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0), // Border melengkung
+                      borderRadius:
+                          BorderRadius.circular(10.0), // Border melengkung
                     ),
                   ),
                   style: const TextStyle(color: Monochrome.white),
@@ -258,7 +266,8 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
                               builder: (context) => EditPassword()));
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 10),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -273,7 +282,8 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
                   child: ElevatedButton(
                     onPressed: _showSaveConfirmationDialog,
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 10),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
