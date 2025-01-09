@@ -344,4 +344,77 @@ class ApiService {
       throw Exception(responseBody['message'] ?? "Unknown error occurred");
     }
   }
+
+
+  // API get data profile
+  Future<Map<String, dynamic>> fetchProfile() async {
+    final token = await getToken();
+    final response = await http.get(
+      Uri.parse('$baseUrl/profile'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return {
+        'success': true,
+        'data': json.decode(response.body),
+      };
+    } else {
+      return {
+        'success': false,
+        'message': 'Failed to fetch profile data',
+      };
+    }
+  }
+
+  // API update profile
+  Future<Map<String, dynamic>> updateProfile(Map<String, dynamic> data) async {
+    final token = await getToken();
+    final response = await http.put(
+      Uri.parse('$baseUrl/profile/edit'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode(data),
+    );
+
+    if (response.statusCode == 200) {
+      return {
+        'success': true,
+        'data': json.decode(response.body),
+      };
+    } else {
+      return {
+        'success': false,
+        'message': 'Failed to update profile data',
+      };
+    }
+  }
+
+  // API Logout
+  Future<Map<String, dynamic>> logoutUser() async {
+    final token = await getToken();
+    final response = await http.post(
+      Uri.parse('$baseUrl/logout'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return {
+        'success': true,
+        'data': json.decode(response.body),
+      };
+    } else {
+      return {
+        'success': false,
+        'message': 'Failed to logout',
+      };
+    }
+  }
+
 }
