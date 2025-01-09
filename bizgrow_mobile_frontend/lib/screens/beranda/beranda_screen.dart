@@ -116,7 +116,7 @@ class _BerandaScreenState extends State<BerandaScreen> {
                   Expanded(
                     child: GridView.count(
                       crossAxisCount: 3,
-                      crossAxisSpacing: 16,
+                      crossAxisSpacing: 8,
                       mainAxisSpacing: 16,
                       children: [
                         _buildQuickAccessButton(
@@ -192,6 +192,7 @@ class _BerandaScreenState extends State<BerandaScreen> {
         );
       },
       child: Container(
+        width: double.infinity,
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 13, 1, 107),
@@ -204,7 +205,7 @@ class _BerandaScreenState extends State<BerandaScreen> {
               title,
               style: GoogleFonts.montserrat(
                 fontSize: 16,
-                color: Colors.white,
+                color: Monochrome.whiteDarkMode,
               ),
             ),
             SizedBox(height: 10),
@@ -212,7 +213,7 @@ class _BerandaScreenState extends State<BerandaScreen> {
               '${formatRupiah(value)}',
               style: GoogleFonts.montserrat(
                 fontSize: 28,
-                color: Colors.white,
+                color: Monochrome.whiteDarkMode,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -237,24 +238,27 @@ class _BerandaScreenState extends State<BerandaScreen> {
       },
       child: Container(
         padding: EdgeInsets.all(16),
+        height: 100,
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 13, 1, 107),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
               icon,
-              color: Colors.white,
+              color: Monochrome.whiteDarkMode,
               size: 32,
             ),
             SizedBox(height: 8),
             Text(
               label,
+              textAlign: TextAlign.center,
               style: GoogleFonts.montserrat(
                 fontSize: 14,
-                color: Colors.white,
+                color: Monochrome.whiteDarkMode,
               ),
             ),
           ],

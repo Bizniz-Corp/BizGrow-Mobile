@@ -3,7 +3,6 @@ import 'package:bizgrow_mobile_frontend/screens/profil/profil_edit.dart';
 import 'package:bizgrow_mobile_frontend/services/api_service.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
-import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
@@ -115,7 +114,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
         child: Column(
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 profileImagePath != null
                     ? CircleAvatar(
@@ -137,15 +136,15 @@ class _ProfilScreenState extends State<ProfilScreen> {
                   children: [
                     Text(
                       profileData['name'] ?? 'Memuat...',
-                      style: SemiBold.h2.withColor(Monochrome.whiteDarkMode),
+                      style: SemiBold.large.withColor(Monochrome.whiteDarkMode),
                     ),
                     Text(
                       profileData['email'] ?? 'Memuat...',
-                      style: Regular.h3.withColor(Monochrome.whiteDarkMode),
+                      style: Regular.body.withColor(Monochrome.whiteDarkMode),
                     ),
                     Text(
                       profileData['npwp'] ?? 'Memuat...',
-                      style: Regular.h3.withColor(Monochrome.grey),
+                      style: SemiBold.body.withColor(Monochrome.grey),
                     ),
                   ],
                 ),
