@@ -246,7 +246,7 @@ class _PenjualanHistoryState extends State<PenjualanHistory> {
               child: Container(
                 width: double.infinity,
                 height: 1,
-                color: Colors.white,
+                color: Monochrome.whiteDarkMode,
               ),
             ),
             Padding(

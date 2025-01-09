@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/screens/Sign Up/sign up.dart';
 import 'package:bizgrow_mobile_frontend/screens/beranda/beranda_screen.dart';
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SignInScreen(),
-    );
-  }
-}
+import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 
 class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF0F1636), // Dark blue background
+      backgroundColor: Main.background, // Dark blue background
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -134,19 +125,19 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ),
                 child: GestureDetector(
-                onTap: () {
-                                 Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BerandaScreen(),
-                    ),
-                  );                                                             
-                },
-                child: Text(
-                  'Sign In',
-                  style: TextStyle(color: Colors.white),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BerandaScreen(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Sign In',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
-              ),
               ),
             ),
             SizedBox(height: 20.0),
