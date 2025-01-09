@@ -17,7 +17,7 @@ class BizGrowApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: BizGrowTheme.darkMode,
-      home: LandingPageScreen(),
+      home: BerandaScreen(),
     );
   }
 }

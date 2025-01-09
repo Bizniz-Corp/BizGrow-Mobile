@@ -29,7 +29,8 @@ class _PrediksiProfitScreenState extends State<PrediksiProfitScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Prediksi Demand"),
+        automaticallyImplyLeading: false,
+        title: const Text("Prediksi Profit"),
       ),
       body: SingleChildScrollView(
         child: Container(
