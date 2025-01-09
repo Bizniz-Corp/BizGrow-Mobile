@@ -345,7 +345,6 @@ class ApiService {
     }
   }
 
-
   // API get data profile
   Future<Map<String, dynamic>> fetchProfile() async {
     final token = await getToken();
@@ -405,6 +404,7 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
+      logout();
       return {
         'success': true,
         'data': json.decode(response.body),
@@ -416,5 +416,4 @@ class ApiService {
       };
     }
   }
-
 }
