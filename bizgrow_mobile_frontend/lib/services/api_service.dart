@@ -5,10 +5,11 @@ import 'package:bizgrow_mobile_frontend/models/sales_transaction.dart';
 import 'package:bizgrow_mobile_frontend/models/stock_change.dart';
 import 'package:bizgrow_mobile_frontend/models/product.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:bizgrow_mobile_frontend/local_notification.dart';
 
 class ApiService {
   // final String baseUrl = "http://10.0.2.2:8000/api";
-  final String baseUrl = "http://192.168.1.15:8000/api";
+  final String baseUrl = "http://192.168.4.241:8000/api";
 
   Future<void> setToken(String token) async {
     final prefs = await SharedPreferences.getInstance();
@@ -25,12 +26,28 @@ class ApiService {
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('auth_token');
+    LocalNotification.showSimpleNotif(
+        title: 'Reminder Login',
+        body:
+            'Jangan lupa untuk login lagi ya, pengeluaranmu harus dikontrol :D',
+        payload: "logout payload");
+    // setLoginReminder();
   }
 
   /// Cek Login Status
   Future<bool> isLoggedIn() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('auth_token') != null;
+  }
+
+  void setLoginReminder() async {
+    final now = DateTime.now();
+    final scheduledDate = now.add(Duration(minutes: 1));
+    await LocalNotification.showReminderNotif(
+      title: "Don't forget to login!",
+      body: "It's time to check your data. Log in now to stay updated.",
+      scheduledDate: scheduledDate,
+    );
   }
 
   /// Register API
