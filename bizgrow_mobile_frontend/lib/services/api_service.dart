@@ -4,12 +4,131 @@ import 'package:bizgrow_mobile_frontend/models/pagination.dart';
 import 'package:bizgrow_mobile_frontend/models/sales_transaction.dart';
 import 'package:bizgrow_mobile_frontend/models/stock_change.dart';
 import 'package:bizgrow_mobile_frontend/models/product.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:bizgrow_mobile_frontend/local_notification.dart';
 
 class ApiService {
-  final String baseUrl = "http://10.0.2.2:8000/api";
+  // final String baseUrl = "http://10.0.2.2:8000/api";
+  final String baseUrl = "http://192.168.4.241:8000/api";
 
-  Future<Map<String, dynamic>> getMonthlyProfit(String token) async {
+  Future<void> setToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('auth_token', token);
+  }
+
+  /// Ambil Token yang Tersimpan
+  Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('auth_token');
+  }
+
+  /// Logout dan Hapus Token
+  Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('auth_token');
+    LocalNotification.showSimpleNotif(
+        title: 'Reminder Login',
+        body:
+            'Jangan lupa untuk login lagi ya, pengeluaranmu harus dikontrol :D',
+        payload: "logout payload");
+    // setLoginReminder();
+  }
+
+  /// Cek Login Status
+  Future<bool> isLoggedIn() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('auth_token') != null;
+  }
+
+  void setLoginReminder() async {
+    final now = DateTime.now();
+    final scheduledDate = now.add(Duration(minutes: 1));
+    await LocalNotification.showReminderNotif(
+      title: "Don't forget to login!",
+      body: "It's time to check your data. Log in now to stay updated.",
+      scheduledDate: scheduledDate,
+    );
+  }
+
+  /// Register API
+  Future<Map<String, dynamic>> register(
+      Map<String, String> data, String filePath) async {
+    try {
+      print("Fields being sent: $data");
+      print("File path: $filePath");
+      var request =
+          http.MultipartRequest('POST', Uri.parse('$baseUrl/register'))
+            ..fields.addAll(data)
+            ..files.add(
+                await http.MultipartFile.fromPath('file_surat_izin', filePath));
+
+      print("Request Fields: ${request.fields}");
+      print("Request Files: ${request.files}");
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      print("Response Status Code: ${response.statusCode}");
+      print("Response Body: ${response.body}");
+
+      if (response.statusCode == 201) {
+        return {
+          'success': true,
+          'data': json.decode(response.body),
+        };
+      } else {
+        return {
+          'success': false,
+          'message':
+              json.decode(response.body)['error'] ?? 'Failed to register',
+        };
+      }
+    } catch (e) {
+      return {
+        'success': false,
+        'message': e.toString(),
+      };
+    }
+  }
+
+  //API LOGIN
+  Future<Map<String, dynamic>> login(String email, String password) async {
+    print('Email: $email, Password: $password');
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'email': email, 'password': password}),
+      );
+
+      if (response.statusCode == 200) {
+        final body = json.decode(response.body);
+
+        // Simpan token ke SharedPreferences
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('auth_token', body['data']['token']);
+
+        return {
+          'success': true,
+          'data': body,
+        };
+      } else {
+        return {
+          'success': false,
+          'message': json.decode(response.body)['message'] ?? 'Failed to login',
+        };
+      }
+    } catch (e) {
+      return {
+        'success': false,
+        'message': e.toString(),
+      };
+    }
+  }
+
+  Future<Map<String, dynamic>> getMonthlyProfit() async {
     final url = Uri.parse("$baseUrl/profit");
+    final token = await getToken();
 
     try {
       final response = await http.get(
@@ -41,8 +160,9 @@ class ApiService {
     }
   }
 
-  Future<Map<String, dynamic>> getProfile(String token) async {
+  Future<Map<String, dynamic>> getProfile() async {
     final String url = "$baseUrl/profile";
+    final token = await getToken();
 
     try {
       final response = await http.get(
@@ -73,7 +193,6 @@ class ApiService {
 
   //Menarik data penjualan dari server
   Future<Map<String, dynamic>> fetchSalesHistory({
-    required String token,
     required int page,
     int perPage = 10,
     String? productName,
@@ -81,6 +200,7 @@ class ApiService {
     String? endDate,
   }) async {
     try {
+      final token = await getToken();
       final queryParams = {
         'per_page': perPage.toString(),
         'page': page.toString(),
@@ -124,8 +244,9 @@ class ApiService {
     }
   }
 
-  Future<List<Product>> fetchAllProduct(String token) async {
+  Future<List<Product>> fetchAllProduct() async {
     try {
+      final token = await getToken();
       final response = await http.get(
         Uri.parse("$baseUrl/products"),
         headers: {
@@ -149,7 +270,6 @@ class ApiService {
 
   //Menarik data perubahan stok dari server
   Future<Map<String, dynamic>> fetchStockHistory({
-    required String token,
     required int page,
     int perPage = 10,
     String? productName,
@@ -157,6 +277,7 @@ class ApiService {
     String? endDate,
   }) async {
     try {
+      final token = await getToken();
       final queryParams = {
         'per_page': perPage.toString(),
         'page': page.toString(),
@@ -201,7 +322,8 @@ class ApiService {
   }
 
   // Method to check the old password
-  Future<String> checkPassword(String token, String oldPassword) async {
+  Future<String> checkPassword(String oldPassword) async {
+    final token = await getToken();
     final response = await http.post(
       Uri.parse("$baseUrl/profile/edit-password"),
       headers: {
@@ -221,7 +343,8 @@ class ApiService {
   }
 
   // Method to update the password
-  Future<String> editPassword(String token, String newPassword) async {
+  Future<String> editPassword(String newPassword) async {
+    final token = await getToken();
     final response = await http.put(
       Uri.parse("$baseUrl/profile/edit-password"),
       headers: {
@@ -240,9 +363,120 @@ class ApiService {
     }
   }
 
-  Future<String> getAggregateByDayProfit(String apiUrl) async {
-    var url = Uri.parse(apiUrl);
-    http.Response response = await http.get(url);
-    return response.body;
+  // API get data profile
+  Future<Map<String, dynamic>> fetchProfile() async {
+    final token = await getToken();
+    final response = await http.get(
+      Uri.parse('$baseUrl/profile'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return {
+        'success': true,
+        'data': json.decode(response.body),
+      };
+    } else {
+      return {
+        'success': false,
+        'message': 'Failed to fetch profile data',
+      };
+    }
+  }
+
+  // API update profile
+  Future<Map<String, dynamic>> updateProfile(Map<String, dynamic> data) async {
+    final token = await getToken();
+    final response = await http.put(
+      Uri.parse('$baseUrl/profile/edit'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode(data),
+    );
+
+    if (response.statusCode == 200) {
+      return {
+        'success': true,
+        'data': json.decode(response.body),
+      };
+    } else {
+      return {
+        'success': false,
+        'message': 'Failed to update profile data',
+      };
+    }
+  }
+
+  // API Logout
+  Future<Map<String, dynamic>> logoutUser() async {
+    final token = await getToken();
+    final response = await http.post(
+      Uri.parse('$baseUrl/logout'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      logout();
+      return {
+        'success': true,
+        'data': json.decode(response.body),
+      };
+    } else {
+      return {
+        'success': false,
+        'message': 'Failed to logout',
+      };
+    }
+  }
+
+  Future<Map<String, dynamic>> insertSalesTransaction({
+    required String token,
+    required int productId,
+    required String salesDate,
+    required String salesQuantity,
+    required String pricePerItem,
+    required int total,
+  }) async {
+    final String url = "$baseUrl/"; // !! ISI WEY JANLUP
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'product_id': productId,
+          'sales_date': salesDate,
+          'sales_quantity': salesQuantity,
+          'price_per_item': pricePerItem,
+          'total': total,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        if (data['status'] == 'success') {
+          return {
+            'status': 'success',
+            'message': 'Data inserted successfully',
+          };
+        } else {
+          throw Exception('Failed to insert data');
+        }
+      } else {
+        throw Exception(
+            'Error: ${response.statusCode}, ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Terjadi kesalahan: $e');
+    }
   }
 }

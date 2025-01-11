@@ -1,4 +1,6 @@
+import 'package:bizgrow_mobile_frontend/screens/profil/edit_password.dart';
 import 'package:bizgrow_mobile_frontend/screens/profil/profil_edit.dart';
+import 'package:bizgrow_mobile_frontend/services/api_service.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +8,100 @@ import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:bizgrow_mobile_frontend/screens/Sign in/sign in.dart';
 
-class ProfilScreen extends StatelessWidget {
+class ProfilScreen extends StatefulWidget {
   const ProfilScreen({super.key});
+
+  @override
+  State<ProfilScreen> createState() => _ProfilScreenState();
+}
+
+class _ProfilScreenState extends State<ProfilScreen> {
+  final List<String> entries = <String>[
+    'Ubah Profil',
+    'Ganti Password',
+    'Keluar'
+  ];
+  final List<Icon> icons = <Icon>[
+    Icon(Icons.edit),
+    Icon(Icons.lock),
+    Icon(Icons.logout)
+  ];
+  Map<String, dynamic> profileData = {};
+  String? profileImagePath;
+  final ApiService apiService = ApiService();
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchProfileData();
+  }
+
+  Future<void> _fetchProfileData() async {
+    try {
+      final response = await apiService.fetchProfile();
+      print("API Response: $response");
+      if (response['success'] == true) {
+        setState(() {
+          profileData = response['data']['data'];
+          profileImagePath = response['data']['data']['profile_picture'];
+        });
+        print("Profile data: $profileData");
+        print("Profile image path: $profileImagePath");
+      } else {
+        print("Error fetching data: ${response['message']}");
+      }
+    } catch (e) {
+      print("Error loading JSON data: $e");
+    }
+  }
+
+  void confirmLogout() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Monochrome.darkGrey,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          title: Text(
+            'Konfirmasi Keluar',
+            style: SemiBold.h2.withColor(Monochrome.whiteDarkMode),
+          ),
+          content: Text(
+            'Apakah kamu yakin ingin keluar?',
+            style: Regular.h3.withColor(Monochrome.whiteDarkMode),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text(
+                'Batal',
+                style: SemiBold.body.withColor(Main.lightBlue),
+              ),
+            ),
+            TextButton(
+              onPressed: _logout,
+              child: Text(
+                'Keluar',
+                style: SemiBold.body.withColor(additionalColor.red),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _logout() async {
+    await apiService.logoutUser();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => SignInScreen()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,186 +112,105 @@ class ProfilScreen extends StatelessWidget {
       body: Container(
         margin: EdgeInsets.all(BizGrowTheme.getMargin(context)),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
-              child: Stack(
-                children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Monochrome.lightGrey,
-                    child: Icon(
-                      Icons.person,
-                      size: 50,
-                      color: Monochrome.grey,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 30),
-            Text(
-              'Nama',
-              style: Regular.h2.withColor(Monochrome.whiteDarkMode),
-            ),
-            // DI SINI INPUT BORDER
-            TextField(
-              readOnly: true,
-              decoration: InputDecoration(
-                hintText: 'Budi',
-                labelStyle: TextStyle(
-                  color: Monochrome.white,  
-                ),
-                hintStyle: TextStyle(
-                  color: Monochrome.white, 
-                ),
-                fillColor: Main.lightBlue,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Border melengkung
-                ),
-              ),
-            ),
-            SizedBox(height: 30),
-            Text(
-              'Email',
-              style: Regular.h2.withColor(Monochrome.whiteDarkMode)
-            ),
-            // DI SINI INPUT BORDER
-            TextField(
-              readOnly: true,
-              decoration: InputDecoration(
-                hintText: 'a@gmail.com', // Placeholder
-                labelStyle: TextStyle(
-                  color: Monochrome.white, // Warna label
-                ),
-                hintStyle: TextStyle(
-                  color: Monochrome.white, // Warna placeholder
-                ),
-                fillColor: Main.lightBlue,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Border melengkung
-                ),
-              ),
-            ),
-            SizedBox(height: 30),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfilEditScreen()));
-                  },
-                  child: Text('Edit Profil'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                profileImagePath != null
+                    ? CircleAvatar(
+                        radius: 50,
+                        backgroundImage: NetworkImage('$profileImagePath'),
+                      )
+                    : CircleAvatar(
+                        radius: 50,
+                        backgroundColor: Monochrome.lightGrey,
+                        child: Icon(
+                          Icons.person,
+                          size: 50,
+                          color: Monochrome.grey,
+                        ),
+                      ),
+                const SizedBox(width: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      profileData['name'] ?? 'Memuat...',
+                      style: SemiBold.large.withColor(Monochrome.whiteDarkMode),
                     ),
-                    backgroundColor: Main.blueSecondary,
-                    foregroundColor: Monochrome.white,
-                  ),
+                    Text(
+                      profileData['email'] ?? 'Memuat...',
+                      style: Regular.body.withColor(Monochrome.whiteDarkMode),
+                    ),
+                    Text(
+                      profileData['npwp'] ?? 'Memuat...',
+                      style: SemiBold.body.withColor(Monochrome.grey),
+                    ),
+                  ],
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text('Konfirmasi Hapus Akun'),
-                          content: Text('Apakah Anda yakin ingin menghapus akun ini?'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop(); 
-                              },
-                              child: Text('Batal',)
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SignInScreen(),
-                                  ),
-                                );
-                                // Belum diisi karena menunggu api dari website 
-                              },
-                              child: Text('Hapus Akun', style: Regular.body.withColor(additionalColor.red)),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  child: Text('Hapus Akun'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    backgroundColor: additionalColor.red,
-                    foregroundColor: Monochrome.white,
-                  ),
-                ),              
               ],
             ),
-            SizedBox(height: 30),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Konfirmasi Keluar'),
-                        content: Text('Apakah Anda yakin ingin keluar?'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text('Batal'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop(); 
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SignInScreen(),
-                                ),
-                              );
-                            },
-                            child: Text('Keluar', style: Regular.body.withColor(additionalColor.red)),
-                          ),
-                        ],
-                      );
+            const SizedBox(height: 48),
+            Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.all(8),
+                itemCount: entries.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: () {
+                      if (index == 0) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ProfilEditScreen()),
+                        );
+                      } else if (index == 1) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditPassword()),
+                        );
+                      } else if (index == 2) {
+                        confirmLogout();
+                      }
                     },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10), // Add vertical padding
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 8), // Add vertical margin
+                      child: Row(
+                        children: [
+                          const SizedBox(width: 16),
+                          CircleAvatar(
+                            radius: 24,
+                            backgroundColor: index == 2
+                                ? additionalColor.red
+                                : Main.lightBlue,
+                            child: Icon(
+                              icons[index].icon,
+                              color: Monochrome.whiteDarkMode,
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          Text(entries[index],
+                              style: SemiBold.body
+                                  .withColor(Monochrome.whiteDarkMode)),
+                        ],
+                      ),
+                    ),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  backgroundColor: additionalColor.red,
-                  foregroundColor: Monochrome.white,
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(
+                  height: 20,
                 ),
-                child: Text('Keluar'),
-              ),     
+              ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: MainNavigator(selectedIndex: 3),
+      bottomNavigationBar: const MainNavigator(selectedIndex: 3),
     );
   }
 }

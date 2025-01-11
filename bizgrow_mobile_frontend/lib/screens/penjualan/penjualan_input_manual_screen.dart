@@ -1,13 +1,13 @@
+import 'package:bizgrow_mobile_frontend/models/product.dart';
+import 'package:bizgrow_mobile_frontend/services/api_service.dart';
 import 'package:bizgrow_mobile_frontend/themes/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 import 'package:bizgrow_mobile_frontend/themes/text_styles.dart';
 import 'package:bizgrow_mobile_frontend/widgets/navbar.dart';
 import 'package:intl/intl.dart';
 
 import 'input_data_penjualan.dart';
-// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class PenjualanInputManualScreen extends StatefulWidget {
   const PenjualanInputManualScreen({super.key});
@@ -20,26 +20,17 @@ class PenjualanInputManualScreen extends StatefulWidget {
 class _PenjualanInputManualScreenState
     extends State<PenjualanInputManualScreen> {
   DateTime selectedDate = DateTime.now();
-  // late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+
+  final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _quantityController = TextEditingController();
+  Product? selectedProduct;
+  List<Product> products = [];
+  final String token =
+      "1|0Qv5q5hDpjU1no6CpwvTpzaT9D9N2PihAmc8ibSw410e7fc4"; // Token untuk autentikasi API
 
   @override
   void initState() {
     super.initState();
-    // _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    _initializeNotifications();
-  }
-
-  void _initializeNotifications() async {
-    // const AndroidInitializationSettings initializationSettingsAndroid =
-    //     AndroidInitializationSettings('@mipmap/ic_launcher');
-
-    // const InitializationSettings initializationSettings =
-    //     InitializationSettings(
-    //   android: initializationSettingsAndroid,
-    //   // iOS settings can be added here if needed
-    // );
-
-    // await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
   Widget build(BuildContext context) {
@@ -78,23 +69,39 @@ class _PenjualanInputManualScreenState
                       padding: EdgeInsets.all(8.0),
                       child: Text("Nama Produk",
                           style: TextStyle(color: Monochrome.whiteDarkMode))),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Nama Produk',
-                      ),
-                    ),
+                  DropdownButtonFormField<Product>(
+                    value: selectedProduct,
+                    onChanged: (Product? newValue) {
+                      setState(() {
+                        selectedProduct = newValue!;
+                      });
+                    },
+                    items: products.map((Product product) {
+                      return DropdownMenuItem<Product>(
+                        value: product,
+                        child: Text(product.productName),
+                      );
+                    }).toList(),
+                    decoration: InputDecoration(labelText: 'Nama Produk'),
                   ),
+                  // const Padding(
+                  //   padding: EdgeInsets.all(8.0),
+                  //   child: TextField(
+                  //     decoration: InputDecoration(
+                  //       border: OutlineInputBorder(),
+                  //       hintText: 'Nama Produk',
+                  //     ),
+                  //   ),
+                  // ),
                   const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text("Harga",
                           style: TextStyle(color: Monochrome.whiteDarkMode))),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: _priceController,
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Harga',
                       ),
@@ -104,15 +111,17 @@ class _PenjualanInputManualScreenState
                       padding: EdgeInsets.all(8.0),
                       child: Text("Kuantitas",
                           style: TextStyle(color: Monochrome.whiteDarkMode))),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: _quantityController,
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Kuantitas',
                       ),
                     ),
                   ),
+                  // submit button
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -121,7 +130,6 @@ class _PenjualanInputManualScreenState
                               backgroundColor: Main.lightBlue),
                           onPressed: () {
                             //  save data
-                            _showNotification(); //local push notif hopefully
                           },
                           child: Text("Kirim Data",
                               style: Regular.body
@@ -151,26 +159,47 @@ class _PenjualanInputManualScreenState
     }
   }
 
-  Future<void> _showNotification() async {
-    // const AndroidNotificationDetails androidPlatformChannelSpecifics =
-    //     AndroidNotificationDetails(
-    //   'channelId',
-    //   'channelName',
-    //   channelDescription: 'lorem ipsum dolor sit amet',
-    //   importance: Importance.high,
-    //   priority: Priority.high,
-    //   showWhen: false,
-    // );
+  Future<void> _submitData() async {
+    String price = _priceController.text;
+    String quantity = _quantityController.text;
 
-    // const NotificationDetails platformChannelSpecifics =
-    //     NotificationDetails(android: androidPlatformChannelSpecifics);
+    if (selectedProduct == null || price.isEmpty || quantity.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Please fill all the fields"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
 
-    // await _flutterLocalNotificationsPlugin.show(
-    //   0,
-    //   'Data Terkirim',
-    //   'Data penjualan Anda telah berhasil dikirim.',
-    //   platformChannelSpecifics,
-    // );
+    int total = int.parse(price) * int.parse(quantity);
+
+    try {
+      final response = await ApiService().insertSalesTransaction(
+        token: token,
+        productId: selectedProduct!.productId,
+        salesDate: DateFormat("yyyy-MM-dd").format(selectedDate),
+        salesQuantity: quantity,
+        pricePerItem: price,
+        total: total,
+      );
+
+      if (response['status'] == 'success') {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(response['message']),
+          backgroundColor: Colors.green,
+        ));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(response['message']),
+          backgroundColor: Colors.red,
+        ));
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Failed to submit data: $e"),
+        backgroundColor: Colors.red,
+      ));
+    }
   }
 }
 

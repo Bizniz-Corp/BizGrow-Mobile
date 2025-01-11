@@ -20,7 +20,8 @@ class BerandaScreen extends StatefulWidget {
 }
 
 class _BerandaScreenState extends State<BerandaScreen> {
-  final String token = "1|0Qv5q5hDpjU1no6CpwvTpzaT9D9N2PihAmc8ibSw410e7fc4"; // Token untuk autentikasi API
+  final String token =
+      "1|0Qv5q5hDpjU1no6CpwvTpzaT9D9N2PihAmc8ibSw410e7fc4"; // Token untuk autentikasi API
 
   double totalPembelian = 0.0;
   double totalPenjualan = 0.0;
@@ -38,13 +39,18 @@ class _BerandaScreenState extends State<BerandaScreen> {
 
     try {
       // Ambil data profit
-      final profitData = await apiService.getMonthlyProfit(token);
+      final profitData = await apiService.getMonthlyProfit();
       // Ambil data profil
-      final profileData = await apiService.getProfile(token);
+      final profileData = await apiService.getProfile();
+
+      final authToken = await apiService.getToken(); // Tambahkan await di sini
+      print('Auth Token: $authToken');
 
       setState(() {
-        totalPembelian = double.tryParse(profitData['total_pembelian'].toString()) ?? 0.0;
-        totalPenjualan = double.tryParse(profitData['total_penjualan'].toString()) ?? 0.0;
+        totalPembelian =
+            double.tryParse(profitData['total_pembelian'].toString()) ?? 0.0;
+        totalPenjualan =
+            double.tryParse(profitData['total_penjualan'].toString()) ?? 0.0;
         umkmName = profileData['name'] ?? "Nama UMKM";
         isLoading = false;
       });
@@ -110,7 +116,7 @@ class _BerandaScreenState extends State<BerandaScreen> {
                   Expanded(
                     child: GridView.count(
                       crossAxisCount: 3,
-                      crossAxisSpacing: 16,
+                      crossAxisSpacing: 8,
                       mainAxisSpacing: 16,
                       children: [
                         _buildQuickAccessButton(
@@ -148,7 +154,7 @@ class _BerandaScreenState extends State<BerandaScreen> {
                           Icons.upload,
                           'Input Data Penjualan',
                           InputDataPenjualanScreen(),
-                        ),  
+                        ),
                       ],
                     ),
                   ),
@@ -186,6 +192,7 @@ class _BerandaScreenState extends State<BerandaScreen> {
         );
       },
       child: Container(
+        width: double.infinity,
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 13, 1, 107),
@@ -198,7 +205,7 @@ class _BerandaScreenState extends State<BerandaScreen> {
               title,
               style: GoogleFonts.montserrat(
                 fontSize: 16,
-                color: Colors.white,
+                color: Monochrome.whiteDarkMode,
               ),
             ),
             SizedBox(height: 10),
@@ -206,7 +213,7 @@ class _BerandaScreenState extends State<BerandaScreen> {
               '${formatRupiah(value)}',
               style: GoogleFonts.montserrat(
                 fontSize: 28,
-                color: Colors.white,
+                color: Monochrome.whiteDarkMode,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -231,24 +238,27 @@ class _BerandaScreenState extends State<BerandaScreen> {
       },
       child: Container(
         padding: EdgeInsets.all(16),
+        height: 100,
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 13, 1, 107),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
               icon,
-              color: Colors.white,
+              color: Monochrome.whiteDarkMode,
               size: 32,
             ),
             SizedBox(height: 8),
             Text(
               label,
+              textAlign: TextAlign.center,
               style: GoogleFonts.montserrat(
                 fontSize: 14,
-                color: Colors.white,
+                color: Monochrome.whiteDarkMode,
               ),
             ),
           ],
