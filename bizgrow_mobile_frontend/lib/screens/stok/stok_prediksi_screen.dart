@@ -65,10 +65,10 @@ class _PrediksiStokScreenState extends State<PrediksiStokScreen> {
                   ],
                 ),
               ),
-              Container(
-                height: 200,
-                child: CustomLineChart(jsonPath: _path),
-              ),
+              // Container(
+              //   height: 200,
+              //   child: CustomLineChart(apiUrl: _path),
+              // ),
             ],
           ),
         ),

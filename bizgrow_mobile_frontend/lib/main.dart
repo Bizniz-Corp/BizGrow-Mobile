@@ -1,4 +1,5 @@
 import 'package:bizgrow_mobile_frontend/screens/beranda/beranda_screen.dart';
+import 'package:bizgrow_mobile_frontend/screens/penjualan/penjualan_prediksi_profit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bizgrow_mobile_frontend/themes/theme.dart';
 

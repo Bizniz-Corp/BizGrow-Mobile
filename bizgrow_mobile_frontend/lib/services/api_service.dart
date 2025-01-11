@@ -42,35 +42,34 @@ class ApiService {
   }
 
   Future<Map<String, dynamic>> getProfile(String token) async {
-  final String url = "$baseUrl/profile";
+    final String url = "$baseUrl/profile";
 
-  try {
-    final response = await http.get(
-      Uri.parse(url),
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Accept': 'application/json',
-      },
-    );
+    try {
+      final response = await http.get(
+        Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Accept': 'application/json',
+        },
+      );
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
-      if (data['success'] == true) {
-        return {
-          'name': data['data']['name'],
-        };
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        if (data['success'] == true) {
+          return {
+            'name': data['data']['name'],
+          };
+        } else {
+          throw Exception("Gagal mendapatkan data profil.");
+        }
       } else {
-        throw Exception("Gagal mendapatkan data profil.");
+        throw Exception(
+            "Error: ${response.statusCode}, ${response.reasonPhrase}");
       }
-    } else {
-      throw Exception(
-          "Error: ${response.statusCode}, ${response.reasonPhrase}");
+    } catch (e) {
+      throw Exception("Terjadi kesalahan: $e");
     }
-  } catch (e) {
-    throw Exception("Terjadi kesalahan: $e");
   }
-}
-
 
   //Menarik data penjualan dari server
   Future<Map<String, dynamic>> fetchSalesHistory({
@@ -239,5 +238,11 @@ class ApiService {
     } else {
       throw Exception(responseBody['message'] ?? "Unknown error occurred");
     }
+  }
+
+  Future<String> getAggregateByDayProfit(String apiUrl) async {
+    var url = Uri.parse(apiUrl);
+    http.Response response = await http.get(url);
+    return response.body;
   }
 }

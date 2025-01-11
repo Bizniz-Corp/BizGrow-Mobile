@@ -68,7 +68,7 @@ class _PrediksiDemandScreenState extends State<PrediksiDemandScreen> {
               ),
               Container(
                 height: 200,
-                child: CustomLineChart(jsonPath: _path),
+                // child: CustomLineChart(apiUrl: _path),
               ),
             ],
           ),
