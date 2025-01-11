@@ -88,7 +88,7 @@ class _PrediksiProfitScreenState extends State<PrediksiProfitScreen> {
               ),
               Container(
                 height: 200,
-                child: CustomLineChart(jsonPath: _path),
+                // child: CustomLineChart(apiUrl: _path),
               ),
             ],
           ),
